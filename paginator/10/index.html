@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+  <base href="http://blog.coderzh.com/">
+  <script type="text/javascript">
+ 
+(function(){var a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X=[].slice,Y={}.hasOwnProperty,Z=function(a,b){function c(){this.constructor=a}for(var d in b)Y.call(b,d)&&(a[d]=b[d]);return c.prototype=b.prototype,a.prototype=new c,a.__super__=b.prototype,a},$=[].indexOf||function(a){for(var b=0,c=this.length;c>b;b++)if(b in this&&this[b]===a)return b;return-1};for(u={catchupTime:100,initialRate:.03,minTime:250,ghostTime:100,maxProgressPerFrame:20,easeFactor:1.25,startOnPageLoad:!0,restartOnPushState:!0,restartOnRequestAfter:500,target:"body",elements:{checkInterval:100,selectors:["body"]},eventLag:{minSamples:10,sampleCount:3,lagThreshold:3},ajax:{trackMethods:["GET"],trackWebSockets:!0,ignoreURLs:[]}},C=function(){var a;return null!=(a="undefined"!=typeof performance&&null!==performance&&"function"==typeof performance.now?performance.now():void 0)?a:+new Date},E=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame,t=window.cancelAnimationFrame||window.mozCancelAnimationFrame,null==E&&(E=function(a){return setTimeout(a,50)},t=function(a){return clearTimeout(a)}),G=function(a){var b,c;return b=C(),(c=function(){var d;return d=C()-b,d>=33?(b=C(),a(d,function(){return E(c)})):setTimeout(c,33-d)})()},F=function(){var a,b,c;return c=arguments[0],b=arguments[1],a=3<=arguments.length?X.call(arguments,2):[],"function"==typeof c[b]?c[b].apply(c,a):c[b]},v=function(){var a,b,c,d,e,f,g;for(b=arguments[0],d=2<=arguments.length?X.call(arguments,1):[],f=0,g=d.length;g>f;f++)if(c=d[f])for(a in c)Y.call(c,a)&&(e=c[a],null!=b[a]&&"object"==typeof b[a]&&null!=e&&"object"==typeof e?v(b[a],e):b[a]=e);return b},q=function(a){var b,c,d,e,f;for(c=b=0,e=0,f=a.length;f>e;e++)d=a[e],c+=Math.abs(d),b++;return c/b},x=function(a,b){var c,d,e;if(null==a&&(a="options"),null==b&&(b=!0),e=document.querySelector("[data-pace-"+a+"]")){if(c=e.getAttribute("data-pace-"+a),!b)return c;try{return JSON.parse(c)}catch(f){return d=f,"undefined"!=typeof console&&null!==console?console.error("Error parsing inline pace options",d):void 0}}},g=function(){function a(){}return a.prototype.on=function(a,b,c,d){var e;return null==d&&(d=!1),null==this.bindings&&(this.bindings={}),null==(e=this.bindings)[a]&&(e[a]=[]),this.bindings[a].push({handler:b,ctx:c,once:d})},a.prototype.once=function(a,b,c){return this.on(a,b,c,!0)},a.prototype.off=function(a,b){var c,d,e;if(null!=(null!=(d=this.bindings)?d[a]:void 0)){if(null==b)return delete this.bindings[a];for(c=0,e=[];c<this.bindings[a].length;)e.push(this.bindings[a][c].handler===b?this.bindings[a].splice(c,1):c++);return e}},a.prototype.trigger=function(){var a,b,c,d,e,f,g,h,i;if(c=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],null!=(g=this.bindings)?g[c]:void 0){for(e=0,i=[];e<this.bindings[c].length;)h=this.bindings[c][e],d=h.handler,b=h.ctx,f=h.once,d.apply(null!=b?b:this,a),i.push(f?this.bindings[c].splice(e,1):e++);return i}},a}(),j=window.Pace||{},window.Pace=j,v(j,g.prototype),D=j.options=v({},u,window.paceOptions,x()),U=["ajax","document","eventLag","elements"],Q=0,S=U.length;S>Q;Q++)K=U[Q],D[K]===!0&&(D[K]=u[K]);i=function(a){function b(){return V=b.__super__.constructor.apply(this,arguments)}return Z(b,a),b}(Error),b=function(){function a(){this.progress=0}return a.prototype.getElement=function(){var a;if(null==this.el){if(a=document.querySelector(D.target),!a)throw new i;this.el=document.createElement("div"),this.el.className="pace pace-active",document.body.className=document.body.className.replace(/pace-done/g,""),document.body.className+=" pace-running",this.el.innerHTML='<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>',null!=a.firstChild?a.insertBefore(this.el,a.firstChild):a.appendChild(this.el)}return this.el},a.prototype.finish=function(){var a;return a=this.getElement(),a.className=a.className.replace("pace-active",""),a.className+=" pace-inactive",document.body.className=document.body.className.replace("pace-running",""),document.body.className+=" pace-done"},a.prototype.update=function(a){return this.progress=a,this.render()},a.prototype.destroy=function(){try{this.getElement().parentNode.removeChild(this.getElement())}catch(a){i=a}return this.el=void 0},a.prototype.render=function(){var a,b,c,d,e,f,g;if(null==document.querySelector(D.target))return!1;for(a=this.getElement(),d="translate3d("+this.progress+"%, 0, 0)",g=["webkitTransform","msTransform","transform"],e=0,f=g.length;f>e;e++)b=g[e],a.children[0].style[b]=d;return(!this.lastRenderedProgress||this.lastRenderedProgress|0!==this.progress|0)&&(a.children[0].setAttribute("data-progress-text",""+(0|this.progress)+"%"),this.progress>=100?c="99":(c=this.progress<10?"0":"",c+=0|this.progress),a.children[0].setAttribute("data-progress",""+c)),this.lastRenderedProgress=this.progress},a.prototype.done=function(){return this.progress>=100},a}(),h=function(){function a(){this.bindings={}}return a.prototype.trigger=function(a,b){var c,d,e,f,g;if(null!=this.bindings[a]){for(f=this.bindings[a],g=[],d=0,e=f.length;e>d;d++)c=f[d],g.push(c.call(this,b));return g}},a.prototype.on=function(a,b){var c;return null==(c=this.bindings)[a]&&(c[a]=[]),this.bindings[a].push(b)},a}(),P=window.XMLHttpRequest,O=window.XDomainRequest,N=window.WebSocket,w=function(a,b){var c,d,e;e=[];for(d in b.prototype)try{e.push(null==a[d]&&"function"!=typeof b[d]?"function"==typeof Object.defineProperty?Object.defineProperty(a,d,{get:function(){return b.prototype[d]},configurable:!0,enumerable:!0}):a[d]=b.prototype[d]:void 0)}catch(f){c=f}return e},A=[],j.ignore=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("ignore"),c=b.apply(null,a),A.shift(),c},j.track=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("track"),c=b.apply(null,a),A.shift(),c},J=function(a){var b;if(null==a&&(a="GET"),"track"===A[0])return"force";if(!A.length&&D.ajax){if("socket"===a&&D.ajax.trackWebSockets)return!0;if(b=a.toUpperCase(),$.call(D.ajax.trackMethods,b)>=0)return!0}return!1},k=function(a){function b(){var a,c=this;b.__super__.constructor.apply(this,arguments),a=function(a){var b;return b=a.open,a.open=function(d,e){return J(d)&&c.trigger("request",{type:d,url:e,request:a}),b.apply(a,arguments)}},window.XMLHttpRequest=function(b){var c;return c=new P(b),a(c),c};try{w(window.XMLHttpRequest,P)}catch(d){}if(null!=O){window.XDomainRequest=function(){var b;return b=new O,a(b),b};try{w(window.XDomainRequest,O)}catch(d){}}if(null!=N&&D.ajax.trackWebSockets){window.WebSocket=function(a,b){var d;return d=null!=b?new N(a,b):new N(a),J("socket")&&c.trigger("request",{type:"socket",url:a,protocols:b,request:d}),d};try{w(window.WebSocket,N)}catch(d){}}}return Z(b,a),b}(h),R=null,y=function(){return null==R&&(R=new k),R},I=function(a){var b,c,d,e;for(e=D.ajax.ignoreURLs,c=0,d=e.length;d>c;c++)if(b=e[c],"string"==typeof b){if(-1!==a.indexOf(b))return!0}else if(b.test(a))return!0;return!1},y().on("request",function(b){var c,d,e,f,g;return f=b.type,e=b.request,g=b.url,I(g)?void 0:j.running||D.restartOnRequestAfter===!1&&"force"!==J(f)?void 0:(d=arguments,c=D.restartOnRequestAfter||0,"boolean"==typeof c&&(c=0),setTimeout(function(){var b,c,g,h,i,k;if(b="socket"===f?e.readyState<2:0<(h=e.readyState)&&4>h){for(j.restart(),i=j.sources,k=[],c=0,g=i.length;g>c;c++){if(K=i[c],K instanceof a){K.watch.apply(K,d);break}k.push(void 0)}return k}},c))}),a=function(){function a(){var a=this;this.elements=[],y().on("request",function(){return a.watch.apply(a,arguments)})}return a.prototype.watch=function(a){var b,c,d,e;return d=a.type,b=a.request,e=a.url,I(e)?void 0:(c="socket"===d?new n(b):new o(b),this.elements.push(c))},a}(),o=function(){function a(a){var b,c,d,e,f,g,h=this;if(this.progress=0,null!=window.ProgressEvent)for(c=null,a.addEventListener("progress",function(a){return h.progress=a.lengthComputable?100*a.loaded/a.total:h.progress+(100-h.progress)/2},!1),g=["load","abort","timeout","error"],d=0,e=g.length;e>d;d++)b=g[d],a.addEventListener(b,function(){return h.progress=100},!1);else f=a.onreadystatechange,a.onreadystatechange=function(){var b;return 0===(b=a.readyState)||4===b?h.progress=100:3===a.readyState&&(h.progress=50),"function"==typeof f?f.apply(null,arguments):void 0}}return a}(),n=function(){function a(a){var b,c,d,e,f=this;for(this.progress=0,e=["error","open"],c=0,d=e.length;d>c;c++)b=e[c],a.addEventListener(b,function(){return f.progress=100},!1)}return a}(),d=function(){function a(a){var b,c,d,f;for(null==a&&(a={}),this.elements=[],null==a.selectors&&(a.selectors=[]),f=a.selectors,c=0,d=f.length;d>c;c++)b=f[c],this.elements.push(new e(b))}return a}(),e=function(){function a(a){this.selector=a,this.progress=0,this.check()}return a.prototype.check=function(){var a=this;return document.querySelector(this.selector)?this.done():setTimeout(function(){return a.check()},D.elements.checkInterval)},a.prototype.done=function(){return this.progress=100},a}(),c=function(){function a(){var a,b,c=this;this.progress=null!=(b=this.states[document.readyState])?b:100,a=document.onreadystatechange,document.onreadystatechange=function(){return null!=c.states[document.readyState]&&(c.progress=c.states[document.readyState]),"function"==typeof a?a.apply(null,arguments):void 0}}return a.prototype.states={loading:0,interactive:50,complete:100},a}(),f=function(){function a(){var a,b,c,d,e,f=this;this.progress=0,a=0,e=[],d=0,c=C(),b=setInterval(function(){var g;return g=C()-c-50,c=C(),e.push(g),e.length>D.eventLag.sampleCount&&e.shift(),a=q(e),++d>=D.eventLag.minSamples&&a<D.eventLag.lagThreshold?(f.progress=100,clearInterval(b)):f.progress=100*(3/(a+3))},50)}return a}(),m=function(){function a(a){this.source=a,this.last=this.sinceLastUpdate=0,this.rate=D.initialRate,this.catchup=0,this.progress=this.lastProgress=0,null!=this.source&&(this.progress=F(this.source,"progress"))}return a.prototype.tick=function(a,b){var c;return null==b&&(b=F(this.source,"progress")),b>=100&&(this.done=!0),b===this.last?this.sinceLastUpdate+=a:(this.sinceLastUpdate&&(this.rate=(b-this.last)/this.sinceLastUpdate),this.catchup=(b-this.progress)/D.catchupTime,this.sinceLastUpdate=0,this.last=b),b>this.progress&&(this.progress+=this.catchup*a),c=1-Math.pow(this.progress/100,D.easeFactor),this.progress+=c*this.rate*a,this.progress=Math.min(this.lastProgress+D.maxProgressPerFrame,this.progress),this.progress=Math.max(0,this.progress),this.progress=Math.min(100,this.progress),this.lastProgress=this.progress,this.progress},a}(),L=null,H=null,r=null,M=null,p=null,s=null,j.running=!1,z=function(){return D.restartOnPushState?j.restart():void 0},null!=window.history.pushState&&(T=window.history.pushState,window.history.pushState=function(){return z(),T.apply(window.history,arguments)}),null!=window.history.replaceState&&(W=window.history.replaceState,window.history.replaceState=function(){return z(),W.apply(window.history,arguments)}),l={ajax:a,elements:d,document:c,eventLag:f},(B=function(){var a,c,d,e,f,g,h,i;for(j.sources=L=[],g=["ajax","elements","document","eventLag"],c=0,e=g.length;e>c;c++)a=g[c],D[a]!==!1&&L.push(new l[a](D[a]));for(i=null!=(h=D.extraSources)?h:[],d=0,f=i.length;f>d;d++)K=i[d],L.push(new K(D));return j.bar=r=new b,H=[],M=new m})(),j.stop=function(){return j.trigger("stop"),j.running=!1,r.destroy(),s=!0,null!=p&&("function"==typeof t&&t(p),p=null),B()},j.restart=function(){return j.trigger("restart"),j.stop(),j.start()},j.go=function(){var a;return j.running=!0,r.render(),a=C(),s=!1,p=G(function(b,c){var d,e,f,g,h,i,k,l,n,o,p,q,t,u,v,w;for(l=100-r.progress,e=p=0,f=!0,i=q=0,u=L.length;u>q;i=++q)for(K=L[i],o=null!=H[i]?H[i]:H[i]=[],h=null!=(w=K.elements)?w:[K],k=t=0,v=h.length;v>t;k=++t)g=h[k],n=null!=o[k]?o[k]:o[k]=new m(g),f&=n.done,n.done||(e++,p+=n.tick(b));return d=p/e,r.update(M.tick(b,d)),r.done()||f||s?(r.update(100),j.trigger("done"),setTimeout(function(){return r.finish(),j.running=!1,j.trigger("hide")},Math.max(D.ghostTime,Math.max(D.minTime-(C()-a),0)))):c()})},j.start=function(a){v(D,a),j.running=!0;try{r.render()}catch(b){i=b}return document.querySelector(".pace")?(j.trigger("start"),j.go()):setTimeout(j.start,50)},"function"==typeof define&&define.amd?define(["pace"],function(){return j}):"object"==typeof exports?module.exports=j:D.startOnPageLoad&&j.start()}).call(this);
+</script>
+<style type="text/css">
+   
+  .pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  .pace.pace-inactive .pace-progress {
+    display: none;
+  }
+
+  .pace .pace-progress {
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 45%;
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .pace .pace-progress:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: .5rem;
+    content: attr(data-progress-text);
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 100;
+    font-size: 5rem;
+    line-height: 1;
+    text-align: right;
+    color: rgba(229, 146, 42, 0.90);
+  }
+</style>
+
+  <title>CoderZh&#39;s Blog - CoderZh&#39;s Blog</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="CoderZh&#39;s Blog">
+<meta name="author" content="coderzh">
+<meta name="publisher" content="coderzh">
+<meta name="generator" content="http://gohugo.io/"/>
+
+<meta itemprop="name" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta itemprop="description" content="CoderZh&#39;s Blog">
+<meta itemprop="image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+<meta property="og:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.coderzh.com/" />
+<meta property="og:image" content="http://blog.coderzh.com/public/coderzh.jpg" />
+<meta property="og:description" content="CoderZh&#39;s Blog" />
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@coderzh">
+<meta name="twitter:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta name="twitter:description" content="CoderZh&#39;s Blog">
+<meta name="twitter:creator" content="@coderzh">
+<meta name="twitter:image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+  <link rel="canonical" href="http://blog.coderzh.com/">
+  <link rel='shortlink' href="http://blog.coderzh.com/"/>
+  <link rel="shortcut icon" href="http://blog.coderzh.com/public/favicon.ico"/>
+  
+  <link href="http://blog.coderzh.com/feed.xml" rel="alternate" type="application/rss+xml" title="CoderZh&#39;s Blog" />
+
+
+<link rel="stylesheet" id="human-style-css" href="http://blog.coderzh.com/wp-content/themes/hueman/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="human-style-css2" href="http://blog.coderzh.com/wp-content/themes/hueman-child/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="responsive-css" href="http://blog.coderzh.com/wp-content/themes/hueman/responsive.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="font-awesome-css" href="http://blog.coderzh.com/wp-content/themes/hueman/fonts/font-awesome.min.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="wp-youtube-lyte" href="http://blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/lyte.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="hubinfo" href="http://blog.coderzh.com/assets/hubinfo/dist/hubinfo.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="http://blog.coderzh.com/public/highlightjs/default.min.css">
+<script src="http://blog.coderzh.com/public/highlightjs/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<link rel="stylesheet" id="human-style-css3" href="http://blog.coderzh.com/wp-content/themes/hueman-child/user.css" type="text/css" media="all"/>
+
+
+</head>
+
+<body class="archive category col-3cm full-width topbar-enabled chrome">
+
+<div id="wrapper">
+  <header id="header">
+
+  <nav class="nav-container group" id="nav-topbar">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap container">
+      <a href="http://blog.coderzh.com" class="nav-cs-icon">
+        <img width="40" height="40" src="http://blog.coderzh.com/public/coderzh.jpg" alt="coderzh" title="Home">
+      </a>
+      <ul id="menu-default-menu" class="nav container-inner group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/post/">归档</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/about/">关于我</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/feed.xml" type="application/rss+xml" target="_blank">订阅</a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-text">
+        一个程序员的思考与总结
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="container-inner">
+        <div class="toggle-search"><i class="fa fa-search"></i></div>
+        <div class="search-expand">
+          <div class="search-expand-inner">
+            <form method="get" class="searchform themeform" action="https://www.google.com/search">
+              <div>
+                <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+
+  </nav>
+  
+
+  <div class="container group">
+    <div class="container-inner">
+
+      <div class="group pad">
+
+        <div class="group pad">
+          <h1 class="site-title">
+            <a href="http://blog.coderzh.com" rel="home">
+              <img style="border-radius: 50%;width:72px;height:72px;margin:0 auto;" src="http://blog.coderzh.com/public/coderzh.jpg"></img>
+              CoderZh&#39;s Blog
+            </a>
+          </h1>
+          <p class="site-description"> 如果你没有感觉到时间不够用时，你多半正在虚度光阴。 </p>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+  
+
+</header>
+
+
+
+  <div class="container" id="page">
+    <div class="container-inner">
+      <div class="main">
+        <div class="main-inner group">
+          <section class="content">
+            <div class="pad group">
+              
+              
+              <div class="post-list group">
+                
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年04月21日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/04/21/talk-about-agile-continuousIntegration" rel="bookmark" title="三言两语话敏捷(2) - 持续集成">三言两语话敏捷(2) - 持续集成</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>这篇，我只谈&#8220;持续集成&#8221;。 有人说敏捷必须有持续集成，有人说持续集成就是敏捷。如果你还不了解持续集成，赶紧看看《持续集成》第二版的中译本。 持续集成的最大益处是降低风险，及时发现代码的缺陷，并让代码保持随时可用的状态。 如果不使用持续集成，会出现什么问题呢? 到最后的集成时，会花费大量的时间，而且可能有很多BUG。 开发过程会比较混乱。开发人员无法基于稳定的代码版本新增或修改代码。 一个良好的持续集成应该包括，鼓励冲突编辑的源代码管理系统，自动构建系统，自动化测试系统，自动部署系统。 构建一个持续集成环境成本非常低，通过一些开源的工具就能实现。比如，我们使用的SVN + CruiseControl.NET +&nbsp; NAnt(MSBuild) + xUnit。 使用持续集成，我们需要注意什么？ 第一，重视持续集成的结果。 持续集成的结果有两种，不通过（红灯）和通过（绿灯）。尤其是亮红灯时，一定要让团队的所有人都看到，并且相关的人员必须重视，立即停下手头的工作去修复它。我见过有的团队使用一个大显示器，让在团队成员的中间，显示器中显眼的红灯很容易就被团队的成员看见，并且每个人看着都会不爽，直到去修复它。甚至，有的团队使用邮件进行骚扰，当编译不过时，不断的给Breaker或团队所有成员发邮件，直到解决为止。据说ThoughtWorks公司使用一种类似灯笼的东西，集成不过时，灯笼两红灯，非常的生动有趣。 另外一个简单的办法，就是要求团队成员在自己电脑开机时自动启动CCTray（如果使用CCNET的话），团队所有成员通过CCTray及时的得到集成的结果。 &#8220;谁破坏了构建，谁就要受到惩罚&#8221;，不过这里的&#8220;惩罚&#8221;并不是真正的惩罚，而是诸如请别人喝可乐之类的。每个人都有犯错误的时候，都有入库时忘记入某些文件的时候，我还记得有个同事因为破坏了构建，导致我和另外一个同事无法工作，最后解决后给我们送上的可乐。 第二，入库前，先在本机集成。 这是一个好习惯。要让团队所有人都养成这个习惯，就必须让本机的集成做的越简单，比如做成一个Bat文件。Martin Fowler的文章里提到在本机集成两次，第一次在代码完成时集成，第二次更新最新的代码下来，如果有冲突，解决冲突后在集成一次。然后再入库。 本机集成通过，并不一定提交后在集成服务器就能通过。通常让构建亮红灯，都是因为本机编译没问题，到了构建服务器就出问题。最常见的原因就是漏了入库文件，以及，本机未更新最新代码进行的集成。 第三，鼓励频繁的集成。 构建一般分为，日构建，实时构建，手工构建。我觉得，日构建肯定是必须的，能做实时构建就做实时构建。在完成一个小的迭代，或是功能时，就加入到构建中，让团队中的其他成员能够获得更加及时可用的代码。频繁的入库，集成，同时也能减少代码冲突产生的代价。 我见过有的团队，采用日构建加手工构建的方式，在进行手工构建时，有时还需要加入一些手工的干预，比如修改某个配置文件，替换某个文件等等。其实这是不鼓励的。应该尽量保证构建的自动执行。 第四，加快集成的速度。 相信任何一个稍微大点的项目都会遇到这样的困境，完整的构建整个项目需要花费几个小时甚至更长的时间。这是难以忍受的，除非在半夜里进行的日构建。如果代码提交后，需要等待1小时才有结果，也是难以忍受的。我们之前就遇到过这样的问题。之后我找了很多办法，将实时构建的时间降了下来。比如将不同的工程区分开来、白天只编译Release，晚上Release和Debug一起编译、通过编写MSbuild插件实现入库文件的智能判断，只编译产生影响的代码工程。之前我写过一篇文章专门介绍过这个方法（CCNET+MSBuild+SVN 实时构建的优化总结）。 第五，自动测试。 CCNET中，有良好的扩展机制，可以在代码编译完成后自动执行单元测试案例。同时，CCNET还支持一些代码风格检查工具以及代码覆盖率工具(如NCover)。除此之外，一些集成测试案例也需要在构建完成后能够自动触发，这些案例通常会依赖一些具体环境，比如外部数据库，案例执行的时间会稍长。为了不影响自动构建的时间，需要使用单独的机器来触发和执行这些案例，甚至做成一个自动化分布式案例执行平台。比如我们自己实现的Box自动化测试平台。 &nbsp; 三言两语并非以偏概全，而是说说我心里所想的。想要了解更多关于持续集成，还是仔细看看Martin Fowler的《持续集成》第二版的中译本。如果有CCNET使用的一些问题，可以来问我。</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年04月18日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/04/18/talk-about-agile-1" rel="bookmark" title="三言两语话敏捷(1) - 反馈">三言两语话敏捷(1) - 反馈</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>最近很多人都在体验VS2010，我忙着很多事，没有去体验。但我了解到其中一点，VS2010为敏捷开发提供了更多的支持。以前我所认为的敏捷开发，只有在理想公司，理想团队才可能开展，现在微软通过IDE，将敏捷的思想进行大范围的普及，让敏捷更加的深入人心。 敏捷宣言中只有简短的几句话，但是能真正做到不是那么容易。 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;Individuals&nbsp;and&nbsp;interactions&nbsp;over&nbsp;processes&nbsp;and&nbsp;tools Working&nbsp;software&nbsp;over&nbsp;comprehensive&nbsp;documentation Customer&nbsp;collaboration&nbsp;over&nbsp;contract&nbsp;negotiation Responding&nbsp;to&nbsp;change&nbsp;over&nbsp;following&nbsp;a&nbsp;plan Practices of an Agile Developer一书中，对敏捷开发做了一个精辟的概括： 敏捷开发就是在一个高度协作的环境中，不断地使用反馈进行自我调整和完善。 今天我就谈谈&#8220;反馈&#8221;。 最近我在做一个项目，单枪匹马，只有我一个人，看上去一点都不敏捷对吗？敏捷团队通常是一些小型团队，但是小到一个人，也不好。理想的团队应该是10人左右。每天早上的站立式会议上，我都是自报进度，对于遇到的困难，别人也很难给出意见，因为他们都没有参与进来。但是有一点，他们是这个项目未来的客户，站立式会议上，我可以听到作为客户的反馈。 这个项目是一个基于VMWare Esx的虚拟化管理平台，我有一个大客户，就是服务器管理员C。和C讨论过系统的需求和基本实现后，我开始将任务分成了以下几个部分： VMWare Esx API的封装。 分布式Controller, Agent控制系统。 数据库设计 Web界面 整个过程计划在一周的时间完成，并且能够上线，提供一个基本可用的版本。看上去几乎是不可完成的任务，于是我开始了高效的Coding。过程中，我不断的收到了来自&#8220;用户&#8221;的反馈： &#8220;可以暂时使用原有系统的数据库系统，用户才不关心他的数据存在哪里。&#8221; &gt; 于是，&#8220;数据库设计&#8221;暂时砍掉。 &#8220;我最关心的是系统最基本的申请和释放功能，至于其他的细节问题，我可以暂时不关心。&#8221; &gt; 于是，&#8220;分布式Controller, Agent控制系统。&#8221;也暂时被砍掉了。不过，这个反馈来的太晚，我已经花费了一天的时间实现和调试。 &#8220;这个数据列表我希望是横着排的。&#8221; &gt; 在我把数据列表做好，自我感觉很好给C演示时，他表示希望列表是横着排列的。而这时我已经在这个竖的列表花费了不少时间。 &#8220;也许，我们可以考虑使用另外一种方式实现。&#8221; &gt; 听到这句崩溃的话时，已经周五了。这是我将系统实现的差不多的时候，找C聊天，C蹦出来的一句话。经过分析，确实可行，亡羊补牢，为时未晚。新的方案一定程度上还是对之前方案的简化，并且更加可行。 &#8230; 在不断的用户反馈中，不断的纠正了我的方向，才使得我能够在一周的时间内完成。 有时， 我们关注的，用户不一定关注。 我们认为重要的，用户不一定觉得重要。 我们认为很酷的，用户不一定想要。 我们认为没所谓的，用户反而觉得非常重要！ 所以，做用户最想要的软件，关注用户的反馈，如果可能，让用户也加入到团队的开发中来。这就是敏捷宣言中所说的： Customer collaboration over contract negotiation（客户协作胜过合同谈判）</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F/" title="All posts in 思考感悟" rel="category tag">思考感悟</a>
+    
+  </p>
+
+  <p class="post-date">2010年03月27日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/03/27/three-years-work-thinking" rel="bookmark" title="三年之痒">三年之痒</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>眼看就要工作满三年了，对于大多数人来说是一个特殊的时期，对于我来说，也不例外。我也常常在想，我自己的定位是什么，我以后想要做什么，我该怎么选择，才能实现自己的价值和梦想。 思绪回到三年前&#8230;&#8230; 我毕业于当时全国排名14左右的中南大学，学的专业是也是该校专业排名仅次于同济清华的土木工程。我没有像大多数人一样，选择去设计院，或者铁路局，工程局。我义无反顾的选择了金山软件，当时的我，几乎没有任何的犹豫。因为我相信，这就是我未来要走的路。 金山软件是我梦想的地方，很早之前求伯君就是我的偶像。在高中时代，我就用过金山的WPS，毒霸，玩过剑侠情缘系列。在我看来，金山软件是一个值得自豪的公司，我能加入金山软件，更是一件自豪的事情。 初中时期我开始学习QB，参加过奥赛，但是没有拿过什么名次。现在想来，当时经常获奖的几个同学，现在都没有在搞计算机了，也只有我是坚持了下来。正是因为这种坚持，让我有了机会来到金山。 我所从事的是自动化测试工作，就是为WPS产品编写自动化测试案例或者测试工具。当时我加入时，产品的自动化测试程度还不是很高，后来我们使用QTP编写了大量的自动化测试案例，接着又打造了Box自动化测试平台，一个集任务发布、机器分配、环境准备、案例执行、报告收集、结果展示的分布式自动化测试平台。 当时我还写过很多测试工具，最让我引以自豪的工具是用C#写的对话框检查工具(DialogCheck)，功能是自动去打开所有WPS的对话框，检查窗口是否正确弹出。当时我对这个工具进行了精心的设计，后来我才发现，我的代码中使用了一些设计模式，比如：模板方法，反射工厂等。接着，我对设计模式产生了极大的兴趣，从《大话设计模式》、《Head First 设计模式》到《设计模式 - 可复用面向对象软件的基础》，让我受益颇多。 后来，我开始意识到，由于非计算机专业毕业，基础知识自然成了我的薄弱环节，比如数据结构、算法、编译原理。我不能只停留在C#这种高级语言的层次。于是，我开始自学。为了证明自己学习的成果，我报考了国家软件设计师的考试，几个月的备战后，我非常顺利的通过了这个证明自己的考试。软件设计师原名高级程序员，这对我一个非科班出身的人来说，是一个极大的激励。 公司组织结构几经调整，一直到现在，我所属的是金山互联网安全公司，负责测试金山毒霸等安全类产品。作为一个测试工程师，最令我引以自豪的是，我接触过软件测试的各个环节的具体工作。从界面层的QTP集成测试、基于C++底层接口的接口测试、测试工具及平台的开发、到性能测试，再到安全性测试。每一次转变，对我来说都是极大的提高。之前，公司并没有人专门做性能测试和安全性测试，我接到这个任务，并且开始了有趣的探索。比如性能测试工具LoadRunner、Silkperformer、OpenSTA、JMeter等等，甚至当时我蠢蠢欲动的打算自己实现一个性能测试工具。安全性测试中，我们研究了各种攻击方式，安全威胁，研究了各种安全扫描工具：FindBugs、PMD、LAPSE、Fortify SCA等等。我的(原创)攻击方式学习之XXX系列也是那时完成的。 后来，性能测试逐步走向正轨，我开始负责毒霸C++模块的接口测试，属于白盒测试，我们都统一称作模块测试。当时我加入的时候，模块测试已经做了很长一段时间了，当时我们使用的测试框架是自己开发的CppTestFramework，我使用了几周后，发现CppTestFramework有很多不尽人意的地方，有的时候还会出现Bug，让我不得不停下案例编写的脚步去修正CppTestFramework的Bug。于是我想是否可以使用一些现成的测试框架，比如CppUnit之类的。后来，我发现了Google Test，简称gtest。这让我异常兴奋，gtest的简洁、易用，让我毫不犹豫的选择了它。所以你会看到现在还一直置顶的《玩转GTest系列》的文章。 玩转GTest系列的文章很快就被gtest的作者zhanyong.wan发现，在他的鼓励下，我在极短的时间内完成了整个系列。现在的gtest官方主页右侧，还保留着我的文章链接。这个链接为我带来了可观的流量，更给我带来了极大的信心。 接下来，就需要说服团队中的每个人，切换测试框架到gtest上来。于是，我特意举行了几次关于gtest的技术交流，向他们介绍gtest的特点和优势，并且从头开始介绍gtest的用法，以及一些能够吸引他们眼球的东西，比如：参数化测试，死亡测试，案例分布执行等等。渐渐的，大家都接受了gtest，于是，我用了1，2天的时间，写了个脚本，将以前所有基于CppTestFramework的测试案例代码自动升级成了gtest测试案例。 模块测试的主要工作，是调用毒霸DLL的导出函数，尝试各种输入，然后检查是否达到预期的结果。有时候，我们还会对产品代码做一些单元测试。直接取下毒霸产品的代码，进行阅读、测试，让我对产品有了更深的了解。我对自己的代码要求很高，也容不得别人代码的瑕疵，所以，我很喜欢挑刺。我无法容忍开发人员命名时随意使用的缩写，我会给开发人员报变量命名的Bug，仅仅因为开发将Client写成了Clien。虽然Bugs数并不在我们的考核指标范围内，但我搜了一下，我发现的Bug数在整个测试团队（包括手工测试）中是排在前列的，虽然有很多Bug的优先级并不是很高。 我是一个追求完美的人，我给开发提的一点点小的BUG，虽然不是立竿见影，但是是对开发代码有长远的促进作用。当我发现一个Bug时，我不是立即将它录到Bug库提交给开发，而是直接编译开发的代码，进行调试，找到Bug的根源。所以，我提交的Bug，基本上都会指出导致这个Bug的代码在哪个文件，第几行，以及，修复这个Bug的方法。也许开发不太喜欢过于强势的测试人员，我发现很多开发人员看了我的修复建议后，都要使用另外一种方式去修复它。这的确非常有趣。 回到现在&#8230;&#8230; 我一直在思考，我的未来发展方向是什么。我是一个喜欢和代码打交道的人，也是一个愿意写代码一直到60岁的人。所以，一直以来，架构师是我梦寐以求的。我在测试领域的这三年，让我深刻的领悟到了软件测试的点点滴滴。我也在想，我是否需要坚持在测试这个领域继续发展。 我心里怀着一个梦想，开发一款卓越的软件，让全世界为之受益。软件测试始终是在测试别人的代码，无法创造真正属于自己的产品。于是，业余的时间，成了我的快乐时光。我疯狂的学习、读书、写Blog，Coding。这一点来说，我非常的宅，不过我有一个喜欢和我一起宅的女朋友。一直以来，她对我的鼓励，支持都令我非常感动。我写了很多东西，都是用她的名字命名的，比如：NancyTetris，NancyBlog，NancyGLines等等。 Python是我业余时间时间学习并喜欢上的编程语言。我喜欢它的简洁和优美。我的很多工程都是使用Python来编写的，并且所以的代码都托管在Google Code中，以开源的方式提供着。我喜欢这种哲学。如果让我做一个职业Python程序员，会让我非常兴奋。 我也想过做一个自由职业者。这样我就有大量的时间做自己喜欢的事情，专研自己喜欢的技术，前提是有某个东西能够给我带来稳定的收入维持生计。当然，我可以选择创业。我有一些想法，但是都没有坚持实施下来。 我想，做一个Consultant也不错。据说这是一个在国外很火的职业。Consultant会遇到各种各样的环境，面对各种各样的难题，从事的是一个非常有挑战的工作，需要具备很强的解决问题的能力。 也许，研究院会更适合我。我有着对那些未知领域无穷的求知欲望，我非常享受沉浸在研究中的快乐。同时，这也能让我找到自己专攻的方向，将某一门技术研究的更深更透。 一个人想在某方面成为大师，需要在上面花费1万小时的努力。我希望我能找到自己的方向，并且坚定的走下去。</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年03月23日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/03/23/android-nancyglines-design" rel="bookmark" title="Android游戏开发 - NancyGLines设计">Android游戏开发 - NancyGLines设计</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>今天把之前用Python实现的NancyGLines游戏迁移到了Android中，虽然现在还只是算个毛坯版，界面比较丑陋，功能也不够完善，但是整个框架已经建立好，并且，游戏的基本功能已经实现了。见下图： &nbsp; 游戏规则： 触摸某个球，然后选择一个需要移动到的没有球的地方。 球移动过去后，如果满足横，竖，斜同颜色的球大于等于5个，则消去这些同颜色的球得分。 如果没有消去，则会落下三个新的球。 直到棋盘没有位置容下新的球，游戏结束。 下面是layout： &lt;?xml&nbsp;version="1.0"&nbsp;encoding="utf-8"?&gt; &lt;FrameLayout&nbsp;xmlns:android="http://schemas.android.com/apk/res/android" &nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="fill_parent" &nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="fill_parent"&gt; &nbsp;&nbsp;&nbsp;&nbsp;&lt;com.coderzh.nancyglines.GLinesView &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:id="@+id/glines" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="fill_parent" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="fill_parent"/&gt; &nbsp;&nbsp;&nbsp;&nbsp;&lt;RelativeLayout &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="fill_parent" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="fill_parent"&nbsp;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;TextView &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:id="@+id/text" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text="@string/app_name" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:visibility="visible" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="wrap_content" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="wrap_content" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_centerInParent="true" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:gravity="center_horizontal" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:textColor="#88ffffff" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:textSize="24sp"/&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/RelativeLayout&gt; &lt;/FrameLayout&gt; &nbsp; 嗯，我使用了自定义的View - GLinesView，在GLinesView的原型是这样的： public&nbsp;class&nbsp;GLinesView&nbsp;extends&nbsp;SurfaceView&nbsp;implements&nbsp;SurfaceHolder.Callback&nbsp;{ } 在这里继承了SurfaceView ，因为SurfaceView 在游戏制作上有一些优势。接着，我参考了Sample里的LunarLander代码，在建立了一个SurfaceView内部线程类，用来处理游戏的逻辑和绘制游戏画面。 public&nbsp;class&nbsp;GLinesView&nbsp;extends&nbsp;SurfaceView&nbsp;implements&nbsp;SurfaceHolder.Callback&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;GLinesThread&nbsp;extends&nbsp;Thread&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;initGame()&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;setRunning(boolean&nbsp;running)&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mRun&nbsp;=&nbsp;running; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;run()&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;updateCanvas(); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;GLinesView(Context&nbsp;context,&nbsp;AttributeSet&nbsp;attrs)&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super(context,&nbsp;attrs); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SurfaceHolder&nbsp;holder&nbsp;=&nbsp;getHolder(); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;holder.addCallback(this); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thread&nbsp;=&nbsp;new&nbsp;GLinesThread(holder,&nbsp;context,&nbsp;new&nbsp;Handler()&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Override &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;handleMessage(Message&nbsp;m)&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mStatusText.setVisibility(m.getData().getInt("viz")); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mStatusText.setText(m.getData().getString("text")); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;@Override &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;surfaceCreated(SurfaceHolder&nbsp;holder)&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thread.initGame(); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thread.setRunning(true); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thread.start();</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年03月20日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/03/20/android-first" rel="bookmark" title="Android应用开发初印象">Android应用开发初印象</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>前段时间终于拿下了蓄谋已久的HTC G2 TIM，并且在手机上安装了各种各样的软件好好的玩了一把。总体感觉Android的应用相对来说还是少了一些，耐玩的游戏还不多。其中钻石迷情(jewels)还算是比较耐玩的，时间模式下我现在的最高分是46230，和高手比起来，不知道这个分数是不是还低了些呢，呵呵。我非常期待popcap的植物大战僵尸能够尽快移植到Android平台，这款游戏深受广大玩家的喜爱，原因就是非常的耐玩，并且考验智力。 智能手机的好处就是可以自己装软件，甚至是自己写在手机里运行的软件。Android的程序需要使用Java开发，这点让我有些不爽。因为一直以来我对Java都不太感冒，虽然在语法上看起来和C#很相似。但是没办法，我还是决定硬着头皮把eclipse装上，决定学习一下Android应用程序的开发，并且，打算第一个项目把之前使用Python写的NancyGLines游戏移植到Android中。这对我来说是一个激动人心的项目，第一次学习手机软件的开发，希望NancyGLines能够早点出来，放到Android Market里。 为了我的开山之作，自然要先了解Android开发的知识。于是，我在网上找了一圈，发现资料还不少，下面是我找到的电子书列表，都可以Google到，找不到的可以留言问我要： Android-A-Programmer&#8217;s-Guide Android-Essentials Introduction-To-Android Professional_Android_2_Application_Development Android.Application.Development.-.Programming.With.The.Google.Sdk.(O&rsquo;reilly,.2009,.0596521472) 由于刚入门，我还是选择先看Android的官方文档： http://developer.android.com/guide/index.html 官方的文档非常的详细，从基础介绍，内部架构，到入门教学示例，到每个API的说明，都非常详细。因此，我花了2个晚上的时间，把Android开发的一些基础文章以及入门示例都看了一遍，对Android开发有了一些初印象，在这里做为自己的学习笔记记录一下。 工欲善其事必先利其器，首先我需要把Android的开发环境配置好。相信也有很多朋友和我一样，在这里耽误了不少了时间。其实官方的文档中已经写的很详细，只能怪我没有仔细的看清楚。ADT插件老是安装不少，最后的原因是没有安装JDK。 步骤如下： 下载并安装JDK(5或6)。 下载并解压Eclipse。 下载Android的SDK，解压后，设置环境变量PATH到Tool目录。 在Eclipse中通过[https://dl-ssl.google.com/android/eclipse/](https://dl-ssl.google.com/android/eclipse/)下载并安装Android Development Tools (ADT) Plugin。 装好重启Eclipse后，在Window - Preference中设置Android SDK的路径。 打开Android SDK and AVD Manager，安装不同平台的Android SDK版本，比如Andoid2.1 Android1.6。 完成了，其实并不复杂。接下来了解一下Android的架构： 由于是入门，看上面这张图还不是很有感觉。随着以后的深入，再回过头来看这张图，应该会更有感觉。 开发环境配置好后，最行之有效的学习方法是看官方的Tutorials，包括： Hello World Hello Views Hello Localization Notepad Tutorial 通过上面的示例，我会了解到以下东西： 1. Activity Activity控制用户界面操作的实体，一个应用程序可以有多个Activity，但同时只能有一个Activity的用户界面呈现在用户面前。我们需要实现一个类，继承自Activity类，通过重写父类的一些特定方法，就能实现在某些事件发生下，执行一些特定的代码。比如，用户按键，触摸屏幕的某个点等等。其中，关于Activity的几个状态，需要重点搞清楚，见下图： &nbsp; 2. View 用户界面布局是通过xml来描述的，比如： ![](http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif)&lt;?xml&nbsp;version="1.0"&nbsp;encoding="utf-8"?&gt; &lt;LinearLayout&nbsp;xmlns:android="http://schemas.android.com/apk/res/android" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="wrap_content" &nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="wrap_content"&gt; &nbsp;&nbsp;&nbsp;&nbsp;&lt;ListView&nbsp;android:id="@android:id/list" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="wrap_content" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="wrap_content"/&gt; &nbsp;&nbsp;&nbsp;&nbsp;&lt;TextView&nbsp;android:id="@android:id/empty" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width="wrap_content" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height="wrap_content" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:text="@string/no_notes"/&gt; &lt;/LinearLayout&gt; 里面的ListView ，TextView可以理解为自带的一些控件。同时，我们也可以实现自己自定义的View，只要继承自View类。比如： &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;&lt;com.coderzh.nancyglines.GLinesView &nbsp;&nbsp;&nbsp;&nbsp;android:id=&ldquo;@+id/glines&rdquo; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_width=&ldquo;fill_parent&rdquo; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;android:layout_height=&ldquo;fill_parent&rdquo;/&gt; 然后实现GLinesView类： public&nbsp;class&nbsp;GLinesView&nbsp;extends&nbsp;View&nbsp;{ } 其中一个最重要的方法就是onDraw，用来画想要呈现的用户内容。比如，我想在屏幕上写一个Hello。 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;@Override protected&nbsp;void&nbsp;onDraw(Canvas&nbsp;canvas)&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;TODO&nbsp;Auto-generated&nbsp;method&nbsp;stub &nbsp;&nbsp;&nbsp;&nbsp;super.onDraw(canvas); &nbsp;&nbsp;&nbsp;&nbsp;mPaint.setTextSize(20); &nbsp;&nbsp;&nbsp;&nbsp;mPaint.setColor(Color.BLUE); &nbsp;&nbsp;&nbsp;&nbsp;canvas.drawText(&ldquo;Hello&ldquo;,&nbsp;20,&nbsp;20,&nbsp;mPaint); } 3.</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年03月19日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/03/19/gtest_demo" rel="bookmark" title="gtest参数化测试代码示例">gtest参数化测试代码示例</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>在玩转 Google开源C++单元测试框架Google Test系列(gtest)之四 - 参数化中已经介绍过了如何使用gtest进行参数化测试。在twitter上应 @xlinker 的要求，我在这里提供一个参数化的完整例子。这个例子也是我当初了解gtest时写的，同时这个例子也在《玩转》系列中出现过。最后，我再附上整个demo工程，里面有一些其他的示例，刚开始上手的同学可以直接拿我的demo工程去试，有任何疑问都欢迎提出。以下是使用TEST_P宏进行参数化测试的示例： #include&nbsp;"stdafx.h" #include&nbsp;"foo.h" #include&nbsp;&lt;gtest/gtest.h&gt; class&nbsp;IsPrimeParamTest&nbsp;:&nbsp;public::testing::TestWithParam&lt;int&gt; { }; //&nbsp;不使用参数化测试，就需要像这样写五次 TEST(IsPrimeTest,&nbsp;HandleTrueReturn) { &nbsp;&nbsp;&nbsp;&nbsp;EXPECT_TRUE(IsPrime(3)); &nbsp;&nbsp;&nbsp;&nbsp;EXPECT_TRUE(IsPrime(5)); &nbsp;&nbsp;&nbsp;&nbsp;EXPECT_TRUE(IsPrime(11)); &nbsp;&nbsp;&nbsp;&nbsp;EXPECT_TRUE(IsPrime(23)); &nbsp;&nbsp;&nbsp;&nbsp;EXPECT_TRUE(IsPrime(17)); } //&nbsp;使用参数化测试，只需要： TEST_P(IsPrimeParamTest,&nbsp;HandleTrueReturn) { &nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;n&nbsp;=&nbsp;&nbsp;GetParam(); &nbsp;&nbsp;&nbsp;&nbsp;EXPECT_TRUE(IsPrime(n)); } // 定义参数 INSTANTIATE_TEST_CASE_P(TrueReturn,&nbsp;IsPrimeParamTest,&nbsp;testing::Values(3,&nbsp;5,&nbsp;11,&nbsp;23,&nbsp;17)); //&nbsp;----------------------- //&nbsp;更复杂一点的参数结构 struct&nbsp;NumberPair { &nbsp;&nbsp;&nbsp;&nbsp;NumberPair(int&nbsp;_a,&nbsp;int&nbsp;_b) &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;=&nbsp;_a; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b&nbsp;=&nbsp;_b; &nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;a; &nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;b; }; class&nbsp;FooParamTest&nbsp;:&nbsp;public&nbsp;::testing::TestWithParam&lt;NumberPair&gt; { }; TEST_P(FooParamTest,&nbsp;HandleThreeReturn) { &nbsp;&nbsp;&nbsp;&nbsp;FooCalc&nbsp;foo; &nbsp;&nbsp;&nbsp;&nbsp;NumberPair&nbsp;pair&nbsp;=&nbsp;GetParam(); &nbsp;&nbsp;&nbsp;&nbsp;EXPECT_EQ(3,&nbsp;foo.Calc(pair.a,&nbsp;pair.b)); } INSTANTIATE_TEST_CASE_P(ThreeReturn,&nbsp;FooParamTest,&nbsp;testing::Values(NumberPair(12,&nbsp;15),&nbsp;NumberPair(18,&nbsp;21))); 完整示例工程： /Files/coderzh/Code/gtest_demo.rar&nbsp;</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+              </div>
+
+              
+              
+
+<nav class="pagination group">
+  <div class="wp-pagenavi">
+    <span class="pages">
+        Page 10 of 38
+        (265 Posts)
+    </span>
+    
+      <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/9/">Prev &laquo;</a>
+    
+    
+    
+      <a class="nextpostslink" rel="next" href="http://blog.coderzh.com/paginator/11/">Next &raquo;</a>
+    
+  </div>
+</nav>
+
+              
+            </div>
+
+          </section>
+          <div class="sidebar s1">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>Follow:</p>
+      <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+    </div>
+
+    <div class="widget qrcode">
+    <img src="http://blog.coderzh.com/public/qrcode.jpg" width="129px" height="129px"/>
+    <p>微信扫一扫：<br/> 关注我的公众号： <br /> hacker-thinking</p>
+</div>
+
+
+    <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
+      <ul>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="search-2" class="widget widget_search"><h3>Search</h3>
+
+      <form method="get" class="searchform themeform" action="https://www.google.com/search">
+        <div>
+          <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+        </div>
+      </form>
+    </div>
+
+  </div>
+  
+</div>
+
+          <div class="sidebar s2">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>More</p>
+    </div>
+
+
+    <div id="categories-2" class="widget widget_categories"><h3>Categories</h3>
+      <ul>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F/">思考感悟</a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <div id="tag_cloud-2" class="widget widget_tag_cloud"><h3>Tags</h3>
+
+      <div class="tagcloud">
+        <p class="post-tags">
+          
+              
+          
+        </p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+
+  <nav class="nav-container group" id="nav-footer">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap">
+      <ul id="menu-default-menu-1" class="nav container group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+  
+
+  <section class="container" id="footer-bottom">
+    <div class="container-inner">
+      <a id="back-to-top" href="#"><i class="fa fa-angle-up"></i></a>
+      <div class="pad group">
+        <div class="grid one-half">
+          <div id="copyright">
+            <p>Copyright © 2015. All Rights Reserved. <br>Powered by
+              <a href="http://gohugo.io/" target="_blank">Hugo - the static site generator</a>.
+              <a href="http://golang.org" target="_blank">#golang</a>.
+            </p>
+          </div>
+          
+        </div>
+        
+        <div class="grid one-half last">
+          <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+        </div>
+      </div>
+
+    </div>
+    
+  </section>
+  
+
+</footer>
+
+</div>
+<script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/scripts.js"></script>
+<script type="text/javascript" src="assets/picturefill/picturefill.min.js"></script>
+<script type="text/javascript" src="assets/hubinfo/dist/hubinfo.js"></script>
+<script type="text/javascript" src="assets/js/jquery.matchHeight-min.js"></script>
+
+
+<script type="text/javascript">var bU = "http:\/\/blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/";</script>
+<script type="text/javascript" async defer src="wp-content/plugins/wp-youtube-lyte/lyte/lyte.js"></script>
+<script type="text/javascript" async defer src="assets/js/myblog.js"></script>
+
+</body>
+</html>
+

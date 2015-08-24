@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+  <base href="http://blog.coderzh.com/">
+  <script type="text/javascript">
+ 
+(function(){var a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X=[].slice,Y={}.hasOwnProperty,Z=function(a,b){function c(){this.constructor=a}for(var d in b)Y.call(b,d)&&(a[d]=b[d]);return c.prototype=b.prototype,a.prototype=new c,a.__super__=b.prototype,a},$=[].indexOf||function(a){for(var b=0,c=this.length;c>b;b++)if(b in this&&this[b]===a)return b;return-1};for(u={catchupTime:100,initialRate:.03,minTime:250,ghostTime:100,maxProgressPerFrame:20,easeFactor:1.25,startOnPageLoad:!0,restartOnPushState:!0,restartOnRequestAfter:500,target:"body",elements:{checkInterval:100,selectors:["body"]},eventLag:{minSamples:10,sampleCount:3,lagThreshold:3},ajax:{trackMethods:["GET"],trackWebSockets:!0,ignoreURLs:[]}},C=function(){var a;return null!=(a="undefined"!=typeof performance&&null!==performance&&"function"==typeof performance.now?performance.now():void 0)?a:+new Date},E=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame,t=window.cancelAnimationFrame||window.mozCancelAnimationFrame,null==E&&(E=function(a){return setTimeout(a,50)},t=function(a){return clearTimeout(a)}),G=function(a){var b,c;return b=C(),(c=function(){var d;return d=C()-b,d>=33?(b=C(),a(d,function(){return E(c)})):setTimeout(c,33-d)})()},F=function(){var a,b,c;return c=arguments[0],b=arguments[1],a=3<=arguments.length?X.call(arguments,2):[],"function"==typeof c[b]?c[b].apply(c,a):c[b]},v=function(){var a,b,c,d,e,f,g;for(b=arguments[0],d=2<=arguments.length?X.call(arguments,1):[],f=0,g=d.length;g>f;f++)if(c=d[f])for(a in c)Y.call(c,a)&&(e=c[a],null!=b[a]&&"object"==typeof b[a]&&null!=e&&"object"==typeof e?v(b[a],e):b[a]=e);return b},q=function(a){var b,c,d,e,f;for(c=b=0,e=0,f=a.length;f>e;e++)d=a[e],c+=Math.abs(d),b++;return c/b},x=function(a,b){var c,d,e;if(null==a&&(a="options"),null==b&&(b=!0),e=document.querySelector("[data-pace-"+a+"]")){if(c=e.getAttribute("data-pace-"+a),!b)return c;try{return JSON.parse(c)}catch(f){return d=f,"undefined"!=typeof console&&null!==console?console.error("Error parsing inline pace options",d):void 0}}},g=function(){function a(){}return a.prototype.on=function(a,b,c,d){var e;return null==d&&(d=!1),null==this.bindings&&(this.bindings={}),null==(e=this.bindings)[a]&&(e[a]=[]),this.bindings[a].push({handler:b,ctx:c,once:d})},a.prototype.once=function(a,b,c){return this.on(a,b,c,!0)},a.prototype.off=function(a,b){var c,d,e;if(null!=(null!=(d=this.bindings)?d[a]:void 0)){if(null==b)return delete this.bindings[a];for(c=0,e=[];c<this.bindings[a].length;)e.push(this.bindings[a][c].handler===b?this.bindings[a].splice(c,1):c++);return e}},a.prototype.trigger=function(){var a,b,c,d,e,f,g,h,i;if(c=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],null!=(g=this.bindings)?g[c]:void 0){for(e=0,i=[];e<this.bindings[c].length;)h=this.bindings[c][e],d=h.handler,b=h.ctx,f=h.once,d.apply(null!=b?b:this,a),i.push(f?this.bindings[c].splice(e,1):e++);return i}},a}(),j=window.Pace||{},window.Pace=j,v(j,g.prototype),D=j.options=v({},u,window.paceOptions,x()),U=["ajax","document","eventLag","elements"],Q=0,S=U.length;S>Q;Q++)K=U[Q],D[K]===!0&&(D[K]=u[K]);i=function(a){function b(){return V=b.__super__.constructor.apply(this,arguments)}return Z(b,a),b}(Error),b=function(){function a(){this.progress=0}return a.prototype.getElement=function(){var a;if(null==this.el){if(a=document.querySelector(D.target),!a)throw new i;this.el=document.createElement("div"),this.el.className="pace pace-active",document.body.className=document.body.className.replace(/pace-done/g,""),document.body.className+=" pace-running",this.el.innerHTML='<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>',null!=a.firstChild?a.insertBefore(this.el,a.firstChild):a.appendChild(this.el)}return this.el},a.prototype.finish=function(){var a;return a=this.getElement(),a.className=a.className.replace("pace-active",""),a.className+=" pace-inactive",document.body.className=document.body.className.replace("pace-running",""),document.body.className+=" pace-done"},a.prototype.update=function(a){return this.progress=a,this.render()},a.prototype.destroy=function(){try{this.getElement().parentNode.removeChild(this.getElement())}catch(a){i=a}return this.el=void 0},a.prototype.render=function(){var a,b,c,d,e,f,g;if(null==document.querySelector(D.target))return!1;for(a=this.getElement(),d="translate3d("+this.progress+"%, 0, 0)",g=["webkitTransform","msTransform","transform"],e=0,f=g.length;f>e;e++)b=g[e],a.children[0].style[b]=d;return(!this.lastRenderedProgress||this.lastRenderedProgress|0!==this.progress|0)&&(a.children[0].setAttribute("data-progress-text",""+(0|this.progress)+"%"),this.progress>=100?c="99":(c=this.progress<10?"0":"",c+=0|this.progress),a.children[0].setAttribute("data-progress",""+c)),this.lastRenderedProgress=this.progress},a.prototype.done=function(){return this.progress>=100},a}(),h=function(){function a(){this.bindings={}}return a.prototype.trigger=function(a,b){var c,d,e,f,g;if(null!=this.bindings[a]){for(f=this.bindings[a],g=[],d=0,e=f.length;e>d;d++)c=f[d],g.push(c.call(this,b));return g}},a.prototype.on=function(a,b){var c;return null==(c=this.bindings)[a]&&(c[a]=[]),this.bindings[a].push(b)},a}(),P=window.XMLHttpRequest,O=window.XDomainRequest,N=window.WebSocket,w=function(a,b){var c,d,e;e=[];for(d in b.prototype)try{e.push(null==a[d]&&"function"!=typeof b[d]?"function"==typeof Object.defineProperty?Object.defineProperty(a,d,{get:function(){return b.prototype[d]},configurable:!0,enumerable:!0}):a[d]=b.prototype[d]:void 0)}catch(f){c=f}return e},A=[],j.ignore=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("ignore"),c=b.apply(null,a),A.shift(),c},j.track=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("track"),c=b.apply(null,a),A.shift(),c},J=function(a){var b;if(null==a&&(a="GET"),"track"===A[0])return"force";if(!A.length&&D.ajax){if("socket"===a&&D.ajax.trackWebSockets)return!0;if(b=a.toUpperCase(),$.call(D.ajax.trackMethods,b)>=0)return!0}return!1},k=function(a){function b(){var a,c=this;b.__super__.constructor.apply(this,arguments),a=function(a){var b;return b=a.open,a.open=function(d,e){return J(d)&&c.trigger("request",{type:d,url:e,request:a}),b.apply(a,arguments)}},window.XMLHttpRequest=function(b){var c;return c=new P(b),a(c),c};try{w(window.XMLHttpRequest,P)}catch(d){}if(null!=O){window.XDomainRequest=function(){var b;return b=new O,a(b),b};try{w(window.XDomainRequest,O)}catch(d){}}if(null!=N&&D.ajax.trackWebSockets){window.WebSocket=function(a,b){var d;return d=null!=b?new N(a,b):new N(a),J("socket")&&c.trigger("request",{type:"socket",url:a,protocols:b,request:d}),d};try{w(window.WebSocket,N)}catch(d){}}}return Z(b,a),b}(h),R=null,y=function(){return null==R&&(R=new k),R},I=function(a){var b,c,d,e;for(e=D.ajax.ignoreURLs,c=0,d=e.length;d>c;c++)if(b=e[c],"string"==typeof b){if(-1!==a.indexOf(b))return!0}else if(b.test(a))return!0;return!1},y().on("request",function(b){var c,d,e,f,g;return f=b.type,e=b.request,g=b.url,I(g)?void 0:j.running||D.restartOnRequestAfter===!1&&"force"!==J(f)?void 0:(d=arguments,c=D.restartOnRequestAfter||0,"boolean"==typeof c&&(c=0),setTimeout(function(){var b,c,g,h,i,k;if(b="socket"===f?e.readyState<2:0<(h=e.readyState)&&4>h){for(j.restart(),i=j.sources,k=[],c=0,g=i.length;g>c;c++){if(K=i[c],K instanceof a){K.watch.apply(K,d);break}k.push(void 0)}return k}},c))}),a=function(){function a(){var a=this;this.elements=[],y().on("request",function(){return a.watch.apply(a,arguments)})}return a.prototype.watch=function(a){var b,c,d,e;return d=a.type,b=a.request,e=a.url,I(e)?void 0:(c="socket"===d?new n(b):new o(b),this.elements.push(c))},a}(),o=function(){function a(a){var b,c,d,e,f,g,h=this;if(this.progress=0,null!=window.ProgressEvent)for(c=null,a.addEventListener("progress",function(a){return h.progress=a.lengthComputable?100*a.loaded/a.total:h.progress+(100-h.progress)/2},!1),g=["load","abort","timeout","error"],d=0,e=g.length;e>d;d++)b=g[d],a.addEventListener(b,function(){return h.progress=100},!1);else f=a.onreadystatechange,a.onreadystatechange=function(){var b;return 0===(b=a.readyState)||4===b?h.progress=100:3===a.readyState&&(h.progress=50),"function"==typeof f?f.apply(null,arguments):void 0}}return a}(),n=function(){function a(a){var b,c,d,e,f=this;for(this.progress=0,e=["error","open"],c=0,d=e.length;d>c;c++)b=e[c],a.addEventListener(b,function(){return f.progress=100},!1)}return a}(),d=function(){function a(a){var b,c,d,f;for(null==a&&(a={}),this.elements=[],null==a.selectors&&(a.selectors=[]),f=a.selectors,c=0,d=f.length;d>c;c++)b=f[c],this.elements.push(new e(b))}return a}(),e=function(){function a(a){this.selector=a,this.progress=0,this.check()}return a.prototype.check=function(){var a=this;return document.querySelector(this.selector)?this.done():setTimeout(function(){return a.check()},D.elements.checkInterval)},a.prototype.done=function(){return this.progress=100},a}(),c=function(){function a(){var a,b,c=this;this.progress=null!=(b=this.states[document.readyState])?b:100,a=document.onreadystatechange,document.onreadystatechange=function(){return null!=c.states[document.readyState]&&(c.progress=c.states[document.readyState]),"function"==typeof a?a.apply(null,arguments):void 0}}return a.prototype.states={loading:0,interactive:50,complete:100},a}(),f=function(){function a(){var a,b,c,d,e,f=this;this.progress=0,a=0,e=[],d=0,c=C(),b=setInterval(function(){var g;return g=C()-c-50,c=C(),e.push(g),e.length>D.eventLag.sampleCount&&e.shift(),a=q(e),++d>=D.eventLag.minSamples&&a<D.eventLag.lagThreshold?(f.progress=100,clearInterval(b)):f.progress=100*(3/(a+3))},50)}return a}(),m=function(){function a(a){this.source=a,this.last=this.sinceLastUpdate=0,this.rate=D.initialRate,this.catchup=0,this.progress=this.lastProgress=0,null!=this.source&&(this.progress=F(this.source,"progress"))}return a.prototype.tick=function(a,b){var c;return null==b&&(b=F(this.source,"progress")),b>=100&&(this.done=!0),b===this.last?this.sinceLastUpdate+=a:(this.sinceLastUpdate&&(this.rate=(b-this.last)/this.sinceLastUpdate),this.catchup=(b-this.progress)/D.catchupTime,this.sinceLastUpdate=0,this.last=b),b>this.progress&&(this.progress+=this.catchup*a),c=1-Math.pow(this.progress/100,D.easeFactor),this.progress+=c*this.rate*a,this.progress=Math.min(this.lastProgress+D.maxProgressPerFrame,this.progress),this.progress=Math.max(0,this.progress),this.progress=Math.min(100,this.progress),this.lastProgress=this.progress,this.progress},a}(),L=null,H=null,r=null,M=null,p=null,s=null,j.running=!1,z=function(){return D.restartOnPushState?j.restart():void 0},null!=window.history.pushState&&(T=window.history.pushState,window.history.pushState=function(){return z(),T.apply(window.history,arguments)}),null!=window.history.replaceState&&(W=window.history.replaceState,window.history.replaceState=function(){return z(),W.apply(window.history,arguments)}),l={ajax:a,elements:d,document:c,eventLag:f},(B=function(){var a,c,d,e,f,g,h,i;for(j.sources=L=[],g=["ajax","elements","document","eventLag"],c=0,e=g.length;e>c;c++)a=g[c],D[a]!==!1&&L.push(new l[a](D[a]));for(i=null!=(h=D.extraSources)?h:[],d=0,f=i.length;f>d;d++)K=i[d],L.push(new K(D));return j.bar=r=new b,H=[],M=new m})(),j.stop=function(){return j.trigger("stop"),j.running=!1,r.destroy(),s=!0,null!=p&&("function"==typeof t&&t(p),p=null),B()},j.restart=function(){return j.trigger("restart"),j.stop(),j.start()},j.go=function(){var a;return j.running=!0,r.render(),a=C(),s=!1,p=G(function(b,c){var d,e,f,g,h,i,k,l,n,o,p,q,t,u,v,w;for(l=100-r.progress,e=p=0,f=!0,i=q=0,u=L.length;u>q;i=++q)for(K=L[i],o=null!=H[i]?H[i]:H[i]=[],h=null!=(w=K.elements)?w:[K],k=t=0,v=h.length;v>t;k=++t)g=h[k],n=null!=o[k]?o[k]:o[k]=new m(g),f&=n.done,n.done||(e++,p+=n.tick(b));return d=p/e,r.update(M.tick(b,d)),r.done()||f||s?(r.update(100),j.trigger("done"),setTimeout(function(){return r.finish(),j.running=!1,j.trigger("hide")},Math.max(D.ghostTime,Math.max(D.minTime-(C()-a),0)))):c()})},j.start=function(a){v(D,a),j.running=!0;try{r.render()}catch(b){i=b}return document.querySelector(".pace")?(j.trigger("start"),j.go()):setTimeout(j.start,50)},"function"==typeof define&&define.amd?define(["pace"],function(){return j}):"object"==typeof exports?module.exports=j:D.startOnPageLoad&&j.start()}).call(this);
+</script>
+<style type="text/css">
+   
+  .pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  .pace.pace-inactive .pace-progress {
+    display: none;
+  }
+
+  .pace .pace-progress {
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 45%;
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .pace .pace-progress:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: .5rem;
+    content: attr(data-progress-text);
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 100;
+    font-size: 5rem;
+    line-height: 1;
+    text-align: right;
+    color: rgba(229, 146, 42, 0.90);
+  }
+</style>
+
+  <title>CoderZh&#39;s Blog - CoderZh&#39;s Blog</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="CoderZh&#39;s Blog">
+<meta name="author" content="coderzh">
+<meta name="publisher" content="coderzh">
+<meta name="generator" content="http://gohugo.io/"/>
+
+<meta itemprop="name" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta itemprop="description" content="CoderZh&#39;s Blog">
+<meta itemprop="image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+<meta property="og:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.coderzh.com/" />
+<meta property="og:image" content="http://blog.coderzh.com/public/coderzh.jpg" />
+<meta property="og:description" content="CoderZh&#39;s Blog" />
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@coderzh">
+<meta name="twitter:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta name="twitter:description" content="CoderZh&#39;s Blog">
+<meta name="twitter:creator" content="@coderzh">
+<meta name="twitter:image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+  <link rel="canonical" href="http://blog.coderzh.com/">
+  <link rel='shortlink' href="http://blog.coderzh.com/"/>
+  <link rel="shortcut icon" href="http://blog.coderzh.com/public/favicon.ico"/>
+  
+  <link href="http://blog.coderzh.com/feed.xml" rel="alternate" type="application/rss+xml" title="CoderZh&#39;s Blog" />
+
+
+<link rel="stylesheet" id="human-style-css" href="http://blog.coderzh.com/wp-content/themes/hueman/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="human-style-css2" href="http://blog.coderzh.com/wp-content/themes/hueman-child/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="responsive-css" href="http://blog.coderzh.com/wp-content/themes/hueman/responsive.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="font-awesome-css" href="http://blog.coderzh.com/wp-content/themes/hueman/fonts/font-awesome.min.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="wp-youtube-lyte" href="http://blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/lyte.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="hubinfo" href="http://blog.coderzh.com/assets/hubinfo/dist/hubinfo.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="http://blog.coderzh.com/public/highlightjs/default.min.css">
+<script src="http://blog.coderzh.com/public/highlightjs/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<link rel="stylesheet" id="human-style-css3" href="http://blog.coderzh.com/wp-content/themes/hueman-child/user.css" type="text/css" media="all"/>
+
+
+</head>
+
+<body class="archive category col-3cm full-width topbar-enabled chrome">
+
+<div id="wrapper">
+  <header id="header">
+
+  <nav class="nav-container group" id="nav-topbar">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap container">
+      <a href="http://blog.coderzh.com" class="nav-cs-icon">
+        <img width="40" height="40" src="http://blog.coderzh.com/public/coderzh.jpg" alt="coderzh" title="Home">
+      </a>
+      <ul id="menu-default-menu" class="nav container-inner group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/post/">归档</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/about/">关于我</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/feed.xml" type="application/rss+xml" target="_blank">订阅</a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-text">
+        一个程序员的思考与总结
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="container-inner">
+        <div class="toggle-search"><i class="fa fa-search"></i></div>
+        <div class="search-expand">
+          <div class="search-expand-inner">
+            <form method="get" class="searchform themeform" action="https://www.google.com/search">
+              <div>
+                <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+
+  </nav>
+  
+
+  <div class="container group">
+    <div class="container-inner">
+
+      <div class="group pad">
+
+        <div class="group pad">
+          <h1 class="site-title">
+            <a href="http://blog.coderzh.com" rel="home">
+              <img style="border-radius: 50%;width:72px;height:72px;margin:0 auto;" src="http://blog.coderzh.com/public/coderzh.jpg"></img>
+              CoderZh&#39;s Blog
+            </a>
+          </h1>
+          <p class="site-description"> 如果你没有感觉到时间不够用时，你多半正在虚度光阴。 </p>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+  
+
+</header>
+
+
+
+  <div class="container" id="page">
+    <div class="container-inner">
+      <div class="main">
+        <div class="main-inner group">
+          <section class="content">
+            <div class="pad group">
+              
+              
+              <div class="post-list group">
+                
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月09日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/09/1190173" rel="bookmark" title="Python天天美味(16) - 过滤字符串的技巧,map与itertools.imap">Python天天美味(16) - 过滤字符串的技巧,map与itertools.imap</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>Python中的map函数非常有用，在字符转换和字符遍历两节都出现过，现在，它又出现了，会给我们带来什么样的惊喜呢？是不是要告诉我们，map是非常棒的，以后要多找它玩呢？ 具体的实例 我们需要在目录中遍历，包括子目录（哈哈），找出所有后缀为：rmvb ，avi&nbsp; ，pmp 的文件。（天哪？！你要干什么？这可是我的隐私啊～～） ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)import&nbsp;os ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;anyTrue(predicate,&nbsp;sequence): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True&nbsp;in&nbsp;map(predicate,&nbsp;sequence) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;filterFiles(folder,&nbsp;exts): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;fileName&nbsp;in&nbsp;os.listdir(folder): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;os.path.isdir(folder&nbsp;+&nbsp;'/'&nbsp;+&nbsp;fileName): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filterFiles(folder&nbsp;+&nbsp;'/'&nbsp;+&nbsp;fileName,&nbsp;exts) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif&nbsp;anyTrue(fileName.endswith,&nbsp;exts): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;fileName ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)exts&nbsp;=&nbsp;['.rmvb',&nbsp;'.avi',&nbsp;'.pmp'] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)filterFiles('/media/Personal/Movie',&nbsp;exts) 输出结果 来看看有什么好东东： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)[66影视www.66ys.cn]迷失第四季04.rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)[迷失.第4季].Lost.S04E00.rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)[迷失Lost第四季][第02集][中文字幕].rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)《迷失Lost第四季》第05集[中文字幕].rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)《迷失Lost第四季》第06集[中文字幕].rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)《迷失Lost第四季》第07集[中文字幕].rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)天赐第2季01.rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)天赐第2季02.rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)天赐第2季03.rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)天赐第2季04.rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)天赐第2季05.rmvb ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)影视帝国(bbs.cnxp.com).美丽心灵.A.Beautiful.Mind.2001.CD1.rmvb ( ... 太多了，不要全输出来吧～～) 扩展 CookBook一书中，提供的是itertools.imap来实现对字符串的过滤。imap和map不同的是，imap返回的是一个iteration对象，而map返回的是一个list对象。代码如下： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)import&nbsp;itertools ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;anyTrue(predicate,&nbsp;sequence): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;True&nbsp;in&nbsp;itertools.imap(predicate,&nbsp;sequence) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;endsWith(s,&nbsp;*endings): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;anyTrue(s.endswith,&nbsp;endings) imap 等价于： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;imap(function,&nbsp;*iterables): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iterables&nbsp;=&nbsp;map(iter,&nbsp;iterables) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;True: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;args&nbsp;=&nbsp;[i.next()&nbsp;for&nbsp;i&nbsp;in&nbsp;iterables] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;function&nbsp;is&nbsp;None: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield&nbsp;tuple(args) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield&nbsp;function(*args) Python 天天美味系列（总） Python 天天美味(14) - splitlines &nbsp; Python 天天美味(15) - Python正则表达式操作指南(re使用)(转) &nbsp; Python 天天美味(16) - 过滤字符串的技巧,map与itertools.imap</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月06日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/06/1185755" rel="bookmark" title="Python天天美味(15) - Python正则表达式操作指南(re使用)(转)">Python天天美味(15) - Python正则表达式操作指南(re使用)(转)</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>简介 Python 自1.5版本起增加了re 模块，它提供 Perl 风格的正则表达式模式。Python 1.5之前版本则是通过 regex 模块提供 Emecs 风格的模式。Emacs 风格模式可读性稍差些，而且功能也不强，因此编写新代码时尽量不要再使用 regex 模块，当然偶尔你还是可能在老代码里发现其踪影。 就其本质而言，正则表达式（或 RE）是一种小型的、高度专业化的编程语言，（在Python中）它内嵌在Python中，并通过 re 模块实现。使用这个小型语言，你可以为想要匹配的相应字符串集指定规则；该字符串集可能包含英文语句、e-mail地址、TeX命令或任何你想搞定的东 西。然後你可以问诸如&#8220;这个字符串匹配该模式吗？&#8221;或&#8220;在这个字符串中是否有部分匹配该模式呢？&#8221;。你也可以使用 RE 以各种方式来修改或分割字符串。 正则表达式模式被编译成一系列的字节码，然後由用 C 编写的匹配引擎执行。在高级用法中，也许还要仔细留意引擎是如何执行给定 RE ，如何以特定方式编写 RE 以令生产的字节码运行速度更快。本文并不涉及优化，因为那要求你已充分掌握了匹配引擎的内部机制。 正则表达式语言相对小型和受限（功能有限），因此并非所有字符串处理都能用正则表达式完成。当然也有些任务可以用正则表达式完成， 不过最终表达式会变得异常复杂。碰到这些情形时，编写 Python 代码进行处理可能反而更好；尽管 Python 代码比一个精巧的正则表达式要慢些，但它更易理解。 简单模式 我们将从最简单的正则表达式学习开始。由于正则表达式常用于字符串操作，那我们就从最常见的任务：字符匹配 下手。 有关正则表达式底层的计算机科学上的详细解释（确定性和非确定性有限自动机），你可以查阅编写编译器相关的任何教科书。 字符匹配 大多数字母和字符一般都会和自身匹配。例如，正则表达式 test 会和字符串&#8220;test&#8221;完全匹配。（你也可以使用大小写不敏感模式，它还能让这个 RE 匹配&#8220;Test&#8221;或&#8220;TEST&#8221;；稍後会有更多解释。） 这个规则当然会有例外；有些字符比较特殊，它们和自身并不匹配，而是会表明应和一些特殊的东西匹配，或者它们会影响到 RE 其它部分的重复次数。本文很大篇幅专门讨论了各种元字符及其作用。 这里有一个元字符的完整列表；其含义会在本指南馀下部分进行讨论。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif).&nbsp;^&nbsp;$&nbsp;*&nbsp;+&nbsp;?&nbsp;{&nbsp;[&nbsp;] \ |&nbsp;(&nbsp;) 我们首先考察的元字符是&rdquo;[&rdquo; 和 &ldquo;]&ldquo;。它们常用来指定一个字符类别，所谓字符类别就是你想匹配的一个字符集。字符可以单个列出，也可以用&#8220;-&#8221;号分隔的两个给定字符来表示一个字符区 间。例如，[abc] 将匹配&rdquo;a&rdquo;, &ldquo;b&rdquo;, 或 &ldquo;c&rdquo;中的任意一个字符；也可以用区间[a-c]来表示同一字符集，和前者效果一致。如果你只想匹配小写字母，那幺 RE 应写成 [a-z]. 元字符在类别里并不起作用。例如，[akm$]将匹配字符&rdquo;a&rdquo;, &ldquo;k&rdquo;, &ldquo;m&rdquo;, 或 &ldquo;$&rdquo; 中的任意一个；&rdquo;$&ldquo;通常用作元字符，但在字符类别里，其特性被除去，恢复成普通字符。 你可以用补集来匹配不在区间范围内的字符。其做法是把&rdquo;^&ldquo;作为类别的首个字符；其它地方的&rdquo;^&ldquo;只会简单匹配 &ldquo;^&ldquo;字符本身。例如，[^5] 将匹配除 &ldquo;5&rdquo; 之外的任意字符。 也许最重要的元字符是反斜杠&rdquo;&ldquo;&ldquo;。 做为 Python 中的字符串字母，反斜杠後面可以加不同的字符以表示不同特殊意义。它也可以用于取消所有的元字符，这样你就可以在模式中匹配它们了。举个例子，如果你需要 匹配字符 &ldquo;[&rdquo; 或 &ldquo;&rdquo;&ldquo;，你可以在它们之前用反斜杠来取消它们的特殊意义： &ldquo;[ 或 &ldquo;&ldquo;。 一些用 &ldquo;&rdquo;&rdquo; 开始的特殊字符所表示的预定义字符集通常是很有用的，象数字集，字母集，或其它非空字符集。下列是可用的预设特殊字符： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)\d&nbsp;&nbsp;匹配任何十进制数；它相当于类&nbsp;[0-9]。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)\D&nbsp;&nbsp;匹配任何非数字字符；它相当于类&nbsp;[^0-9]。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)\s&nbsp;&nbsp;匹配任何空白字符；它相当于类&nbsp;&nbsp;[&nbsp;"t"n"r"f"v]。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)\S&nbsp;&nbsp;匹配任何非空白字符；它相当于类&nbsp;[^&nbsp;"t"n"r"f"v]。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)\w&nbsp;&nbsp;匹配任何字母数字字符；它相当于类&nbsp;[a-zA-Z0-9_]。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)\W&nbsp;&nbsp;匹配任何非字母数字字符；它相当于类&nbsp;[^a-zA-Z0-9_]。 这样特殊字符都可以包含在一个字符类中。如，[&ldquo;s,.]字符类将匹配任何空白字符或&rdquo;,&ldquo;或&rdquo;.&ldquo;。 本节最後一个元字符是 .</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月05日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/05/1183125" rel="bookmark" title="Linux服务器性能数据收集 - Sysstat介绍">Linux服务器性能数据收集 - Sysstat介绍</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>Linux中的top,free等命令不能完全满足我们性能数据收集的要求，我们需要一个更加强大的工具来收集性能数据。经过考察和对比，发现Sysstat是一个非常强大的工具，因此下载了试了下，效果不错。Sysstat是一个工具集，包括sar、pidstat、iostat、mpstat、sadf、sadc。其中sar是其中最强大，也是最能符合我们测试要求的工具，同时pidstat也是非常有用的东东，因此本文结合性能测试重点介绍这两个工具。 Sysstat的安装 从http://pagesperso-orange.fr/sebastien.godard/download.html下载最新版本，解压，安装 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;&nbsp;wget&nbsp;http://pagesperso-orange.fr/sebastien.godard/sysstat-8.1.2.tar.gz &nbsp;tar&nbsp;zxvf&nbsp;sysstat-8.1.2.tar.gz &nbsp;cd&nbsp;sysstat-8.1.2 &nbsp;./configure &nbsp;make &nbsp;su &nbsp;&lt;enter&nbsp;root&nbsp;password&gt; &nbsp;make&nbsp;install 监视某个进程 通过ps命令找到相应进程的PID： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)ps&nbsp;-e 使用pidstat命令监视进程，详细用法见：http://pagesperso-orange.fr/sebastien.godard/man_pidstat.html &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;pidstat&nbsp;2&nbsp;5&nbsp; //每隔2秒，显示5次，所有活动进程的CPU使用情况 pidstat&nbsp;-p&nbsp;3132&nbsp;2&nbsp;5&nbsp; //每隔2秒，显示5次，PID为1643的进程的CPU使用情况显示 pidstat&nbsp;-p&nbsp;3132&nbsp;2&nbsp;5&nbsp;-r //每隔2秒，显示5次，PID为1643的进程的内存使用情况显示 很可惜的是，pidstat命令没有保存性能数据的功能。 查看性能数据 在sysstat工具包中，sar是最强大的了，通过sar几乎可以监视所有的性能数据，同时，sar还支持将性能数据保存起来。 sar详细用法请见：http://pagesperso-orange.fr/sebastien.godard/man_sar.html 查看CPU使用情况 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;sar&nbsp;2&nbsp;5 //每隔2秒，显示5次，CPU使用的情况 查看内存使用情况 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;sar&nbsp;-r&nbsp;2&nbsp;5 //每隔2秒，显示5次，内存使用的情况 查看网络吞吐量 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)sar&nbsp;-n&nbsp;DEV&nbsp;2&nbsp;5 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)//每隔2秒，显示5次，网络吞吐量情况</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月05日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/05/1183967" rel="bookmark" title="Python天天美味(14) - splitlines">Python天天美味(14) - splitlines</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>Python中的splitlines用来分割行。当传入的参数为True时，表示保留换行符 \n。通过下面的例子就很明白了: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)mulLine&nbsp;=&nbsp;"""Hello!!! ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;Wellcome&nbsp;to&nbsp;Python's&nbsp;world! ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;There&nbsp;are&nbsp;a&nbsp;lot&nbsp;of&nbsp;interesting&nbsp;things! ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enjoy&nbsp;yourself.&nbsp;Thank&nbsp;you!""" ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;''.join(mulLine.splitlines()) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;'------------' ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;''.join(mulLine.splitlines(True)) 输出结果： Hello!!! Wellcome to Python&rsquo;s world!&nbsp;&nbsp;&nbsp; There are a lot of interesting things!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Enjoy yourself. Thank you! Hello!!! &nbsp;Wellcome to Python&rsquo;s world! &nbsp;&nbsp;&nbsp; There are a lot of interesting things! &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Enjoy yourself. Thank you! 利用这个函数，就可以非常方便写一些段落处理的函数了，比如处理缩进等方法。如Cookbook书中的例子： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;addSpaces(s,&nbsp;numAdd): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;white&nbsp;=&nbsp;"&nbsp;"*numAdd ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;white&nbsp;+&nbsp;white.join(s.splitlines(True)) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;numSpaces(s): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[len(line)-len(line.lstrip(&nbsp;))&nbsp;for&nbsp;line&nbsp;in&nbsp;s.splitlines(&nbsp;)] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;delSpaces(s,&nbsp;numDel): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;numDel&nbsp;&gt;&nbsp;min(numSpaces(s)): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise&nbsp;ValueError,&nbsp;"removing&nbsp;more&nbsp;spaces&nbsp;than&nbsp;there&nbsp;are!" ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;'\n'.join([&nbsp;line[numDel:]&nbsp;for&nbsp;line&nbsp;in&nbsp;s.splitlines(&nbsp;)&nbsp;]) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;unIndentBlock(s): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;delSpaces(s,&nbsp;min(numSpaces(s))) Python 天天美味系列（总） Python 天天美味(12) - 条件判断的缩写&nbsp; Python 天天美味(13) - struct.unpack&nbsp; &nbsp; Python 天天美味(14)</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月04日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/04/1181250" rel="bookmark" title="Python天天美味(10) - 除法小技巧">Python天天美味(10) - 除法小技巧</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>Python中将两个整数相除，默认结果是为整数的。但我们可以通过下面的方法，使得两个整数相除的结果为小数。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)from&nbsp;__future__&nbsp;import&nbsp;division ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;7/3 输出结果： 2.3333333333 Python 天天美味系列（总） [Python 天天美味(8) - 字符串中的字符倒转](http://www.cnblogs.com/coderzh/archive/2008/05/03/1180584.html) [Python 天天美味(9) - translator](http://www.cnblogs.com/coderzh/archive/2008/05/03/1180705.html) &nbsp; [Python 天天美味(10) - 除法小技巧](http://www.cnblogs.com/coderzh/archive/2008/05/04/1181250.html) &nbsp; [Python 天天美味(11) - 可爱的大小写](http://www.cnblogs.com/coderzh/archive/2008/05/04/1181340.html) [Python 天天美味(12) - 条件判断的缩写](http://www.cnblogs.com/coderzh/archive/2008/05/04/1181416.html) ...</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月04日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/04/1181340" rel="bookmark" title="Python天天美味(11) - 可爱的大小写">Python天天美味(11) - 可爱的大小写</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>转换大小写 和其他语言一样，Python为string对象提供了转换大小写的方法：upper() 和 lower()。还不止这些，Python还为我们提供了首字母大写，其余小写的capitalize()方法，以及所有单词首字母大写，其余小写的title()方法。函数较简单，看下面的例子： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)s&nbsp;=&nbsp;'hEllo&nbsp;pYthon' ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;s.upper() ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;s.lower() ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;s.capitalize() ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;s.title() 输出结果： HELLO PYTHON hello python Hello python Hello Python 判断大小写 Python提供了isupper()，islower()，istitle()方法用来判断字符串的大小写。注意的是： 没有提供 iscapitalize()方法，下面我们会自己实现，至于为什么Python没有为我们实现，就不得而知了。 如果对空字符串使用isupper()，islower()，istitle()，返回的结果都为False。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;'A'.isupper()&nbsp;#True ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;'A'.islower()&nbsp;#False ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;'Python&nbsp;Is&nbsp;So&nbsp;Good'.istitle()&nbsp;#True ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)#print&nbsp;'Dont&nbsp;do&nbsp;that!'.iscapitalize()&nbsp;#错误，不存在iscapitalize()方法 实现iscapitalize 如果我们只是简单比较原字符串与进行了capitallize()转换的字符串的话，如果我们传入的原字符串为空字符串的话，返回结果会为True，这不符合我们上面提到的第2点。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;iscapitalized(s): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;s&nbsp;==&nbsp;s.capitalize(&nbsp;) 有人想到返回时加入条件，判断len(s)&gt;0，其实这样是有问题的，因为当我们调用iscapitalize('123')时，返回的是True，不是我们预期的结果。 2. 因此，我们回忆起了之前的translate方法，去判断字符串是否包含任何英文字母。实现如下： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)import&nbsp;string ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)notrans&nbsp;=&nbsp;string.maketrans('',&nbsp;'') ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;containsAny(str,&nbsp;strset): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;len(strset)&nbsp;!=&nbsp;len(strset.translate(notrans,&nbsp;str)) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;iscapitalized(s): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;s&nbsp;==&nbsp;s.capitalize(&nbsp;)&nbsp;and&nbsp;containsAny(s,&nbsp;string.letters) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;#return&nbsp;s&nbsp;==&nbsp;s.capitalize(&nbsp;)&nbsp;and&nbsp;len(s)&nbsp;&gt;&nbsp;0&nbsp;#如果s为数字组成的字符串，这个方法将行不通 调用一下试试： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;iscapitalized('123') ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;iscapitalized('') ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;iscapitalized('Evergreen&nbsp;is&nbsp;zcr1985') 输出结果： False False True Python 天天美味系列（总） Python 天天美味(9) - translator &nbsp; Python 天天美味(10) - 除法小技巧 &nbsp; Python 天天美味(11) - 可爱的大小写 Python 天天美味(12) - 条件判断的缩写&nbsp; Python</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+              </div>
+
+              
+              
+
+<nav class="pagination group">
+  <div class="wp-pagenavi">
+    <span class="pages">
+        Page 33 of 38
+        (265 Posts)
+    </span>
+    
+      <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/32/">Prev &laquo;</a>
+    
+    
+    
+      <a class="nextpostslink" rel="next" href="http://blog.coderzh.com/paginator/34/">Next &raquo;</a>
+    
+  </div>
+</nav>
+
+              
+            </div>
+
+          </section>
+          <div class="sidebar s1">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>Follow:</p>
+      <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+    </div>
+
+    <div class="widget qrcode">
+    <img src="http://blog.coderzh.com/public/qrcode.jpg" width="129px" height="129px"/>
+    <p>微信扫一扫：<br/> 关注我的公众号： <br /> hacker-thinking</p>
+</div>
+
+
+    <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
+      <ul>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="search-2" class="widget widget_search"><h3>Search</h3>
+
+      <form method="get" class="searchform themeform" action="https://www.google.com/search">
+        <div>
+          <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+        </div>
+      </form>
+    </div>
+
+  </div>
+  
+</div>
+
+          <div class="sidebar s2">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>More</p>
+    </div>
+
+
+    <div id="categories-2" class="widget widget_categories"><h3>Categories</h3>
+      <ul>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F/">思考感悟</a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <div id="tag_cloud-2" class="widget widget_tag_cloud"><h3>Tags</h3>
+
+      <div class="tagcloud">
+        <p class="post-tags">
+          
+              
+          
+        </p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+
+  <nav class="nav-container group" id="nav-footer">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap">
+      <ul id="menu-default-menu-1" class="nav container group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+  
+
+  <section class="container" id="footer-bottom">
+    <div class="container-inner">
+      <a id="back-to-top" href="#"><i class="fa fa-angle-up"></i></a>
+      <div class="pad group">
+        <div class="grid one-half">
+          <div id="copyright">
+            <p>Copyright © 2015. All Rights Reserved. <br>Powered by
+              <a href="http://gohugo.io/" target="_blank">Hugo - the static site generator</a>.
+              <a href="http://golang.org" target="_blank">#golang</a>.
+            </p>
+          </div>
+          
+        </div>
+        
+        <div class="grid one-half last">
+          <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+        </div>
+      </div>
+
+    </div>
+    
+  </section>
+  
+
+</footer>
+
+</div>
+<script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/scripts.js"></script>
+<script type="text/javascript" src="assets/picturefill/picturefill.min.js"></script>
+<script type="text/javascript" src="assets/hubinfo/dist/hubinfo.js"></script>
+<script type="text/javascript" src="assets/js/jquery.matchHeight-min.js"></script>
+
+
+<script type="text/javascript">var bU = "http:\/\/blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/";</script>
+<script type="text/javascript" async defer src="wp-content/plugins/wp-youtube-lyte/lyte/lyte.js"></script>
+<script type="text/javascript" async defer src="assets/js/myblog.js"></script>
+
+</body>
+</html>
+
