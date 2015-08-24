@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+  <base href="http://blog.coderzh.com/">
+  <script type="text/javascript">
+ 
+(function(){var a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X=[].slice,Y={}.hasOwnProperty,Z=function(a,b){function c(){this.constructor=a}for(var d in b)Y.call(b,d)&&(a[d]=b[d]);return c.prototype=b.prototype,a.prototype=new c,a.__super__=b.prototype,a},$=[].indexOf||function(a){for(var b=0,c=this.length;c>b;b++)if(b in this&&this[b]===a)return b;return-1};for(u={catchupTime:100,initialRate:.03,minTime:250,ghostTime:100,maxProgressPerFrame:20,easeFactor:1.25,startOnPageLoad:!0,restartOnPushState:!0,restartOnRequestAfter:500,target:"body",elements:{checkInterval:100,selectors:["body"]},eventLag:{minSamples:10,sampleCount:3,lagThreshold:3},ajax:{trackMethods:["GET"],trackWebSockets:!0,ignoreURLs:[]}},C=function(){var a;return null!=(a="undefined"!=typeof performance&&null!==performance&&"function"==typeof performance.now?performance.now():void 0)?a:+new Date},E=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame,t=window.cancelAnimationFrame||window.mozCancelAnimationFrame,null==E&&(E=function(a){return setTimeout(a,50)},t=function(a){return clearTimeout(a)}),G=function(a){var b,c;return b=C(),(c=function(){var d;return d=C()-b,d>=33?(b=C(),a(d,function(){return E(c)})):setTimeout(c,33-d)})()},F=function(){var a,b,c;return c=arguments[0],b=arguments[1],a=3<=arguments.length?X.call(arguments,2):[],"function"==typeof c[b]?c[b].apply(c,a):c[b]},v=function(){var a,b,c,d,e,f,g;for(b=arguments[0],d=2<=arguments.length?X.call(arguments,1):[],f=0,g=d.length;g>f;f++)if(c=d[f])for(a in c)Y.call(c,a)&&(e=c[a],null!=b[a]&&"object"==typeof b[a]&&null!=e&&"object"==typeof e?v(b[a],e):b[a]=e);return b},q=function(a){var b,c,d,e,f;for(c=b=0,e=0,f=a.length;f>e;e++)d=a[e],c+=Math.abs(d),b++;return c/b},x=function(a,b){var c,d,e;if(null==a&&(a="options"),null==b&&(b=!0),e=document.querySelector("[data-pace-"+a+"]")){if(c=e.getAttribute("data-pace-"+a),!b)return c;try{return JSON.parse(c)}catch(f){return d=f,"undefined"!=typeof console&&null!==console?console.error("Error parsing inline pace options",d):void 0}}},g=function(){function a(){}return a.prototype.on=function(a,b,c,d){var e;return null==d&&(d=!1),null==this.bindings&&(this.bindings={}),null==(e=this.bindings)[a]&&(e[a]=[]),this.bindings[a].push({handler:b,ctx:c,once:d})},a.prototype.once=function(a,b,c){return this.on(a,b,c,!0)},a.prototype.off=function(a,b){var c,d,e;if(null!=(null!=(d=this.bindings)?d[a]:void 0)){if(null==b)return delete this.bindings[a];for(c=0,e=[];c<this.bindings[a].length;)e.push(this.bindings[a][c].handler===b?this.bindings[a].splice(c,1):c++);return e}},a.prototype.trigger=function(){var a,b,c,d,e,f,g,h,i;if(c=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],null!=(g=this.bindings)?g[c]:void 0){for(e=0,i=[];e<this.bindings[c].length;)h=this.bindings[c][e],d=h.handler,b=h.ctx,f=h.once,d.apply(null!=b?b:this,a),i.push(f?this.bindings[c].splice(e,1):e++);return i}},a}(),j=window.Pace||{},window.Pace=j,v(j,g.prototype),D=j.options=v({},u,window.paceOptions,x()),U=["ajax","document","eventLag","elements"],Q=0,S=U.length;S>Q;Q++)K=U[Q],D[K]===!0&&(D[K]=u[K]);i=function(a){function b(){return V=b.__super__.constructor.apply(this,arguments)}return Z(b,a),b}(Error),b=function(){function a(){this.progress=0}return a.prototype.getElement=function(){var a;if(null==this.el){if(a=document.querySelector(D.target),!a)throw new i;this.el=document.createElement("div"),this.el.className="pace pace-active",document.body.className=document.body.className.replace(/pace-done/g,""),document.body.className+=" pace-running",this.el.innerHTML='<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>',null!=a.firstChild?a.insertBefore(this.el,a.firstChild):a.appendChild(this.el)}return this.el},a.prototype.finish=function(){var a;return a=this.getElement(),a.className=a.className.replace("pace-active",""),a.className+=" pace-inactive",document.body.className=document.body.className.replace("pace-running",""),document.body.className+=" pace-done"},a.prototype.update=function(a){return this.progress=a,this.render()},a.prototype.destroy=function(){try{this.getElement().parentNode.removeChild(this.getElement())}catch(a){i=a}return this.el=void 0},a.prototype.render=function(){var a,b,c,d,e,f,g;if(null==document.querySelector(D.target))return!1;for(a=this.getElement(),d="translate3d("+this.progress+"%, 0, 0)",g=["webkitTransform","msTransform","transform"],e=0,f=g.length;f>e;e++)b=g[e],a.children[0].style[b]=d;return(!this.lastRenderedProgress||this.lastRenderedProgress|0!==this.progress|0)&&(a.children[0].setAttribute("data-progress-text",""+(0|this.progress)+"%"),this.progress>=100?c="99":(c=this.progress<10?"0":"",c+=0|this.progress),a.children[0].setAttribute("data-progress",""+c)),this.lastRenderedProgress=this.progress},a.prototype.done=function(){return this.progress>=100},a}(),h=function(){function a(){this.bindings={}}return a.prototype.trigger=function(a,b){var c,d,e,f,g;if(null!=this.bindings[a]){for(f=this.bindings[a],g=[],d=0,e=f.length;e>d;d++)c=f[d],g.push(c.call(this,b));return g}},a.prototype.on=function(a,b){var c;return null==(c=this.bindings)[a]&&(c[a]=[]),this.bindings[a].push(b)},a}(),P=window.XMLHttpRequest,O=window.XDomainRequest,N=window.WebSocket,w=function(a,b){var c,d,e;e=[];for(d in b.prototype)try{e.push(null==a[d]&&"function"!=typeof b[d]?"function"==typeof Object.defineProperty?Object.defineProperty(a,d,{get:function(){return b.prototype[d]},configurable:!0,enumerable:!0}):a[d]=b.prototype[d]:void 0)}catch(f){c=f}return e},A=[],j.ignore=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("ignore"),c=b.apply(null,a),A.shift(),c},j.track=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("track"),c=b.apply(null,a),A.shift(),c},J=function(a){var b;if(null==a&&(a="GET"),"track"===A[0])return"force";if(!A.length&&D.ajax){if("socket"===a&&D.ajax.trackWebSockets)return!0;if(b=a.toUpperCase(),$.call(D.ajax.trackMethods,b)>=0)return!0}return!1},k=function(a){function b(){var a,c=this;b.__super__.constructor.apply(this,arguments),a=function(a){var b;return b=a.open,a.open=function(d,e){return J(d)&&c.trigger("request",{type:d,url:e,request:a}),b.apply(a,arguments)}},window.XMLHttpRequest=function(b){var c;return c=new P(b),a(c),c};try{w(window.XMLHttpRequest,P)}catch(d){}if(null!=O){window.XDomainRequest=function(){var b;return b=new O,a(b),b};try{w(window.XDomainRequest,O)}catch(d){}}if(null!=N&&D.ajax.trackWebSockets){window.WebSocket=function(a,b){var d;return d=null!=b?new N(a,b):new N(a),J("socket")&&c.trigger("request",{type:"socket",url:a,protocols:b,request:d}),d};try{w(window.WebSocket,N)}catch(d){}}}return Z(b,a),b}(h),R=null,y=function(){return null==R&&(R=new k),R},I=function(a){var b,c,d,e;for(e=D.ajax.ignoreURLs,c=0,d=e.length;d>c;c++)if(b=e[c],"string"==typeof b){if(-1!==a.indexOf(b))return!0}else if(b.test(a))return!0;return!1},y().on("request",function(b){var c,d,e,f,g;return f=b.type,e=b.request,g=b.url,I(g)?void 0:j.running||D.restartOnRequestAfter===!1&&"force"!==J(f)?void 0:(d=arguments,c=D.restartOnRequestAfter||0,"boolean"==typeof c&&(c=0),setTimeout(function(){var b,c,g,h,i,k;if(b="socket"===f?e.readyState<2:0<(h=e.readyState)&&4>h){for(j.restart(),i=j.sources,k=[],c=0,g=i.length;g>c;c++){if(K=i[c],K instanceof a){K.watch.apply(K,d);break}k.push(void 0)}return k}},c))}),a=function(){function a(){var a=this;this.elements=[],y().on("request",function(){return a.watch.apply(a,arguments)})}return a.prototype.watch=function(a){var b,c,d,e;return d=a.type,b=a.request,e=a.url,I(e)?void 0:(c="socket"===d?new n(b):new o(b),this.elements.push(c))},a}(),o=function(){function a(a){var b,c,d,e,f,g,h=this;if(this.progress=0,null!=window.ProgressEvent)for(c=null,a.addEventListener("progress",function(a){return h.progress=a.lengthComputable?100*a.loaded/a.total:h.progress+(100-h.progress)/2},!1),g=["load","abort","timeout","error"],d=0,e=g.length;e>d;d++)b=g[d],a.addEventListener(b,function(){return h.progress=100},!1);else f=a.onreadystatechange,a.onreadystatechange=function(){var b;return 0===(b=a.readyState)||4===b?h.progress=100:3===a.readyState&&(h.progress=50),"function"==typeof f?f.apply(null,arguments):void 0}}return a}(),n=function(){function a(a){var b,c,d,e,f=this;for(this.progress=0,e=["error","open"],c=0,d=e.length;d>c;c++)b=e[c],a.addEventListener(b,function(){return f.progress=100},!1)}return a}(),d=function(){function a(a){var b,c,d,f;for(null==a&&(a={}),this.elements=[],null==a.selectors&&(a.selectors=[]),f=a.selectors,c=0,d=f.length;d>c;c++)b=f[c],this.elements.push(new e(b))}return a}(),e=function(){function a(a){this.selector=a,this.progress=0,this.check()}return a.prototype.check=function(){var a=this;return document.querySelector(this.selector)?this.done():setTimeout(function(){return a.check()},D.elements.checkInterval)},a.prototype.done=function(){return this.progress=100},a}(),c=function(){function a(){var a,b,c=this;this.progress=null!=(b=this.states[document.readyState])?b:100,a=document.onreadystatechange,document.onreadystatechange=function(){return null!=c.states[document.readyState]&&(c.progress=c.states[document.readyState]),"function"==typeof a?a.apply(null,arguments):void 0}}return a.prototype.states={loading:0,interactive:50,complete:100},a}(),f=function(){function a(){var a,b,c,d,e,f=this;this.progress=0,a=0,e=[],d=0,c=C(),b=setInterval(function(){var g;return g=C()-c-50,c=C(),e.push(g),e.length>D.eventLag.sampleCount&&e.shift(),a=q(e),++d>=D.eventLag.minSamples&&a<D.eventLag.lagThreshold?(f.progress=100,clearInterval(b)):f.progress=100*(3/(a+3))},50)}return a}(),m=function(){function a(a){this.source=a,this.last=this.sinceLastUpdate=0,this.rate=D.initialRate,this.catchup=0,this.progress=this.lastProgress=0,null!=this.source&&(this.progress=F(this.source,"progress"))}return a.prototype.tick=function(a,b){var c;return null==b&&(b=F(this.source,"progress")),b>=100&&(this.done=!0),b===this.last?this.sinceLastUpdate+=a:(this.sinceLastUpdate&&(this.rate=(b-this.last)/this.sinceLastUpdate),this.catchup=(b-this.progress)/D.catchupTime,this.sinceLastUpdate=0,this.last=b),b>this.progress&&(this.progress+=this.catchup*a),c=1-Math.pow(this.progress/100,D.easeFactor),this.progress+=c*this.rate*a,this.progress=Math.min(this.lastProgress+D.maxProgressPerFrame,this.progress),this.progress=Math.max(0,this.progress),this.progress=Math.min(100,this.progress),this.lastProgress=this.progress,this.progress},a}(),L=null,H=null,r=null,M=null,p=null,s=null,j.running=!1,z=function(){return D.restartOnPushState?j.restart():void 0},null!=window.history.pushState&&(T=window.history.pushState,window.history.pushState=function(){return z(),T.apply(window.history,arguments)}),null!=window.history.replaceState&&(W=window.history.replaceState,window.history.replaceState=function(){return z(),W.apply(window.history,arguments)}),l={ajax:a,elements:d,document:c,eventLag:f},(B=function(){var a,c,d,e,f,g,h,i;for(j.sources=L=[],g=["ajax","elements","document","eventLag"],c=0,e=g.length;e>c;c++)a=g[c],D[a]!==!1&&L.push(new l[a](D[a]));for(i=null!=(h=D.extraSources)?h:[],d=0,f=i.length;f>d;d++)K=i[d],L.push(new K(D));return j.bar=r=new b,H=[],M=new m})(),j.stop=function(){return j.trigger("stop"),j.running=!1,r.destroy(),s=!0,null!=p&&("function"==typeof t&&t(p),p=null),B()},j.restart=function(){return j.trigger("restart"),j.stop(),j.start()},j.go=function(){var a;return j.running=!0,r.render(),a=C(),s=!1,p=G(function(b,c){var d,e,f,g,h,i,k,l,n,o,p,q,t,u,v,w;for(l=100-r.progress,e=p=0,f=!0,i=q=0,u=L.length;u>q;i=++q)for(K=L[i],o=null!=H[i]?H[i]:H[i]=[],h=null!=(w=K.elements)?w:[K],k=t=0,v=h.length;v>t;k=++t)g=h[k],n=null!=o[k]?o[k]:o[k]=new m(g),f&=n.done,n.done||(e++,p+=n.tick(b));return d=p/e,r.update(M.tick(b,d)),r.done()||f||s?(r.update(100),j.trigger("done"),setTimeout(function(){return r.finish(),j.running=!1,j.trigger("hide")},Math.max(D.ghostTime,Math.max(D.minTime-(C()-a),0)))):c()})},j.start=function(a){v(D,a),j.running=!0;try{r.render()}catch(b){i=b}return document.querySelector(".pace")?(j.trigger("start"),j.go()):setTimeout(j.start,50)},"function"==typeof define&&define.amd?define(["pace"],function(){return j}):"object"==typeof exports?module.exports=j:D.startOnPageLoad&&j.start()}).call(this);
+</script>
+<style type="text/css">
+   
+  .pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  .pace.pace-inactive .pace-progress {
+    display: none;
+  }
+
+  .pace .pace-progress {
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 45%;
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .pace .pace-progress:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: .5rem;
+    content: attr(data-progress-text);
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 100;
+    font-size: 5rem;
+    line-height: 1;
+    text-align: right;
+    color: rgba(229, 146, 42, 0.90);
+  }
+</style>
+
+  <title>CoderZh&#39;s Blog - CoderZh&#39;s Blog</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="CoderZh&#39;s Blog">
+<meta name="author" content="coderzh">
+<meta name="publisher" content="coderzh">
+<meta name="generator" content="http://gohugo.io/"/>
+
+<meta itemprop="name" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta itemprop="description" content="CoderZh&#39;s Blog">
+<meta itemprop="image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+<meta property="og:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.coderzh.com/" />
+<meta property="og:image" content="http://blog.coderzh.com/public/coderzh.jpg" />
+<meta property="og:description" content="CoderZh&#39;s Blog" />
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@coderzh">
+<meta name="twitter:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta name="twitter:description" content="CoderZh&#39;s Blog">
+<meta name="twitter:creator" content="@coderzh">
+<meta name="twitter:image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+  <link rel="canonical" href="http://blog.coderzh.com/">
+  <link rel='shortlink' href="http://blog.coderzh.com/"/>
+  <link rel="shortcut icon" href="http://blog.coderzh.com/public/favicon.ico"/>
+  
+  <link href="http://blog.coderzh.com/feed.xml" rel="alternate" type="application/rss+xml" title="CoderZh&#39;s Blog" />
+
+
+<link rel="stylesheet" id="human-style-css" href="http://blog.coderzh.com/wp-content/themes/hueman/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="human-style-css2" href="http://blog.coderzh.com/wp-content/themes/hueman-child/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="responsive-css" href="http://blog.coderzh.com/wp-content/themes/hueman/responsive.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="font-awesome-css" href="http://blog.coderzh.com/wp-content/themes/hueman/fonts/font-awesome.min.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="wp-youtube-lyte" href="http://blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/lyte.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="hubinfo" href="http://blog.coderzh.com/assets/hubinfo/dist/hubinfo.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="http://blog.coderzh.com/public/highlightjs/default.min.css">
+<script src="http://blog.coderzh.com/public/highlightjs/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<link rel="stylesheet" id="human-style-css3" href="http://blog.coderzh.com/wp-content/themes/hueman-child/user.css" type="text/css" media="all"/>
+
+
+</head>
+
+<body class="archive category col-3cm full-width topbar-enabled chrome">
+
+<div id="wrapper">
+  <header id="header">
+
+  <nav class="nav-container group" id="nav-topbar">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap container">
+      <a href="http://blog.coderzh.com" class="nav-cs-icon">
+        <img width="40" height="40" src="http://blog.coderzh.com/public/coderzh.jpg" alt="coderzh" title="Home">
+      </a>
+      <ul id="menu-default-menu" class="nav container-inner group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/post/">归档</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/about/">关于我</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/feed.xml" type="application/rss+xml" target="_blank">订阅</a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-text">
+        一个程序员的思考与总结
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="container-inner">
+        <div class="toggle-search"><i class="fa fa-search"></i></div>
+        <div class="search-expand">
+          <div class="search-expand-inner">
+            <form method="get" class="searchform themeform" action="https://www.google.com/search">
+              <div>
+                <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+
+  </nav>
+  
+
+  <div class="container group">
+    <div class="container-inner">
+
+      <div class="group pad">
+
+        <div class="group pad">
+          <h1 class="site-title">
+            <a href="http://blog.coderzh.com" rel="home">
+              <img style="border-radius: 50%;width:72px;height:72px;margin:0 auto;" src="http://blog.coderzh.com/public/coderzh.jpg"></img>
+              CoderZh&#39;s Blog
+            </a>
+          </h1>
+          <p class="site-description"> 如果你没有感觉到时间不够用时，你多半正在虚度光阴。 </p>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+  
+
+</header>
+
+
+
+  <div class="container" id="page">
+    <div class="container-inner">
+      <div class="main">
+        <div class="main-inner group">
+          <section class="content">
+            <div class="pad group">
+              
+              
+              <div class="post-list group">
+                
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F/" title="All posts in 思考感悟" rel="category tag">思考感悟</a>
+    
+  </p>
+
+  <p class="post-date">2011年01月06日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2011/01/06/start2011" rel="bookmark" title="启程2011">启程2011</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>2011年已经来临，我甚至还来不及对2010年做个总结，过去的2010年是折腾的一年。回顾了09年的总结，2010年我主要完成做了： 1. 博客61篇，相对去年49篇，一定的进步。完成了平均每周一篇的目标。 2. 博客园排名从220名前进到128名，离目标100名还有点差距。2011年争取有更好的成绩吧。 3. Google Reader中统计的博客订阅数达到544。感谢订阅的朋友，我会更加努力，完成更多更有价值的文章。 4. 开源项目：NancyWiki，基于Google App Engine的个人Wiki系统。最新版本已经有近200个下载。 5. 对Android开发有个粗浅的认识，写了一个简单的小游戏NancyGLines。 6. 学习了两门新的编程语言：Ruby和Lua。都还不是很熟，今年要重点攻Lua了。 2010年，我的工作有些起伏： 1. 金山毒霸（1~6月份） 2. 金山快快的秘密项目研究（7、8月，一段神奇的经历） 3. 金山软件管家开发（8月，十分短暂的时间，这个项目后来被无情的拿掉了） 4. 西山居月影传说Online（9~12月，转身进入网游界） 5. 。。。 2010年的一篇《三年之痒》，加上公司上上下下的变化，我换了好几个岗位。期间，考虑过去令人向往的ThoughtWorks，面试之后，感觉自己英语水平和表达能力有待提高，同时也希望自己在行业再多一些积累经验，最后，我主动放弃了。再次感谢Michael Chen的推荐。期间，我还考虑过去金山快盘做服务端开发，本身自己也不太乐意去做Java开发，面试时被一句&#8220;只要Java熟手，不给学习时间&#8221;回绝，于是回去狠心把快盘卸载，从此不再使用。只注重当前的业务能力，而不注重之后的潜力，也许这是快盘的损失。期间，还考虑过加入赖勇浩的创业团队，最后，我还是选择了去西山居。 2010年9月，我加入了西山居。曾经的我，也是一个在网游的世界里迷途的孩子，让我迷途的游戏，正是金山西山居的网游。时光轮回，我自己加入了西山居。有同事开玩笑说，我们曾经都被游戏毒害过，所以我们是来报复社会的。在西山居，如果你真正接触那些满怀梦想，而富有激情的同事，你就会明白，他们为之付出青春的原因。与西山居CTO陈飞舟的接触和了解，让我顿时对他产生了巨大的崇敬和敬仰之情。他技术超群，充满梦想，剑网三良好的技术架构和代码规范由他把控的如此完美。身兼CTO及副总裁的他，仍然坚持在一线写代码，就这一点，也让很多CTO感到羞愧。 然而，这是一个残酷的时代。理想主义者把游戏当做艺术品来做，在商业上就不会太成功。剑网三的高调亮相和后来的表现平平已经很好的说明了这一点。反而是那些想方设法坑钱的IB游戏大行其道，获取了商业上巨大的成功。于是越来越多的人涌入网游这个市场，使得整个行业变得非常的浮躁。游戏的寿命越来越短，坑钱的手段越来越多，甚至还些还使用心理营销，让用户心里知道被骗，嘴里骂着游戏厂商，但手上还是不断的给游戏厂商送钱。 从《DOOM启世录》里，我看到了天才、激情与梦想，在Popcap身上，我看到了创意、执着与成功。浮躁的是这个行业，静下心来研究游戏开发技术才是我的乐趣源泉。我要感谢将我带入这一行业的同事，感谢你们对我的支持和认可。还有一直在默默支持我的老婆，我爱你！ 2011年，我的目标简单一点：争取能看懂大部分《游戏编程精粹》里的文章。同时希望在下次年终总结时，会有一款出色的游戏出来！</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年12月31日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/12/31/testing-topic" rel="bookmark" title="Google Test交流与测试开发经验总结">Google Test交流与测试开发经验总结</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>昨天晚上做的一个讲座。想了很多，希望对这几年来的测试开发工作做一个总结。PPT花了一些心思，尽量做到配图，每个Slide尽量少的字，代码尽量的短，尽量把我以前遇到的问题，总结的内容都囊括进去。也是我做的最长的一个演示稿，一共56页。 年底了，心情有些低落。讲座开始时，才发现今天还没开口说过两句话，再加上有点紧张，口干舌燥，讲的效果不是很好。如何让自己讲的东西变得生动，以及如何组织自己的语言，达到通顺和连贯，是我以后需要提高的。 &nbsp; GTest交流与经验总结View more presentations from coderzh. &nbsp;</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年12月26日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/12/26/twiki" rel="bookmark" title="TWiki安装和使用心得">TWiki安装和使用心得</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>![](http://twiki.org/p/pub/TWiki/TWikiLogos/T-logo-140x40-t.gif)&nbsp; TWiki是一个开源（GPL）的wiki程序。软件定位为&#8220;灵活、强大、易于使用的企业协作平台&#8221;，运行于Perl环境。拥有编程技能的人可以使用变量创建动态页面，譬如内容表格，或者嵌入式搜索结果的页面。默认内置所见即所得编辑器，完善的用户权限系统，不需要任何数据库，完全基于文件目录的格式化引擎。 TWiki部署起来稍微有点复杂，下面是我在Ubuntu上部署TWiki的一些心得。 1. 环境准备 $&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;apache2&nbsp;perl&nbsp;cron&nbsp;grep&nbsp;rcs&nbsp;patch&nbsp;php5 $&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;libapache2-mod-php5&nbsp;libcgi-session-perl&nbsp;libdigest-sha1-perl&nbsp;libhtml-parser-perl &nbsp; 2. 下载 $&nbsp;wget&nbsp;http://downloads.sourceforge.net/project/twiki/TWiki%20for%20all%20Platforms/TWiki-5.0.1/TWiki-5.0.1.tgz?r=&amp;ts=1293085896&amp;use_mirror=nchc $&nbsp;sudo&nbsp;tar&nbsp;-xvzf&nbsp;TWiki-5.0.1.tgz $&nbsp;sudo&nbsp;cp&nbsp;-a&nbsp;twiki&nbsp;/var/www/ $&nbsp;sudo&nbsp;chown&nbsp;-R&nbsp;www-data:www-data&nbsp;/var/www/twiki 3. 配置 $&nbsp;sudo&nbsp;cp&nbsp;/var/www/twiki/bin/LocalLib.cfg.txt&nbsp;/var/www/twiki/bin/LocalLib.cfg 修改LocalLib.cfg中的$twikiLibPath为： $twikiLibPath&nbsp;=&nbsp;&#8220;/var/www/twiki/lib&#8221; 生成twiki.conf文件：http://twiki.org/cgi-bin/view/TWiki/ApacheConfigGenerator，并复制到/var/www/twiki/twiki.conf 修改/etc/apache2/httpd.conf，加入一行： include&nbsp;"/var/www/twiki/twiki.conf"(或者复制一份/var/www/twiki/twiki_httpd_conf.txt为twiki.conf，然后修改里面的路径相关的设置) 修改twiki.conf文件中的 &lt;FilesMatch "^(configure)$"&gt; 节点，设置允许访问configure页面的来路IP或者用户名。Allow&nbsp;from&nbsp;127.0.0.1&nbsp;192.168.1.100 Require&nbsp;user&nbsp;CoderZh &nbsp; 重启apache2 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;$&nbsp;sudo&nbsp;/etc/init.d/apache2&nbsp;restart &nbsp; 访问：http://&lt;ipaddress&gt;/twiki/bin/configure 可进入配置页面，配置完成后进入主页。 &nbsp; 使用技巧 1. 中文支持 TWiki默认是iso8859-1编码，不支持中文编辑， 界面也是全英文。让TWiki支持中文，首先，确保服务器的locale安装有zh_CN.UTF-8。$&nbsp;sudo&nbsp;locale-gen&nbsp;zh_CN $&nbsp;sudo&nbsp;locale-gen&nbsp;zh_CN.UTF-8 $&nbsp;sudo&nbsp;dpkg-reconfigure&nbsp;locales 然后在configure里配置如下： {UserInterfaceInternationalisation}&nbsp;&#8730; {Languages}{'zh-cn'}{Enabled}&nbsp;&#8730; {DisplayTimeValues}&nbsp;servertime {UseLocale}&nbsp;&#8730; {Site}{Locale}&nbsp;zh_CN.UTF-8 {Site}{LocaleRegexes}&nbsp;&#8730; {Site}{CharSet}&nbsp;UTF-8 {Site}{Lang}&nbsp;zh {Site}{FullLang}&nbsp;zh-cn {PluralToSingular}&nbsp;&#8730; #### 2. 发邮件 TWiki支持自动发送验证邮件，用于用户注册和找回密码。要支持发邮件，首先在服务器上安装sendmail： $&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;sendmail 然后，在configure页面设置邮件相关项目，以下两项留空。 {SMTP}{MAILHOST}&nbsp;留空 {SMTP}{SENDERHOST}&nbsp;留空 &nbsp; 3.</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年12月01日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/12/01/cpp-and-lua" rel="bookmark" title="C&#43;&#43;与Lua互操作学习">C&#43;&#43;与Lua互操作学习</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>&nbsp; 今天了解了一下C++与Lua之间的互操作，感觉还算简单，不像之前不了解时那么神秘了。 下面是找到的很好的学习资料，不知道是不是原出处了，反正我找了一下只有cpprog里有。 &nbsp; 1.&nbsp;http://www.cppprog.com/2009/0209/62.html - 在C++中使用Lua(一) 2.&nbsp;http://www.cppprog.com/2009/0210/63.html - 在C++中使用Lua(二) 3.&nbsp;http://www.cppprog.com/2009/0211/64.html - 在C++中使用Lua(三) &nbsp; 最后，Lua简明实用手册，非常实用： http://www.cppprog.com/2009/0211/64_2.html&nbsp; 看过上面的文章，保证你清楚C++与Lua之间的秘密。 &nbsp;</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年11月30日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/11/30/goodby-google-app-engine" rel="bookmark" title="Google App Engine的14宗罪">Google App Engine的14宗罪</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>最近一位老外朋友很郁闷，使用Google App Engine平台，花了15000欧(), 却用的很不爽。于是耐心的写了一篇《Goodbye Google App Engine》，引来众人围观，其中还包括Google的工程师亲临指导。我也是Google App Engine的使用者，不过我基本上是属于个人开发，从来没有超过标，不需要给美刀，用的也挺爽。不过这位老兄是正儿八经的使用GAE进行企业级工程的开发，确实把他郁闷坏了。老外说话都比较啰嗦，我帮他总结了一下他提到的GAE14宗罪，同时也加上自己的一点注释。 &nbsp; &nbsp; 1. 需要Python2.5版本 Ubuntu中早已经默认不是2.5版本了，现在主流版本已经进入到2.6甚至2.7了，所以用个GAE还要再装个2.5版本，让人很不爽。 2. 不支持Https 3.&nbsp; 请求超过30秒将会返回失败 对于上传大数据到数据库来说，简直不可想象。迫不得已的做法是将数据分割成多个小块进行上传。多痛苦。 4. 每个GET或POST请求从Server到别的地址，如果没有在5秒内完成，将会自动停止 5. 不能使用基于C的Python模块 6. 不支持LIKE操作 虽然有通过starts with的hack方法实现，但是和全文检索还有很大差距。可以想象，数据库中的数据不能执行条件搜索，多么不可思议。所以很多GAE站点的站内搜索都直接交给了Google Search。 7. 不支持数据库表的Join操作 一般的一个小型网站，多表查询也是很常用的，GAE告诉你，俺就是不支持！ 8. 数据库实在太慢 所谓的BigTable到底是坑爹呢还是咋的，速度确实不敢恭维。 9. 本地调试时的数据库行为和上传后不一致 本地调试指的是用dev_appserver.py在本地调试，每次本地执行好好的，单元测试也都通过的，一上传，就嗝屁了~~ 10. 数据库太多的索引(index) 写一个Hello World还可以，如果真的要写一个企业级应用，数据库表的字段多的很给力，基于多个字段查询时，GAE也很给力的自动给你加上很多indexs。 11. 一次查询不能返回超过1000条的记录 过去我也为这个懊恼，其实现在的GAE版本已经将这个限制去掉了，为此我还和一位同学打过赌，最后我输的很惨。 12. 不支持文件系统 想要操作服务器的文件系统，写个配置文件，或上传个文件？还是不要想了。 13. 数据库和Memcache操作经常失败 每做一次数据库或Memcache操作，都要担心一把是否操作失败，确实闹心。 14. 每个Memcache值最大为1M，Google是否想让我们把所有东西都放人Memcache？ 似乎这个大哥犯了个错，Memcache通常大小限制也是1M。不过，我确实怀疑，Google的Memcache，是我们所认识的那个Memcache吗？ &nbsp; 上面的14宗罪主要代表这个国外老兄自己的意见，同时加上了一点本人的看法，欢迎大家反驳。 虽然GAE有很多限制和缺陷，但是我对GAE还是喜爱有加的。GAE是免费的，任何人都可以很轻松的通过GAE实现自己的Web应用。比如，做一些实用的小工具，实现一个博客程序来练手。通过GAE，我们可以轻松的搭建属于自己的Blog(micolog)，搭建属于自己的Wiki系统(NancyWiki)。 没有GAE，就不会有大家都懂的gappproxy，gtap，twiter-feed。是的，你懂的。</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2010年11月29日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/11/29/lupa" rel="bookmark" title="Lupa - Python中调用Lua">Lupa - Python中调用Lua</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>Lupa将LuaJIT集成到了Python模块中，可以在Python中执行Lua代码。 比较有意思，也许以后用的着，记录一下。 基本用法： &gt;&gt;&gt;&nbsp;import&nbsp;lupa &gt;&gt;&gt;&nbsp;from&nbsp;lupa&nbsp;import&nbsp;LuaRuntime &gt;&gt;&gt;&nbsp;lua&nbsp;=&nbsp;LuaRuntime() &gt;&gt;&gt;&nbsp;lua.eval('1+1') 2 &gt;&gt;&gt;&nbsp;lua_func&nbsp;=&nbsp;lua.eval('function(f,&nbsp;n)&nbsp;return&nbsp;f(n)&nbsp;end') &gt;&gt;&gt;&nbsp;def&nbsp;py_add1(n):&nbsp;return&nbsp;n+1 &gt;&gt;&gt;&nbsp;lua_func(py_add1,&nbsp;2) 3 &gt;&gt;&gt;&nbsp;lua.eval('python.eval("&nbsp;2&nbsp;**&nbsp;2&nbsp;")')&nbsp;==&nbsp;4 True &gt;&gt;&gt;&nbsp;lua.eval('python.builtins.str(4)')&nbsp;==&nbsp;'4' True Lua中的Python对象&nbsp; &gt;&gt;&gt;&nbsp;lua_func&nbsp;=&nbsp;lua.eval('function(obj)&nbsp;return&nbsp;obj["get"]&nbsp;end') &gt;&gt;&gt;&nbsp;d&nbsp;=&nbsp;{'get'&nbsp;:&nbsp;'got'} &gt;&gt;&gt;&nbsp;value&nbsp;=&nbsp;lua_func(d) &gt;&gt;&gt;&nbsp;value&nbsp;==&nbsp;'got' True &gt;&gt;&gt;&nbsp;dict_get&nbsp;=&nbsp;lua_func(&nbsp;lupa.as_attrgetter(d)&nbsp;) &gt;&gt;&gt;&nbsp;dict_get('get')&nbsp;==&nbsp;'got' True &gt;&gt;&gt;&nbsp;lua_func&nbsp;=&nbsp;lua.eval( ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'function(obj)&nbsp;return&nbsp;python.as_attrgetter(obj)["get"]&nbsp;end') &gt;&gt;&gt;&nbsp;dict_get&nbsp;=&nbsp;lua_func(d) &gt;&gt;&gt;&nbsp;dict_get('get')&nbsp;==&nbsp;'got' True Lua中的迭代循环： &gt;&gt;&gt;&nbsp;lua_copy&nbsp;=&nbsp;lua.eval(''' ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function(L) ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;local&nbsp;t,&nbsp;i&nbsp;=&nbsp;{},&nbsp;1 ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;item&nbsp;in&nbsp;python.iter(L)&nbsp;do ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t[i]&nbsp;=&nbsp;item ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1 ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;t ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end ...&nbsp;''') &gt;&gt;&gt;&nbsp;table&nbsp;=&nbsp;lua_copy([1,2,3,4]) &gt;&gt;&gt;&nbsp;len(table) 4 &gt;&gt;&gt;&nbsp;table[1]&nbsp;&nbsp;&nbsp;#&nbsp;Lua&nbsp;indexing 1 Lua中的Table： &gt;&gt;&gt;&nbsp;table&nbsp;=&nbsp;lua.eval('{10,20,30,40}') &gt;&gt;&gt;&nbsp;table[1] 10 &gt;&gt;&gt;&nbsp;table[4] 40 &gt;&gt;&gt;&nbsp;list(table) [1,&nbsp;2,&nbsp;3,&nbsp;4] &gt;&gt;&gt;&nbsp;list(table.values()) [10,&nbsp;20,&nbsp;30,&nbsp;40] &gt;&gt;&gt;&nbsp;len(table) 4 &gt;&gt;&gt;&nbsp;mapping&nbsp;=&nbsp;lua.eval('{&nbsp;[1]&nbsp;=&nbsp;-1&nbsp;}') &gt;&gt;&gt;&nbsp;list(mapping) [1] &gt;&gt;&gt;&nbsp;mapping&nbsp;=&nbsp;lua.eval('{&nbsp;[20]&nbsp;=&nbsp;-20;&nbsp;[3]&nbsp;=&nbsp;-3&nbsp;}') &gt;&gt;&gt;&nbsp;mapping[20] -20 &gt;&gt;&gt;&nbsp;mapping[3] -3 &gt;&gt;&gt;&nbsp;sorted(mapping.values()) [-20,&nbsp;-3] &gt;&gt;&gt;&nbsp;sorted(mapping.items()) [(3,&nbsp;-3),&nbsp;(20,&nbsp;-20)] &gt;&gt;&gt;&nbsp;mapping[-3]&nbsp;=&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;-3&nbsp;used&nbsp;as&nbsp;key,&nbsp;not&nbsp;index!</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+              </div>
+
+              
+              
+
+<nav class="pagination group">
+  <div class="wp-pagenavi">
+    <span class="pages">
+        Page 5 of 38
+        (265 Posts)
+    </span>
+    
+      <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/4/">Prev &laquo;</a>
+    
+    
+    
+      <a class="nextpostslink" rel="next" href="http://blog.coderzh.com/paginator/6/">Next &raquo;</a>
+    
+  </div>
+</nav>
+
+              
+            </div>
+
+          </section>
+          <div class="sidebar s1">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>Follow:</p>
+      <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+    </div>
+
+    <div class="widget qrcode">
+    <img src="http://blog.coderzh.com/public/qrcode.jpg" width="129px" height="129px"/>
+    <p>微信扫一扫：<br/> 关注我的公众号： <br /> hacker-thinking</p>
+</div>
+
+
+    <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
+      <ul>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="search-2" class="widget widget_search"><h3>Search</h3>
+
+      <form method="get" class="searchform themeform" action="https://www.google.com/search">
+        <div>
+          <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+        </div>
+      </form>
+    </div>
+
+  </div>
+  
+</div>
+
+          <div class="sidebar s2">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>More</p>
+    </div>
+
+
+    <div id="categories-2" class="widget widget_categories"><h3>Categories</h3>
+      <ul>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F/">思考感悟</a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <div id="tag_cloud-2" class="widget widget_tag_cloud"><h3>Tags</h3>
+
+      <div class="tagcloud">
+        <p class="post-tags">
+          
+              
+          
+        </p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+
+  <nav class="nav-container group" id="nav-footer">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap">
+      <ul id="menu-default-menu-1" class="nav container group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+  
+
+  <section class="container" id="footer-bottom">
+    <div class="container-inner">
+      <a id="back-to-top" href="#"><i class="fa fa-angle-up"></i></a>
+      <div class="pad group">
+        <div class="grid one-half">
+          <div id="copyright">
+            <p>Copyright © 2015. All Rights Reserved. <br>Powered by
+              <a href="http://gohugo.io/" target="_blank">Hugo - the static site generator</a>.
+              <a href="http://golang.org" target="_blank">#golang</a>.
+            </p>
+          </div>
+          
+        </div>
+        
+        <div class="grid one-half last">
+          <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+        </div>
+      </div>
+
+    </div>
+    
+  </section>
+  
+
+</footer>
+
+</div>
+<script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/scripts.js"></script>
+<script type="text/javascript" src="assets/picturefill/picturefill.min.js"></script>
+<script type="text/javascript" src="assets/hubinfo/dist/hubinfo.js"></script>
+<script type="text/javascript" src="assets/js/jquery.matchHeight-min.js"></script>
+
+
+<script type="text/javascript">var bU = "http:\/\/blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/";</script>
+<script type="text/javascript" async defer src="wp-content/plugins/wp-youtube-lyte/lyte/lyte.js"></script>
+<script type="text/javascript" async defer src="assets/js/myblog.js"></script>
+
+</body>
+</html>
+

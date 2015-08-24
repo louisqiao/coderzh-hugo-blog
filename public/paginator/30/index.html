@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+  <base href="http://blog.coderzh.com/">
+  <script type="text/javascript">
+ 
+(function(){var a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X=[].slice,Y={}.hasOwnProperty,Z=function(a,b){function c(){this.constructor=a}for(var d in b)Y.call(b,d)&&(a[d]=b[d]);return c.prototype=b.prototype,a.prototype=new c,a.__super__=b.prototype,a},$=[].indexOf||function(a){for(var b=0,c=this.length;c>b;b++)if(b in this&&this[b]===a)return b;return-1};for(u={catchupTime:100,initialRate:.03,minTime:250,ghostTime:100,maxProgressPerFrame:20,easeFactor:1.25,startOnPageLoad:!0,restartOnPushState:!0,restartOnRequestAfter:500,target:"body",elements:{checkInterval:100,selectors:["body"]},eventLag:{minSamples:10,sampleCount:3,lagThreshold:3},ajax:{trackMethods:["GET"],trackWebSockets:!0,ignoreURLs:[]}},C=function(){var a;return null!=(a="undefined"!=typeof performance&&null!==performance&&"function"==typeof performance.now?performance.now():void 0)?a:+new Date},E=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame,t=window.cancelAnimationFrame||window.mozCancelAnimationFrame,null==E&&(E=function(a){return setTimeout(a,50)},t=function(a){return clearTimeout(a)}),G=function(a){var b,c;return b=C(),(c=function(){var d;return d=C()-b,d>=33?(b=C(),a(d,function(){return E(c)})):setTimeout(c,33-d)})()},F=function(){var a,b,c;return c=arguments[0],b=arguments[1],a=3<=arguments.length?X.call(arguments,2):[],"function"==typeof c[b]?c[b].apply(c,a):c[b]},v=function(){var a,b,c,d,e,f,g;for(b=arguments[0],d=2<=arguments.length?X.call(arguments,1):[],f=0,g=d.length;g>f;f++)if(c=d[f])for(a in c)Y.call(c,a)&&(e=c[a],null!=b[a]&&"object"==typeof b[a]&&null!=e&&"object"==typeof e?v(b[a],e):b[a]=e);return b},q=function(a){var b,c,d,e,f;for(c=b=0,e=0,f=a.length;f>e;e++)d=a[e],c+=Math.abs(d),b++;return c/b},x=function(a,b){var c,d,e;if(null==a&&(a="options"),null==b&&(b=!0),e=document.querySelector("[data-pace-"+a+"]")){if(c=e.getAttribute("data-pace-"+a),!b)return c;try{return JSON.parse(c)}catch(f){return d=f,"undefined"!=typeof console&&null!==console?console.error("Error parsing inline pace options",d):void 0}}},g=function(){function a(){}return a.prototype.on=function(a,b,c,d){var e;return null==d&&(d=!1),null==this.bindings&&(this.bindings={}),null==(e=this.bindings)[a]&&(e[a]=[]),this.bindings[a].push({handler:b,ctx:c,once:d})},a.prototype.once=function(a,b,c){return this.on(a,b,c,!0)},a.prototype.off=function(a,b){var c,d,e;if(null!=(null!=(d=this.bindings)?d[a]:void 0)){if(null==b)return delete this.bindings[a];for(c=0,e=[];c<this.bindings[a].length;)e.push(this.bindings[a][c].handler===b?this.bindings[a].splice(c,1):c++);return e}},a.prototype.trigger=function(){var a,b,c,d,e,f,g,h,i;if(c=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],null!=(g=this.bindings)?g[c]:void 0){for(e=0,i=[];e<this.bindings[c].length;)h=this.bindings[c][e],d=h.handler,b=h.ctx,f=h.once,d.apply(null!=b?b:this,a),i.push(f?this.bindings[c].splice(e,1):e++);return i}},a}(),j=window.Pace||{},window.Pace=j,v(j,g.prototype),D=j.options=v({},u,window.paceOptions,x()),U=["ajax","document","eventLag","elements"],Q=0,S=U.length;S>Q;Q++)K=U[Q],D[K]===!0&&(D[K]=u[K]);i=function(a){function b(){return V=b.__super__.constructor.apply(this,arguments)}return Z(b,a),b}(Error),b=function(){function a(){this.progress=0}return a.prototype.getElement=function(){var a;if(null==this.el){if(a=document.querySelector(D.target),!a)throw new i;this.el=document.createElement("div"),this.el.className="pace pace-active",document.body.className=document.body.className.replace(/pace-done/g,""),document.body.className+=" pace-running",this.el.innerHTML='<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>',null!=a.firstChild?a.insertBefore(this.el,a.firstChild):a.appendChild(this.el)}return this.el},a.prototype.finish=function(){var a;return a=this.getElement(),a.className=a.className.replace("pace-active",""),a.className+=" pace-inactive",document.body.className=document.body.className.replace("pace-running",""),document.body.className+=" pace-done"},a.prototype.update=function(a){return this.progress=a,this.render()},a.prototype.destroy=function(){try{this.getElement().parentNode.removeChild(this.getElement())}catch(a){i=a}return this.el=void 0},a.prototype.render=function(){var a,b,c,d,e,f,g;if(null==document.querySelector(D.target))return!1;for(a=this.getElement(),d="translate3d("+this.progress+"%, 0, 0)",g=["webkitTransform","msTransform","transform"],e=0,f=g.length;f>e;e++)b=g[e],a.children[0].style[b]=d;return(!this.lastRenderedProgress||this.lastRenderedProgress|0!==this.progress|0)&&(a.children[0].setAttribute("data-progress-text",""+(0|this.progress)+"%"),this.progress>=100?c="99":(c=this.progress<10?"0":"",c+=0|this.progress),a.children[0].setAttribute("data-progress",""+c)),this.lastRenderedProgress=this.progress},a.prototype.done=function(){return this.progress>=100},a}(),h=function(){function a(){this.bindings={}}return a.prototype.trigger=function(a,b){var c,d,e,f,g;if(null!=this.bindings[a]){for(f=this.bindings[a],g=[],d=0,e=f.length;e>d;d++)c=f[d],g.push(c.call(this,b));return g}},a.prototype.on=function(a,b){var c;return null==(c=this.bindings)[a]&&(c[a]=[]),this.bindings[a].push(b)},a}(),P=window.XMLHttpRequest,O=window.XDomainRequest,N=window.WebSocket,w=function(a,b){var c,d,e;e=[];for(d in b.prototype)try{e.push(null==a[d]&&"function"!=typeof b[d]?"function"==typeof Object.defineProperty?Object.defineProperty(a,d,{get:function(){return b.prototype[d]},configurable:!0,enumerable:!0}):a[d]=b.prototype[d]:void 0)}catch(f){c=f}return e},A=[],j.ignore=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("ignore"),c=b.apply(null,a),A.shift(),c},j.track=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("track"),c=b.apply(null,a),A.shift(),c},J=function(a){var b;if(null==a&&(a="GET"),"track"===A[0])return"force";if(!A.length&&D.ajax){if("socket"===a&&D.ajax.trackWebSockets)return!0;if(b=a.toUpperCase(),$.call(D.ajax.trackMethods,b)>=0)return!0}return!1},k=function(a){function b(){var a,c=this;b.__super__.constructor.apply(this,arguments),a=function(a){var b;return b=a.open,a.open=function(d,e){return J(d)&&c.trigger("request",{type:d,url:e,request:a}),b.apply(a,arguments)}},window.XMLHttpRequest=function(b){var c;return c=new P(b),a(c),c};try{w(window.XMLHttpRequest,P)}catch(d){}if(null!=O){window.XDomainRequest=function(){var b;return b=new O,a(b),b};try{w(window.XDomainRequest,O)}catch(d){}}if(null!=N&&D.ajax.trackWebSockets){window.WebSocket=function(a,b){var d;return d=null!=b?new N(a,b):new N(a),J("socket")&&c.trigger("request",{type:"socket",url:a,protocols:b,request:d}),d};try{w(window.WebSocket,N)}catch(d){}}}return Z(b,a),b}(h),R=null,y=function(){return null==R&&(R=new k),R},I=function(a){var b,c,d,e;for(e=D.ajax.ignoreURLs,c=0,d=e.length;d>c;c++)if(b=e[c],"string"==typeof b){if(-1!==a.indexOf(b))return!0}else if(b.test(a))return!0;return!1},y().on("request",function(b){var c,d,e,f,g;return f=b.type,e=b.request,g=b.url,I(g)?void 0:j.running||D.restartOnRequestAfter===!1&&"force"!==J(f)?void 0:(d=arguments,c=D.restartOnRequestAfter||0,"boolean"==typeof c&&(c=0),setTimeout(function(){var b,c,g,h,i,k;if(b="socket"===f?e.readyState<2:0<(h=e.readyState)&&4>h){for(j.restart(),i=j.sources,k=[],c=0,g=i.length;g>c;c++){if(K=i[c],K instanceof a){K.watch.apply(K,d);break}k.push(void 0)}return k}},c))}),a=function(){function a(){var a=this;this.elements=[],y().on("request",function(){return a.watch.apply(a,arguments)})}return a.prototype.watch=function(a){var b,c,d,e;return d=a.type,b=a.request,e=a.url,I(e)?void 0:(c="socket"===d?new n(b):new o(b),this.elements.push(c))},a}(),o=function(){function a(a){var b,c,d,e,f,g,h=this;if(this.progress=0,null!=window.ProgressEvent)for(c=null,a.addEventListener("progress",function(a){return h.progress=a.lengthComputable?100*a.loaded/a.total:h.progress+(100-h.progress)/2},!1),g=["load","abort","timeout","error"],d=0,e=g.length;e>d;d++)b=g[d],a.addEventListener(b,function(){return h.progress=100},!1);else f=a.onreadystatechange,a.onreadystatechange=function(){var b;return 0===(b=a.readyState)||4===b?h.progress=100:3===a.readyState&&(h.progress=50),"function"==typeof f?f.apply(null,arguments):void 0}}return a}(),n=function(){function a(a){var b,c,d,e,f=this;for(this.progress=0,e=["error","open"],c=0,d=e.length;d>c;c++)b=e[c],a.addEventListener(b,function(){return f.progress=100},!1)}return a}(),d=function(){function a(a){var b,c,d,f;for(null==a&&(a={}),this.elements=[],null==a.selectors&&(a.selectors=[]),f=a.selectors,c=0,d=f.length;d>c;c++)b=f[c],this.elements.push(new e(b))}return a}(),e=function(){function a(a){this.selector=a,this.progress=0,this.check()}return a.prototype.check=function(){var a=this;return document.querySelector(this.selector)?this.done():setTimeout(function(){return a.check()},D.elements.checkInterval)},a.prototype.done=function(){return this.progress=100},a}(),c=function(){function a(){var a,b,c=this;this.progress=null!=(b=this.states[document.readyState])?b:100,a=document.onreadystatechange,document.onreadystatechange=function(){return null!=c.states[document.readyState]&&(c.progress=c.states[document.readyState]),"function"==typeof a?a.apply(null,arguments):void 0}}return a.prototype.states={loading:0,interactive:50,complete:100},a}(),f=function(){function a(){var a,b,c,d,e,f=this;this.progress=0,a=0,e=[],d=0,c=C(),b=setInterval(function(){var g;return g=C()-c-50,c=C(),e.push(g),e.length>D.eventLag.sampleCount&&e.shift(),a=q(e),++d>=D.eventLag.minSamples&&a<D.eventLag.lagThreshold?(f.progress=100,clearInterval(b)):f.progress=100*(3/(a+3))},50)}return a}(),m=function(){function a(a){this.source=a,this.last=this.sinceLastUpdate=0,this.rate=D.initialRate,this.catchup=0,this.progress=this.lastProgress=0,null!=this.source&&(this.progress=F(this.source,"progress"))}return a.prototype.tick=function(a,b){var c;return null==b&&(b=F(this.source,"progress")),b>=100&&(this.done=!0),b===this.last?this.sinceLastUpdate+=a:(this.sinceLastUpdate&&(this.rate=(b-this.last)/this.sinceLastUpdate),this.catchup=(b-this.progress)/D.catchupTime,this.sinceLastUpdate=0,this.last=b),b>this.progress&&(this.progress+=this.catchup*a),c=1-Math.pow(this.progress/100,D.easeFactor),this.progress+=c*this.rate*a,this.progress=Math.min(this.lastProgress+D.maxProgressPerFrame,this.progress),this.progress=Math.max(0,this.progress),this.progress=Math.min(100,this.progress),this.lastProgress=this.progress,this.progress},a}(),L=null,H=null,r=null,M=null,p=null,s=null,j.running=!1,z=function(){return D.restartOnPushState?j.restart():void 0},null!=window.history.pushState&&(T=window.history.pushState,window.history.pushState=function(){return z(),T.apply(window.history,arguments)}),null!=window.history.replaceState&&(W=window.history.replaceState,window.history.replaceState=function(){return z(),W.apply(window.history,arguments)}),l={ajax:a,elements:d,document:c,eventLag:f},(B=function(){var a,c,d,e,f,g,h,i;for(j.sources=L=[],g=["ajax","elements","document","eventLag"],c=0,e=g.length;e>c;c++)a=g[c],D[a]!==!1&&L.push(new l[a](D[a]));for(i=null!=(h=D.extraSources)?h:[],d=0,f=i.length;f>d;d++)K=i[d],L.push(new K(D));return j.bar=r=new b,H=[],M=new m})(),j.stop=function(){return j.trigger("stop"),j.running=!1,r.destroy(),s=!0,null!=p&&("function"==typeof t&&t(p),p=null),B()},j.restart=function(){return j.trigger("restart"),j.stop(),j.start()},j.go=function(){var a;return j.running=!0,r.render(),a=C(),s=!1,p=G(function(b,c){var d,e,f,g,h,i,k,l,n,o,p,q,t,u,v,w;for(l=100-r.progress,e=p=0,f=!0,i=q=0,u=L.length;u>q;i=++q)for(K=L[i],o=null!=H[i]?H[i]:H[i]=[],h=null!=(w=K.elements)?w:[K],k=t=0,v=h.length;v>t;k=++t)g=h[k],n=null!=o[k]?o[k]:o[k]=new m(g),f&=n.done,n.done||(e++,p+=n.tick(b));return d=p/e,r.update(M.tick(b,d)),r.done()||f||s?(r.update(100),j.trigger("done"),setTimeout(function(){return r.finish(),j.running=!1,j.trigger("hide")},Math.max(D.ghostTime,Math.max(D.minTime-(C()-a),0)))):c()})},j.start=function(a){v(D,a),j.running=!0;try{r.render()}catch(b){i=b}return document.querySelector(".pace")?(j.trigger("start"),j.go()):setTimeout(j.start,50)},"function"==typeof define&&define.amd?define(["pace"],function(){return j}):"object"==typeof exports?module.exports=j:D.startOnPageLoad&&j.start()}).call(this);
+</script>
+<style type="text/css">
+   
+  .pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  .pace.pace-inactive .pace-progress {
+    display: none;
+  }
+
+  .pace .pace-progress {
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 45%;
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .pace .pace-progress:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: .5rem;
+    content: attr(data-progress-text);
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 100;
+    font-size: 5rem;
+    line-height: 1;
+    text-align: right;
+    color: rgba(229, 146, 42, 0.90);
+  }
+</style>
+
+  <title>CoderZh&#39;s Blog - CoderZh&#39;s Blog</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="CoderZh&#39;s Blog">
+<meta name="author" content="coderzh">
+<meta name="publisher" content="coderzh">
+<meta name="generator" content="http://gohugo.io/"/>
+
+<meta itemprop="name" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta itemprop="description" content="CoderZh&#39;s Blog">
+<meta itemprop="image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+<meta property="og:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.coderzh.com/" />
+<meta property="og:image" content="http://blog.coderzh.com/public/coderzh.jpg" />
+<meta property="og:description" content="CoderZh&#39;s Blog" />
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@coderzh">
+<meta name="twitter:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta name="twitter:description" content="CoderZh&#39;s Blog">
+<meta name="twitter:creator" content="@coderzh">
+<meta name="twitter:image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+  <link rel="canonical" href="http://blog.coderzh.com/">
+  <link rel='shortlink' href="http://blog.coderzh.com/"/>
+  <link rel="shortcut icon" href="http://blog.coderzh.com/public/favicon.ico"/>
+  
+  <link href="http://blog.coderzh.com/feed.xml" rel="alternate" type="application/rss+xml" title="CoderZh&#39;s Blog" />
+
+
+<link rel="stylesheet" id="human-style-css" href="http://blog.coderzh.com/wp-content/themes/hueman/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="human-style-css2" href="http://blog.coderzh.com/wp-content/themes/hueman-child/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="responsive-css" href="http://blog.coderzh.com/wp-content/themes/hueman/responsive.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="font-awesome-css" href="http://blog.coderzh.com/wp-content/themes/hueman/fonts/font-awesome.min.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="wp-youtube-lyte" href="http://blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/lyte.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="hubinfo" href="http://blog.coderzh.com/assets/hubinfo/dist/hubinfo.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="http://blog.coderzh.com/public/highlightjs/default.min.css">
+<script src="http://blog.coderzh.com/public/highlightjs/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<link rel="stylesheet" id="human-style-css3" href="http://blog.coderzh.com/wp-content/themes/hueman-child/user.css" type="text/css" media="all"/>
+
+
+</head>
+
+<body class="archive category col-3cm full-width topbar-enabled chrome">
+
+<div id="wrapper">
+  <header id="header">
+
+  <nav class="nav-container group" id="nav-topbar">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap container">
+      <a href="http://blog.coderzh.com" class="nav-cs-icon">
+        <img width="40" height="40" src="http://blog.coderzh.com/public/coderzh.jpg" alt="coderzh" title="Home">
+      </a>
+      <ul id="menu-default-menu" class="nav container-inner group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/post/">归档</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/about/">关于我</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/feed.xml" type="application/rss+xml" target="_blank">订阅</a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-text">
+        一个程序员的思考与总结
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="container-inner">
+        <div class="toggle-search"><i class="fa fa-search"></i></div>
+        <div class="search-expand">
+          <div class="search-expand-inner">
+            <form method="get" class="searchform themeform" action="https://www.google.com/search">
+              <div>
+                <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+
+  </nav>
+  
+
+  <div class="container group">
+    <div class="container-inner">
+
+      <div class="group pad">
+
+        <div class="group pad">
+          <h1 class="site-title">
+            <a href="http://blog.coderzh.com" rel="home">
+              <img style="border-radius: 50%;width:72px;height:72px;margin:0 auto;" src="http://blog.coderzh.com/public/coderzh.jpg"></img>
+              CoderZh&#39;s Blog
+            </a>
+          </h1>
+          <p class="site-description"> 如果你没有感觉到时间不够用时，你多半正在虚度光阴。 </p>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+  
+
+</header>
+
+
+
+  <div class="container" id="page">
+    <div class="container-inner">
+      <div class="main">
+        <div class="main-inner group">
+          <section class="content">
+            <div class="pad group">
+              
+              
+              <div class="post-list group">
+                
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年06月07日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/06/07/1215657" rel="bookmark" title="Python天天美味(28) - urlopen">Python天天美味(28) - urlopen</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>一、打开一个网页获取所有的内容 &nbsp;from&nbsp;urllib&nbsp;import&nbsp;urlopen doc&nbsp;=&nbsp;urlopen("http://www.baidu.com").read() print&nbsp;doc 二、获取Http头 from&nbsp;urllib&nbsp;import&nbsp;urlopen doc&nbsp;=&nbsp;urlopen("http://www.baidu.com") print&nbsp;doc.info() print&nbsp;doc.info().getheader('Content-Type') &nbsp;三、使用代理 &nbsp;&nbsp;&nbsp; 1. 查看环境变量 print&nbsp;""n".join(["%s=%s"&nbsp;%&nbsp;(k,&nbsp;v)&nbsp;&nbsp;for&nbsp;k,&nbsp;v&nbsp;in&nbsp;os.environ.items()]) print&nbsp;os.getenv("http_proxy") &nbsp;&nbsp;&nbsp; 2. 设置环境变量 import&nbsp;&nbsp;&nbsp;os&nbsp; os.putenv("http_proxy",&nbsp;&nbsp;&nbsp;"http://proxyaddr:&lt;port&gt;") &nbsp;&nbsp;&nbsp;&nbsp; 3. 使用代理 #&nbsp;Use&nbsp;http://www.someproxy.com:3128&nbsp;for&nbsp;http&nbsp;proxying proxies&nbsp;=&nbsp;{'http':&nbsp;'http://www.someproxy.com:3128'} filehandle&nbsp;=&nbsp;urllib.urlopen(some_url,&nbsp;proxies=proxies) #&nbsp;Don't&nbsp;use&nbsp;any&nbsp;proxies filehandle&nbsp;=&nbsp;urllib.urlopen(some_url,&nbsp;proxies={}) #&nbsp;Use&nbsp;proxies&nbsp;from&nbsp;environment&nbsp;-&nbsp;both&nbsp;versions&nbsp;are&nbsp;equivalent filehandle&nbsp;=&nbsp;urllib.urlopen(some_url,&nbsp;proxies=None) filehandle&nbsp;=&nbsp;urllib.urlopen(some_url) &nbsp; Python 天天美味系列（总） [Python 天天美味(26) - __getattr__与__setattr__](http://www.cnblogs.com/coderzh/archive/2008/05/25/1206931.html) &nbsp; [Python 天天美味(27) - 网络编程起步(Socket发送消息)](http://www.cnblogs.com/coderzh/archive/2008/06/07/1215607.html) &nbsp; [Python 天天美味(28) - urlopen](http://www.cnblogs.com/coderzh/archive/2008/06/07/1215657.html)&nbsp;&nbsp; &nbsp; [Python 天天美味(29) - 调用VC++的动态链接库(DLL)](http://www.cnblogs.com/coderzh/archive/2008/07/23/1249919.html)&nbsp; [Python 天天美味(30) - python数据结构与算法之快速排序](http://www.cnblogs.com/coderzh/archive/2008/09/20/1294947.html)&nbsp; ..</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年06月03日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/06/03/1213078" rel="bookmark" title="开始使用Emacs">开始使用Emacs</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>最近发现右键菜单弹出好慢，找了很多原因，后来发现是注册表中HKEY_CLASSES_ROOT\&rdquo;*&rdquo;\shellex被破坏，因此索性把ContextMenuHandlers和PropertySheetHandlers删掉了。选择文件，点击右键，奇快无比。后发现EmEditor没了，索性把EmEditor删掉，开始用Emacs。开始用的时候会比较困难，自己勉励一下自己，坚持一下吧！ 先记一下基本的命令吧，有了如下的命令基本可以正常使用Emacs了： C-x C-f&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 寻找文件。 C-x C-s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 保存文件。 C-x C-b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 列出缓冲区。 C-x C-c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 离开 Emacs。 C-x 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 关掉其它所有窗格，只保留一个。 C-x u&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 撤销。 C-s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 搜索 C-x h&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 全选 M-w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 复制 C-y&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 粘贴 C-w&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 剪切 其中.emacs是重要的配置文件，通过C-x C-f ~/.emacs来打开进行编辑，可以进行一些个性化的设置。我一上来就设置了如下几个好用的东东： 1.修改选择区域快捷键，我修改为Control - C 然后按空格。 (global-set-key (kbd "C-c &lt;SPC&gt;") 'set-mark-command) &nbsp; 2.高亮显示选择的区域 (transient-mark-mode t) &nbsp; 3.Emacs启动后最大化 (defun w32-restore-frame () &nbsp;&nbsp;&nbsp; "Restore a minimized frame" &nbsp;&nbsp;&nbsp; (interactive) &nbsp;&nbsp;&nbsp; (w32-send-sys-command 61728)) (defun w32-maximize-frame () &nbsp;&nbsp;&nbsp; "Maximize the current</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年06月02日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/06/02/1212410" rel="bookmark" title="SaveFileDialog与Castle(ActiveRecord)有冲突？？">SaveFileDialog与Castle(ActiveRecord)有冲突？？</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>使用SaveFileDialog，点击保存按钮后，再执行Castle的操作，出错~~很郁闷，不知道有没有人和我一样，还是我自己的问题。 运行：</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F/" title="All posts in 思考感悟" rel="category tag">思考感悟</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月31日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/31/1211422" rel="bookmark" title="做人、做事，做架构师——架构师能力模型解析(转)">做人、做事，做架构师——架构师能力模型解析(转)</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>做人、做事，做架构师——架构师能力模型解析 &nbsp; ##### **要想从一名普通程序员发展成为优秀的架构师，&#8220;个人特性&#8221;与&#8220;技术技能&#8221;缺一不可；而&#8220;技术专业能力&#8221;、&#8220;人际关系能力&#8221;和&#8220;业务能力&#8221;更是优秀架构师重要的三种能力。** **文 / 周爱民（《程序员》2008年4月刊）** **引子** 究竟是什么让你在同一个位置上——例如程序员或技术负责人——工作了三年、五年或者更久，而仍然得不到任何的发展空间？你觉得自己已成为技术圈中 的大牛，并信心满满地去拿明天就要颁发的某某大奖，然而却仍然停留在同样的技术职位上，去年到今年涨的薪水甚至填不平物价升幅？于是，你开始对老板不满， 对员工不满，对昨天升职的那个同事不满&#8230;&#8230;你开始计划明天就要跑单，或者准备考虑提出加薪却又心怀忐忑。 如果技术人员有发展的轨迹，那么他要么&#8220;看透工具的本质，把关注点转移到&#8216;团队&#8217;的圈子里去&#8221;，要么&#8220;顺着代码铺就的道路，亦步亦趋地成为良匠大 师&#8221;。仅以技术方向而言，你大概可以做到架构师、总架构师甚至首席架构师；但问题是：你现在还只是一个程序员。那要如何才能踏上通往架构师之路呢？本文为 你解析一个架构师的能力模型。 **你能不能做一个好的架构师？** 架构师不是界定一个技术高下的职位名称，而是一个职务。所谓职务，包括职——职位，务——工作。前者决定了你具备哪些资源，可以影响到怎样的范围，以及面向的机构，后者则简单地是你需要完成的工作列表。 所以我说&#8220;架构师&#8221;不是指&#8220;一个能做架构的人&#8221;。前者是把架构师当职能，后者是当工人。能做一份工作列表中的事，并不等于就成为相应职位上的人。 在管理体系里面，你的个人特性决定了你在哪个位置，而技术技能只是做事实施的必需。架构师这个职务，同时要求较高的个人素质和技术能力，因此它的进取之路 总结起来就是：做人、做事，做架构师。 因此&#8220;模型&#8221;由&#8220;个人特性&#8221;和&#8220;技术技能&#8221;两个方面构成，在第一张图中，我特别说明&#8220;个人特性&#8221;既包括人际关系的能力，也包括（具体）业务能力；&#8220;技术技能&#8221;也是如此。所以个人特性主要与&#8220;做人&#8221;有关，部分地也包含&#8220;做事&#8221;的要素。 ![](http://images.csdn.net/20080530/123.jpg) &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 图1 架构师能力模型 &#8220;有效沟通&#8221;以及&#8220;学会谈判&#8221;与做具体的事无关，是个人能力特性的公共方面。前者是过程，后者是知道如何定目标与求结果。而&#8220;风险与防备&#8221;是做事 过程控制的关键，与前面两项正好构成了一个做事基本能力的完整体系。基本上，这三项个人特性都是一个&#8220;普通程序员&#8221;所不具备的，甚至在大多数情况下，普通 程序员并不愿意去具备这样的个人特性，因为在许多陷于技术泥淖的开发人员看来：沟通总是会使事情变得更加麻烦，谈判则徒耗时间而无济于事。然而事实上，在 整个的架构决策过程中，架构师需要不停地沟通与谈判。将&#8220;架构&#8221;变成&#8220;决策&#8221;的过程，其实就是对各个技术角色（及其思想）兼容并包的过程，你需要不断地协 调需求、实现之间的各种问题，也需要面对各种投资者（时间、资金、人才等方面的决策者）进行谈判，以确定项目的规模——没有规模也就没有范围，没有范围如 何展开设计呢？ 一部分开发人员会认为上述过程是&#8220;项目经理&#8221;的事情，但真的如此吗？当你作为一个更高级别的架构师，以至于要影响到多个项目的决策时，你就全然不会有这种感受了。因为这种情况下，你的决策将先于项目的启动，或者说你已经不单单是一个技术角色了。 设计是架构能力的一部分，但架构师不是设计师——看清楚二者之间的不同，你才真正迈出了架构师职业生涯的第一步。 **抽象是思维能力、模型化是表达能力** 个人特性中另一个非常重要的方面是&#8220;抽象思维&#8221;，而这是与架构师角色直接相关的一种能力。这种能力既有职业技能特征，又是普遍性的能力。 所谓普遍性的能力，是指&#8220;抽象&#8221;在我们——作为人这种个体的——生活中无处不在。例如我们说花、草，说桌、椅&#8230;&#8230;我们用语言去指称任何一个既已存 在的（可以脱离我们的语言而自然存在的）事物时，就用到了抽象。说&#8220;桌子&#8221;的时候，既没有描述桌子的具体形式，也没有说明它的规格，但我们用这个名词时， 所有人都知道&#8220;桌子是什么&#8221;。所以，名词概念是整个抽象逻辑系统中的主体。如果失去了这些名词定义，我们基本上不能说话，也不能描述任何东西——那便到了 &#8220;只可意会不可言传&#8221;的境地。 用现有的成熟语汇去描述你的系统时，大多数人会理解你所表达的含义，例如我们说&#8220;这个系统设计为一个三层结构&#8221;。然而架构师面临的系统在许多细节 上并不见得能够用成熟的语汇去描述，因此必须自已构建一个抽象系统，这就需要概念抽象能力、概念表达能力和基于概念的逻辑表达能力。 概念抽象能力是一种思维能力。简单地说，就是&#8220;把目标分解或概括清楚&#8221;：你要么概而言之&#8220;它是什么&#8221;，要么详细地说明&#8220;它包括什么&#8221;。必须使用大 量的语汇来陈述这个&#8220;什么&#8221;，这不单单是表达为文字，也表达为你在思想过程中的一个完整系统。通常用的方法是&#8220;映射系统&#8221;。例如你可以用数学中的&#8220;数轴&#8221; 来映射&#8220;实数域&#8221;。将目标系统形式化为一个概念化的、可讨论的结构系统后，你的抽象过程就基本结束了。 ![](http://images.csdn.net/20080530/%E6%9E%B6%E6%9E%842.jpg) &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 图2 能力模型中的个人特性 然而这个&#8220;抽象系统&#8221;可能只构建在你的思维意识里，还必须把它描绘出来。因为不能只是你自己思考清楚，系统就能设计完成。这个&#8220;描绘&#8221;就依赖于后面两种表达能力，一种是描绘概念实体，一种是描绘实体上的逻辑——有趣的是，这似乎又回到了&#8220;程序＝结构＋算法&#8221;。 现在大家回过头来看看UML，或者更多种类的ML（建模语言），他们就用于表达这两个方面的东西：要么是概念实体（例如用一个框表明系统边界），要么是实体上的逻辑（例如用箭头表明逻辑时序）。 所以大家应该清楚，我们再如何称赞UML，它也只是一种对模型化系统的&#8220;表达能力&#8221;，你只能把它当一种辅助表达的工具去使用，它本身既不能帮助思考，也不见得能作为抽象过程中的或抽象思维环境中的参考。</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月25日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/25/1206931" rel="bookmark" title="Python天天美味(26) - __getattr__与__setattr__">Python天天美味(26) - __getattr__与__setattr__</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>getattr和setattr可以用来对属性的设置和取值进行处理，比如下面的例子： class&nbsp;Book(object): &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;__setattr__(self,&nbsp;name,&nbsp;value): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;name&nbsp;==&nbsp;'value': &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.__setattr__(self,&nbsp;name,&nbsp;value&nbsp;-&nbsp;100) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;object.__setattr__(self,&nbsp;name,&nbsp;value) &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;__getattr__(self,&nbsp;name): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;object.__getattribute__(name) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;name&nbsp;+&nbsp;'&nbsp;is&nbsp;not&nbsp;found!' &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;__str__(self): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;self.name&nbsp;+&nbsp;'&nbsp;cost&nbsp;:&nbsp;'&nbsp;+&nbsp;str(self.value) c&nbsp;=&nbsp;Book() c.name&nbsp;=&nbsp;'Python' c.value&nbsp;=&nbsp;100 print&nbsp;c.name print&nbsp;c.value print&nbsp;c print&nbsp;c.Type 上面的例子中，在赋值书的value属性时，偷偷的将value减去了１００，呵。输出结果： Python 0 Python cost : 0 Type is not found! Python 天天美味系列（总） Python 天天美味(24) - 初始化多维数组 &nbsp; Python 天天美味(25) - 深入理解yield &nbsp; Python 天天美味(26) - getattr与setattr &nbsp; Python 天天美味(27) - 网络编程起步(Socket发送消息) &nbsp; Python 天天美味(28) - urlopen&nbsp;&nbsp; &nbsp; &hellip; &nbsp;</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月20日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/20/1203574" rel="bookmark" title="开源Granados介绍 - SSH连接远程Linux服务器(C#)">开源Granados介绍 - SSH连接远程Linux服务器(C#)</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>Granados是一个基于.NET的SSH客户端库。它有以下特点： 1.Granados是一个C#的开源项目。源码地址：http://www.routrek.co.jp/support/download/varaterm/granados200.tar.gz 2.同时支持SSH1和SSH2。 3.Granados实现了AES, Blowfish, TripleDES, RSA, DSA等加密验证算法。 4.实现TCP协议连接。 如何使用Granados库 可惜的是Granados的文档几乎没有！所以只有从它的源码找到它的测试代码来看。总结步骤为： 1.工程中添加Routrek.granados.dll(下载的包里有)的引用。 2.添加Reader类，实现ISSHConnectionEventReceiver和ISSHChannelEventReceiver接口。首先引用命名空间： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;System.Threading; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;System.Diagnostics; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;System.Net; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;System.Net.Sockets; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.Crypto; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.SSHC; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.SSHCV1; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.SSHCV2; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.Toolkit; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.PKI; Reader类实现如下： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)class&nbsp;Reader&nbsp;:&nbsp;ISSHConnectionEventReceiver,&nbsp;ISSHChannelEventReceiver ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;SSHConnection&nbsp;_conn; ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;bool&nbsp;_ready; ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnData(byte[]&nbsp;data,&nbsp;int&nbsp;offset,&nbsp;int&nbsp;length) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.Console.Write(Encoding.ASCII.GetString(data,&nbsp;offset,&nbsp;length)); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnDebugMessage(bool&nbsp;always_display,&nbsp;byte[]&nbsp;data) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("DEBUG:&nbsp;"&nbsp;+&nbsp;Encoding.ASCII.GetString(data)); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnIgnoreMessage(byte[]&nbsp;data) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Ignore:&nbsp;"&nbsp;+&nbsp;Encoding.ASCII.GetString(data)); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnAuthenticationPrompt(string[]&nbsp;msg) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Auth&nbsp;Prompt&nbsp;"&nbsp;+&nbsp;msg[0]); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnError(Exception&nbsp;error,&nbsp;string&nbsp;msg) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("ERROR:&nbsp;"&nbsp;+&nbsp;msg); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnChannelClosed() ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Channel&nbsp;closed"); ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_conn.Disconnect(""); ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//_conn.AsyncReceive(this); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnChannelEOF() ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_pf.Close(); ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Channel&nbsp;EOF"); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnExtendedData(int&nbsp;type,&nbsp;byte[]&nbsp;data) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("EXTENDED&nbsp;DATA"); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnConnectionClosed() ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Connection&nbsp;closed"); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnUnknownMessage(byte&nbsp;type,&nbsp;byte[]&nbsp;data)</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+              </div>
+
+              
+              
+
+<nav class="pagination group">
+  <div class="wp-pagenavi">
+    <span class="pages">
+        Page 30 of 38
+        (265 Posts)
+    </span>
+    
+      <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/29/">Prev &laquo;</a>
+    
+    
+    
+      <a class="nextpostslink" rel="next" href="http://blog.coderzh.com/paginator/31/">Next &raquo;</a>
+    
+  </div>
+</nav>
+
+              
+            </div>
+
+          </section>
+          <div class="sidebar s1">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>Follow:</p>
+      <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+    </div>
+
+    <div class="widget qrcode">
+    <img src="http://blog.coderzh.com/public/qrcode.jpg" width="129px" height="129px"/>
+    <p>微信扫一扫：<br/> 关注我的公众号： <br /> hacker-thinking</p>
+</div>
+
+
+    <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
+      <ul>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="search-2" class="widget widget_search"><h3>Search</h3>
+
+      <form method="get" class="searchform themeform" action="https://www.google.com/search">
+        <div>
+          <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+        </div>
+      </form>
+    </div>
+
+  </div>
+  
+</div>
+
+          <div class="sidebar s2">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>More</p>
+    </div>
+
+
+    <div id="categories-2" class="widget widget_categories"><h3>Categories</h3>
+      <ul>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F/">思考感悟</a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <div id="tag_cloud-2" class="widget widget_tag_cloud"><h3>Tags</h3>
+
+      <div class="tagcloud">
+        <p class="post-tags">
+          
+              
+          
+        </p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+
+  <nav class="nav-container group" id="nav-footer">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap">
+      <ul id="menu-default-menu-1" class="nav container group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+  
+
+  <section class="container" id="footer-bottom">
+    <div class="container-inner">
+      <a id="back-to-top" href="#"><i class="fa fa-angle-up"></i></a>
+      <div class="pad group">
+        <div class="grid one-half">
+          <div id="copyright">
+            <p>Copyright © 2015. All Rights Reserved. <br>Powered by
+              <a href="http://gohugo.io/" target="_blank">Hugo - the static site generator</a>.
+              <a href="http://golang.org" target="_blank">#golang</a>.
+            </p>
+          </div>
+          
+        </div>
+        
+        <div class="grid one-half last">
+          <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+        </div>
+      </div>
+
+    </div>
+    
+  </section>
+  
+
+</footer>
+
+</div>
+<script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/scripts.js"></script>
+<script type="text/javascript" src="assets/picturefill/picturefill.min.js"></script>
+<script type="text/javascript" src="assets/hubinfo/dist/hubinfo.js"></script>
+<script type="text/javascript" src="assets/js/jquery.matchHeight-min.js"></script>
+
+
+<script type="text/javascript">var bU = "http:\/\/blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/";</script>
+<script type="text/javascript" async defer src="wp-content/plugins/wp-youtube-lyte/lyte/lyte.js"></script>
+<script type="text/javascript" async defer src="assets/js/myblog.js"></script>
+
+</body>
+</html>
+

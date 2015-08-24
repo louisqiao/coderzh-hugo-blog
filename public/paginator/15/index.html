@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+  <base href="http://blog.coderzh.com/">
+  <script type="text/javascript">
+ 
+(function(){var a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X=[].slice,Y={}.hasOwnProperty,Z=function(a,b){function c(){this.constructor=a}for(var d in b)Y.call(b,d)&&(a[d]=b[d]);return c.prototype=b.prototype,a.prototype=new c,a.__super__=b.prototype,a},$=[].indexOf||function(a){for(var b=0,c=this.length;c>b;b++)if(b in this&&this[b]===a)return b;return-1};for(u={catchupTime:100,initialRate:.03,minTime:250,ghostTime:100,maxProgressPerFrame:20,easeFactor:1.25,startOnPageLoad:!0,restartOnPushState:!0,restartOnRequestAfter:500,target:"body",elements:{checkInterval:100,selectors:["body"]},eventLag:{minSamples:10,sampleCount:3,lagThreshold:3},ajax:{trackMethods:["GET"],trackWebSockets:!0,ignoreURLs:[]}},C=function(){var a;return null!=(a="undefined"!=typeof performance&&null!==performance&&"function"==typeof performance.now?performance.now():void 0)?a:+new Date},E=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame,t=window.cancelAnimationFrame||window.mozCancelAnimationFrame,null==E&&(E=function(a){return setTimeout(a,50)},t=function(a){return clearTimeout(a)}),G=function(a){var b,c;return b=C(),(c=function(){var d;return d=C()-b,d>=33?(b=C(),a(d,function(){return E(c)})):setTimeout(c,33-d)})()},F=function(){var a,b,c;return c=arguments[0],b=arguments[1],a=3<=arguments.length?X.call(arguments,2):[],"function"==typeof c[b]?c[b].apply(c,a):c[b]},v=function(){var a,b,c,d,e,f,g;for(b=arguments[0],d=2<=arguments.length?X.call(arguments,1):[],f=0,g=d.length;g>f;f++)if(c=d[f])for(a in c)Y.call(c,a)&&(e=c[a],null!=b[a]&&"object"==typeof b[a]&&null!=e&&"object"==typeof e?v(b[a],e):b[a]=e);return b},q=function(a){var b,c,d,e,f;for(c=b=0,e=0,f=a.length;f>e;e++)d=a[e],c+=Math.abs(d),b++;return c/b},x=function(a,b){var c,d,e;if(null==a&&(a="options"),null==b&&(b=!0),e=document.querySelector("[data-pace-"+a+"]")){if(c=e.getAttribute("data-pace-"+a),!b)return c;try{return JSON.parse(c)}catch(f){return d=f,"undefined"!=typeof console&&null!==console?console.error("Error parsing inline pace options",d):void 0}}},g=function(){function a(){}return a.prototype.on=function(a,b,c,d){var e;return null==d&&(d=!1),null==this.bindings&&(this.bindings={}),null==(e=this.bindings)[a]&&(e[a]=[]),this.bindings[a].push({handler:b,ctx:c,once:d})},a.prototype.once=function(a,b,c){return this.on(a,b,c,!0)},a.prototype.off=function(a,b){var c,d,e;if(null!=(null!=(d=this.bindings)?d[a]:void 0)){if(null==b)return delete this.bindings[a];for(c=0,e=[];c<this.bindings[a].length;)e.push(this.bindings[a][c].handler===b?this.bindings[a].splice(c,1):c++);return e}},a.prototype.trigger=function(){var a,b,c,d,e,f,g,h,i;if(c=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],null!=(g=this.bindings)?g[c]:void 0){for(e=0,i=[];e<this.bindings[c].length;)h=this.bindings[c][e],d=h.handler,b=h.ctx,f=h.once,d.apply(null!=b?b:this,a),i.push(f?this.bindings[c].splice(e,1):e++);return i}},a}(),j=window.Pace||{},window.Pace=j,v(j,g.prototype),D=j.options=v({},u,window.paceOptions,x()),U=["ajax","document","eventLag","elements"],Q=0,S=U.length;S>Q;Q++)K=U[Q],D[K]===!0&&(D[K]=u[K]);i=function(a){function b(){return V=b.__super__.constructor.apply(this,arguments)}return Z(b,a),b}(Error),b=function(){function a(){this.progress=0}return a.prototype.getElement=function(){var a;if(null==this.el){if(a=document.querySelector(D.target),!a)throw new i;this.el=document.createElement("div"),this.el.className="pace pace-active",document.body.className=document.body.className.replace(/pace-done/g,""),document.body.className+=" pace-running",this.el.innerHTML='<div class="pace-progress">\n  <div class="pace-progress-inner"></div>\n</div>\n<div class="pace-activity"></div>',null!=a.firstChild?a.insertBefore(this.el,a.firstChild):a.appendChild(this.el)}return this.el},a.prototype.finish=function(){var a;return a=this.getElement(),a.className=a.className.replace("pace-active",""),a.className+=" pace-inactive",document.body.className=document.body.className.replace("pace-running",""),document.body.className+=" pace-done"},a.prototype.update=function(a){return this.progress=a,this.render()},a.prototype.destroy=function(){try{this.getElement().parentNode.removeChild(this.getElement())}catch(a){i=a}return this.el=void 0},a.prototype.render=function(){var a,b,c,d,e,f,g;if(null==document.querySelector(D.target))return!1;for(a=this.getElement(),d="translate3d("+this.progress+"%, 0, 0)",g=["webkitTransform","msTransform","transform"],e=0,f=g.length;f>e;e++)b=g[e],a.children[0].style[b]=d;return(!this.lastRenderedProgress||this.lastRenderedProgress|0!==this.progress|0)&&(a.children[0].setAttribute("data-progress-text",""+(0|this.progress)+"%"),this.progress>=100?c="99":(c=this.progress<10?"0":"",c+=0|this.progress),a.children[0].setAttribute("data-progress",""+c)),this.lastRenderedProgress=this.progress},a.prototype.done=function(){return this.progress>=100},a}(),h=function(){function a(){this.bindings={}}return a.prototype.trigger=function(a,b){var c,d,e,f,g;if(null!=this.bindings[a]){for(f=this.bindings[a],g=[],d=0,e=f.length;e>d;d++)c=f[d],g.push(c.call(this,b));return g}},a.prototype.on=function(a,b){var c;return null==(c=this.bindings)[a]&&(c[a]=[]),this.bindings[a].push(b)},a}(),P=window.XMLHttpRequest,O=window.XDomainRequest,N=window.WebSocket,w=function(a,b){var c,d,e;e=[];for(d in b.prototype)try{e.push(null==a[d]&&"function"!=typeof b[d]?"function"==typeof Object.defineProperty?Object.defineProperty(a,d,{get:function(){return b.prototype[d]},configurable:!0,enumerable:!0}):a[d]=b.prototype[d]:void 0)}catch(f){c=f}return e},A=[],j.ignore=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("ignore"),c=b.apply(null,a),A.shift(),c},j.track=function(){var a,b,c;return b=arguments[0],a=2<=arguments.length?X.call(arguments,1):[],A.unshift("track"),c=b.apply(null,a),A.shift(),c},J=function(a){var b;if(null==a&&(a="GET"),"track"===A[0])return"force";if(!A.length&&D.ajax){if("socket"===a&&D.ajax.trackWebSockets)return!0;if(b=a.toUpperCase(),$.call(D.ajax.trackMethods,b)>=0)return!0}return!1},k=function(a){function b(){var a,c=this;b.__super__.constructor.apply(this,arguments),a=function(a){var b;return b=a.open,a.open=function(d,e){return J(d)&&c.trigger("request",{type:d,url:e,request:a}),b.apply(a,arguments)}},window.XMLHttpRequest=function(b){var c;return c=new P(b),a(c),c};try{w(window.XMLHttpRequest,P)}catch(d){}if(null!=O){window.XDomainRequest=function(){var b;return b=new O,a(b),b};try{w(window.XDomainRequest,O)}catch(d){}}if(null!=N&&D.ajax.trackWebSockets){window.WebSocket=function(a,b){var d;return d=null!=b?new N(a,b):new N(a),J("socket")&&c.trigger("request",{type:"socket",url:a,protocols:b,request:d}),d};try{w(window.WebSocket,N)}catch(d){}}}return Z(b,a),b}(h),R=null,y=function(){return null==R&&(R=new k),R},I=function(a){var b,c,d,e;for(e=D.ajax.ignoreURLs,c=0,d=e.length;d>c;c++)if(b=e[c],"string"==typeof b){if(-1!==a.indexOf(b))return!0}else if(b.test(a))return!0;return!1},y().on("request",function(b){var c,d,e,f,g;return f=b.type,e=b.request,g=b.url,I(g)?void 0:j.running||D.restartOnRequestAfter===!1&&"force"!==J(f)?void 0:(d=arguments,c=D.restartOnRequestAfter||0,"boolean"==typeof c&&(c=0),setTimeout(function(){var b,c,g,h,i,k;if(b="socket"===f?e.readyState<2:0<(h=e.readyState)&&4>h){for(j.restart(),i=j.sources,k=[],c=0,g=i.length;g>c;c++){if(K=i[c],K instanceof a){K.watch.apply(K,d);break}k.push(void 0)}return k}},c))}),a=function(){function a(){var a=this;this.elements=[],y().on("request",function(){return a.watch.apply(a,arguments)})}return a.prototype.watch=function(a){var b,c,d,e;return d=a.type,b=a.request,e=a.url,I(e)?void 0:(c="socket"===d?new n(b):new o(b),this.elements.push(c))},a}(),o=function(){function a(a){var b,c,d,e,f,g,h=this;if(this.progress=0,null!=window.ProgressEvent)for(c=null,a.addEventListener("progress",function(a){return h.progress=a.lengthComputable?100*a.loaded/a.total:h.progress+(100-h.progress)/2},!1),g=["load","abort","timeout","error"],d=0,e=g.length;e>d;d++)b=g[d],a.addEventListener(b,function(){return h.progress=100},!1);else f=a.onreadystatechange,a.onreadystatechange=function(){var b;return 0===(b=a.readyState)||4===b?h.progress=100:3===a.readyState&&(h.progress=50),"function"==typeof f?f.apply(null,arguments):void 0}}return a}(),n=function(){function a(a){var b,c,d,e,f=this;for(this.progress=0,e=["error","open"],c=0,d=e.length;d>c;c++)b=e[c],a.addEventListener(b,function(){return f.progress=100},!1)}return a}(),d=function(){function a(a){var b,c,d,f;for(null==a&&(a={}),this.elements=[],null==a.selectors&&(a.selectors=[]),f=a.selectors,c=0,d=f.length;d>c;c++)b=f[c],this.elements.push(new e(b))}return a}(),e=function(){function a(a){this.selector=a,this.progress=0,this.check()}return a.prototype.check=function(){var a=this;return document.querySelector(this.selector)?this.done():setTimeout(function(){return a.check()},D.elements.checkInterval)},a.prototype.done=function(){return this.progress=100},a}(),c=function(){function a(){var a,b,c=this;this.progress=null!=(b=this.states[document.readyState])?b:100,a=document.onreadystatechange,document.onreadystatechange=function(){return null!=c.states[document.readyState]&&(c.progress=c.states[document.readyState]),"function"==typeof a?a.apply(null,arguments):void 0}}return a.prototype.states={loading:0,interactive:50,complete:100},a}(),f=function(){function a(){var a,b,c,d,e,f=this;this.progress=0,a=0,e=[],d=0,c=C(),b=setInterval(function(){var g;return g=C()-c-50,c=C(),e.push(g),e.length>D.eventLag.sampleCount&&e.shift(),a=q(e),++d>=D.eventLag.minSamples&&a<D.eventLag.lagThreshold?(f.progress=100,clearInterval(b)):f.progress=100*(3/(a+3))},50)}return a}(),m=function(){function a(a){this.source=a,this.last=this.sinceLastUpdate=0,this.rate=D.initialRate,this.catchup=0,this.progress=this.lastProgress=0,null!=this.source&&(this.progress=F(this.source,"progress"))}return a.prototype.tick=function(a,b){var c;return null==b&&(b=F(this.source,"progress")),b>=100&&(this.done=!0),b===this.last?this.sinceLastUpdate+=a:(this.sinceLastUpdate&&(this.rate=(b-this.last)/this.sinceLastUpdate),this.catchup=(b-this.progress)/D.catchupTime,this.sinceLastUpdate=0,this.last=b),b>this.progress&&(this.progress+=this.catchup*a),c=1-Math.pow(this.progress/100,D.easeFactor),this.progress+=c*this.rate*a,this.progress=Math.min(this.lastProgress+D.maxProgressPerFrame,this.progress),this.progress=Math.max(0,this.progress),this.progress=Math.min(100,this.progress),this.lastProgress=this.progress,this.progress},a}(),L=null,H=null,r=null,M=null,p=null,s=null,j.running=!1,z=function(){return D.restartOnPushState?j.restart():void 0},null!=window.history.pushState&&(T=window.history.pushState,window.history.pushState=function(){return z(),T.apply(window.history,arguments)}),null!=window.history.replaceState&&(W=window.history.replaceState,window.history.replaceState=function(){return z(),W.apply(window.history,arguments)}),l={ajax:a,elements:d,document:c,eventLag:f},(B=function(){var a,c,d,e,f,g,h,i;for(j.sources=L=[],g=["ajax","elements","document","eventLag"],c=0,e=g.length;e>c;c++)a=g[c],D[a]!==!1&&L.push(new l[a](D[a]));for(i=null!=(h=D.extraSources)?h:[],d=0,f=i.length;f>d;d++)K=i[d],L.push(new K(D));return j.bar=r=new b,H=[],M=new m})(),j.stop=function(){return j.trigger("stop"),j.running=!1,r.destroy(),s=!0,null!=p&&("function"==typeof t&&t(p),p=null),B()},j.restart=function(){return j.trigger("restart"),j.stop(),j.start()},j.go=function(){var a;return j.running=!0,r.render(),a=C(),s=!1,p=G(function(b,c){var d,e,f,g,h,i,k,l,n,o,p,q,t,u,v,w;for(l=100-r.progress,e=p=0,f=!0,i=q=0,u=L.length;u>q;i=++q)for(K=L[i],o=null!=H[i]?H[i]:H[i]=[],h=null!=(w=K.elements)?w:[K],k=t=0,v=h.length;v>t;k=++t)g=h[k],n=null!=o[k]?o[k]:o[k]=new m(g),f&=n.done,n.done||(e++,p+=n.tick(b));return d=p/e,r.update(M.tick(b,d)),r.done()||f||s?(r.update(100),j.trigger("done"),setTimeout(function(){return r.finish(),j.running=!1,j.trigger("hide")},Math.max(D.ghostTime,Math.max(D.minTime-(C()-a),0)))):c()})},j.start=function(a){v(D,a),j.running=!0;try{r.render()}catch(b){i=b}return document.querySelector(".pace")?(j.trigger("start"),j.go()):setTimeout(j.start,50)},"function"==typeof define&&define.amd?define(["pace"],function(){return j}):"object"==typeof exports?module.exports=j:D.startOnPageLoad&&j.start()}).call(this);
+</script>
+<style type="text/css">
+   
+  .pace {
+    -webkit-pointer-events: none;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  .pace.pace-inactive .pace-progress {
+    display: none;
+  }
+
+  .pace .pace-progress {
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    right: 45%;
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .pace .pace-progress:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: .5rem;
+    content: attr(data-progress-text);
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: 100;
+    font-size: 5rem;
+    line-height: 1;
+    text-align: right;
+    color: rgba(229, 146, 42, 0.90);
+  }
+</style>
+
+  <title>CoderZh&#39;s Blog - CoderZh&#39;s Blog</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="CoderZh&#39;s Blog">
+<meta name="author" content="coderzh">
+<meta name="publisher" content="coderzh">
+<meta name="generator" content="http://gohugo.io/"/>
+
+<meta itemprop="name" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta itemprop="description" content="CoderZh&#39;s Blog">
+<meta itemprop="image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+<meta property="og:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.coderzh.com/" />
+<meta property="og:image" content="http://blog.coderzh.com/public/coderzh.jpg" />
+<meta property="og:description" content="CoderZh&#39;s Blog" />
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@coderzh">
+<meta name="twitter:title" content="CoderZh&#39;s Blog - CoderZh&#39;s Blog">
+<meta name="twitter:description" content="CoderZh&#39;s Blog">
+<meta name="twitter:creator" content="@coderzh">
+<meta name="twitter:image" content="http://blog.coderzh.com/public/coderzh.jpg">
+
+  <script>document.documentElement.className = document.documentElement.className.replace("no-js", "js");</script>
+  <link rel="canonical" href="http://blog.coderzh.com/">
+  <link rel='shortlink' href="http://blog.coderzh.com/"/>
+  <link rel="shortcut icon" href="http://blog.coderzh.com/public/favicon.ico"/>
+  
+  <link href="http://blog.coderzh.com/feed.xml" rel="alternate" type="application/rss+xml" title="CoderZh&#39;s Blog" />
+
+
+<link rel="stylesheet" id="human-style-css" href="http://blog.coderzh.com/wp-content/themes/hueman/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="human-style-css2" href="http://blog.coderzh.com/wp-content/themes/hueman-child/style.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="responsive-css" href="http://blog.coderzh.com/wp-content/themes/hueman/responsive.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="font-awesome-css" href="http://blog.coderzh.com/wp-content/themes/hueman/fonts/font-awesome.min.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="wp-youtube-lyte" href="http://blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/lyte.css" type="text/css" media="all"/>
+<link rel="stylesheet" id="hubinfo" href="http://blog.coderzh.com/assets/hubinfo/dist/hubinfo.css" type="text/css" media="all"/>
+<link rel="stylesheet" href="http://blog.coderzh.com/public/highlightjs/default.min.css">
+<script src="http://blog.coderzh.com/public/highlightjs/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<link rel="stylesheet" id="human-style-css3" href="http://blog.coderzh.com/wp-content/themes/hueman-child/user.css" type="text/css" media="all"/>
+
+
+</head>
+
+<body class="archive category col-3cm full-width topbar-enabled chrome">
+
+<div id="wrapper">
+  <header id="header">
+
+  <nav class="nav-container group" id="nav-topbar">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap container">
+      <a href="http://blog.coderzh.com" class="nav-cs-icon">
+        <img width="40" height="40" src="http://blog.coderzh.com/public/coderzh.jpg" alt="coderzh" title="Home">
+      </a>
+      <ul id="menu-default-menu" class="nav container-inner group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/post/">归档</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/about/">关于我</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/feed.xml" type="application/rss+xml" target="_blank">订阅</a>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-text">
+        一个程序员的思考与总结
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="container-inner">
+        <div class="toggle-search"><i class="fa fa-search"></i></div>
+        <div class="search-expand">
+          <div class="search-expand-inner">
+            <form method="get" class="searchform themeform" action="https://www.google.com/search">
+              <div>
+                <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+
+  </nav>
+  
+
+  <div class="container group">
+    <div class="container-inner">
+
+      <div class="group pad">
+
+        <div class="group pad">
+          <h1 class="site-title">
+            <a href="http://blog.coderzh.com" rel="home">
+              <img style="border-radius: 50%;width:72px;height:72px;margin:0 auto;" src="http://blog.coderzh.com/public/coderzh.jpg"></img>
+              CoderZh&#39;s Blog
+            </a>
+          </h1>
+          <p class="site-description"> 如果你没有感觉到时间不够用时，你多半正在虚度光阴。 </p>
+        </div>
+
+      </div>
+    </div>
+    
+  </div>
+  
+
+</header>
+
+
+
+  <div class="container" id="page">
+    <div class="container-inner">
+      <div class="main">
+        <div class="main-inner group">
+          <section class="content">
+            <div class="pad group">
+              
+              
+              <div class="post-list group">
+                
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2009年11月15日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2009/11/15/1603315" rel="bookmark" title="django单元测试历险记">django单元测试历险记</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>最近需要测试一个服务器端的django项目，查看了一下django的文档，发现django为了更加方便的对web应用进行测试，提供了一些便捷的测试方法。并且，专门有一篇文档讲诉如何测试django应用。 http://docs.djangoproject.com/en/dev/topics/testing/&nbsp; 快速横扫了一下文档后，初步印象是django默认支持Doctests和Unit tests两个测试框架的，同时提供了一些辅助的测试类，比如Test Client、TestCase、Email Service。通过Client，可以方便的发起一个get或者post请求，并且取得返回结果。而TestCase也是对unittest.TestCase进行了进一步的封装，省去了很多重复要写的代码，比如定义一个self.client。Email Service提供了方便的邮件发送的方法。 使用Test Client有什么好处呢？ 它不需要Web服务器运行起来。 它执行更加快速。 它能非常方便的取到被测应用内部的东西。 好的，既然那么好的东西，赶紧试用一下。首先，我新建了一个测试工程testdjango，设置了一个简单的页面，通过访问&rdquo;/test&rdquo;，会返回一个字符串&rdquo;abc&rdquo;。 #&nbsp;urls.py urlpatterns&nbsp;=&nbsp;patterns('', &nbsp;&nbsp;&nbsp;&nbsp;(r'^test$',&nbsp;'views.test'), ) #&nbsp;views.py from&nbsp;django.http&nbsp;import&nbsp;HttpResponse def&nbsp;test(request): &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;HttpResponse('abc') &nbsp; 接下来，编写一个测试案例： # tests.py from&nbsp;django.test&nbsp;import&nbsp;TestCase class&nbsp;ViewTest(TestCase): &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;test(self): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;self.client.get('/test') &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.failUnlessEqual('abc',&nbsp;response.content) &nbsp; 如何才能找到你的测试案例呢？文档中说，会加载settings里INSTALLED_APPS的模块，并且在该模块目录的models.py和tests.py中查找测试案例。因此，我在settings的INSTALLED_APPS里添加了&rsquo;testdjango&rsquo;，testdjango目录中正好有tests.py。 接下来要运行测试案例，由于安装文档的说明， 运行所有INSTALLED_APPS里的测试案例只要运行： python&nbsp;manage.py&nbsp;test 如果想指定运行，可以： python&nbsp;manage.py&nbsp;test&nbsp;testdjango &nbsp; OK，运行一下，非常不幸，出现了如下异常： &ldquo;You haven&rsquo;t set the DATABASE_ENGINE setting yet.&rdquo;&nbsp; 数据库？？测试案例为什么还需要设置数据库？回过头仔细看下文档，发现确实有test database一节，大概含义是会生成一个临时的测试数据库，名字是test_前缀，如果想改还可以设定TEST_DATABASE_NAME属性。如果是sqlite，则默认是:memory:方式，即记在内存的方式。为了简单起见，我设置一个sqlite的。。 DATABASE_ENGINE&nbsp;=&nbsp;'sqlite3'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;'postgresql_psycopg2',&nbsp;'postgresql',&nbsp;'mysql',&nbsp;'sqlite3'&nbsp;or&nbsp;'oracle'. DATABASE_NAME&nbsp;=&nbsp;':memory:'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Or&nbsp;path&nbsp;to&nbsp;database&nbsp;file&nbsp;if&nbsp;using&nbsp;sqlite3. DATABASE_USER&nbsp;=&nbsp;''&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Not&nbsp;used&nbsp;with&nbsp;sqlite3. DATABASE_PASSWORD&nbsp;=&nbsp;''&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Not&nbsp;used&nbsp;with&nbsp;sqlite3. DATABASE_HOST&nbsp;=&nbsp;''&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Set&nbsp;to&nbsp;empty&nbsp;string&nbsp;for&nbsp;localhost.&nbsp;Not&nbsp;used&nbsp;with&nbsp;sqlite3. DATABASE_PORT&nbsp;=&nbsp;''&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Set&nbsp;to&nbsp;empty&nbsp;string&nbsp;for&nbsp;default.&nbsp;Not&nbsp;used&nbsp;with&nbsp;sqlite3. 再次执行，看到输出窗口开始输出了： Creating&nbsp;test&nbsp;database![](http://www.cnblogs.com/Images/dot.gif) 突然又是一个异常： &rdquo; UnboundLocalError: local variable &lsquo;int_alias&rsquo; referenced before assignment &ldquo; 这个问题让我google了好一阵，在djangoproject里还专门有一个ticket报了这个问题，但最后确认为不是django的bug不了了之。 http://code.djangoproject.com/ticket/10930&nbsp; 奇怪的是，只有在WingIDE中启动才会出现，在命令行里执行就不会有这个错误。后来看了一下WingIDE的设置，原来可以Debug里的Exception可以设置Never Report和Always Report，在Never Report里添加UnboundLocalError，同时在Always Report里去掉，这个异常就没有出现了。 再次运行，开始看到一大段的输出，时不时还有一些异常： django.template.TemplateDoesNotExist: registration/password_change_form.html&nbsp; 输出大致如下： ![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedBlock.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockStart.gif)Code Creating&nbsp;test&nbsp;database![](http://www.cnblogs.com/Images/dot.gif) Creating&nbsp;table&nbsp;auth_permission Creating&nbsp;table&nbsp;auth_group Creating&nbsp;table&nbsp;auth_user Creating&nbsp;table&nbsp;auth_message Creating&nbsp;table&nbsp;django_content_type Creating&nbsp;table&nbsp;django_session Creating&nbsp;table&nbsp;django_site Installing&nbsp;index&nbsp;for&nbsp;auth.Permission&nbsp;model Installing&nbsp;index&nbsp;for&nbsp;auth.Message&nbsp;model EE..E![](http://www.cnblogs.com/Images/dot.gif)EEEEEEE![](http://www.cnblogs.com/Images/dot.gif)![](http://www.cnblogs.com/Images/dot.gif)![](http://www.cnblogs.com/Images/dot.gif)![](http://www.cnblogs.com/Images/dot.gif)![](http://www.cnblogs.com/Images/dot.gif)![](http://www.cnblogs.com/Images/dot.gif).</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2009年11月14日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2009/11/14/1603109" rel="bookmark" title="使用UI Automation库用于UI自动化测试">使用UI Automation库用于UI自动化测试</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>UI Automation也不是什么新东西了，很久以前曾经用过一次，最近又在一个测试中打算使用，于是又翻了一遍MSDN。MSDN里的介绍确实非常详细，但是对于一个刚刚接触的人来说，大而全的文档反而使得无从下手。往往一个简单的Demo比得上大段的文字说明，因此我打算用几个简单的Demo来介绍一下UI Automation到底是如何使用的。 首先，我们还是得知道UI Automation的MSDN文档在哪。在这： http://msdn.microsoft.com/en-us/library/ms753107.aspx 我们只看关键的一节： Using UI Automation for Automated Testing 上面的文档能够在你遇到各种复杂情况下有资料可查，下面就开始我们的Demo，大致分为以下几个步骤。 添加引用。 需要添加UIAutomationClient.dll，UIAutomationClientSideProvider.dll，UIAutomationTypes.dll 添加相应的命名空间System.Windows.Automation。 查找你感兴趣的控件。你要单击一个按钮或是在一个文本框输入内容，你得先找到它。要找到你要的控件，你就必须提供一些的标识来定位你的控件，包括：控件类型，标题等等。看一个简单的例子，如何找到一个窗口，标题为&rdquo;test&rdquo;。 var&nbsp;desktop&nbsp;=&nbsp;AutomationElement.RootElement;&nbsp;//&nbsp;先找到根元素，可以认为是桌面 var&nbsp;condition&nbsp;=&nbsp;new&nbsp;PropertyCondition(AutomationElement.NameProperty,&nbsp;"test");&nbsp;//&nbsp;定义我们的查找条件，名字是test var&nbsp;window&nbsp;=&nbsp;desktop.FindFirst(TreeScope.Children,&nbsp;condition);&nbsp;//&nbsp;在桌面的子控件中查找第一个符合条件的窗体。 UI Automation有一个配套的工具，用于查看控件的属性和事件，就是UI Spy，单个文件，绿色版，非常好用。 上面的PropertyCondtion是单个的属性条件，如果需要设置多个条件，可以使用AndContion对象。比如，我们在上面的window窗口中其中一个按钮，标题是&rdquo;ok&rdquo;： var&nbsp;btnCondition&nbsp;=&nbsp;new&nbsp;AndCondition( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;PropertyCondition(AutomationElement.ControlTypeProperty,&nbsp;ControlType.Button), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;PropertyCondition(AutomationElement.NameProperty,&nbsp;"ok")); 我们最常用的几个属性就是AutomationID，ControlType，NameProperty了，这几个属性都可以在UI Spy里查到。 如何触发控件的事件。比如，按钮的点击事件，窗口的拖动事件等等。好是来个简单的例子，也是最最常用的例子，按钮的点击： var&nbsp;button&nbsp;=&nbsp;window.FindFirst(TreeScope.Children,&nbsp;btnCondition); var&nbsp;clickPattern&nbsp;=&nbsp;(InvokePattern)button.GetCurrentPattern(InvokePattern.Pattern); clickPattern.Invoke(); 我们怎么知道一个控件有哪些Pattern呢，还是看UI Spy。在左边的树目录中右键需要查看的控件，选中&#8220;Control Patterns&#8221;就可以查看有哪些Pattern，并且可以进行测试。下面这个地址可以查看一共有哪些Control Pattern，需要用到的时候查一下就知道了： UI Automation Control Patterns Overview&nbsp; 总结： 可以看出，我上面的例子一共也没多少行，就把UI Automation的基本用法介绍了一遍，这些东西也是最最常使用到的，通常的情况也都能应付过去。如果需要更加深入的内容，就得自己去详细查看MSDN的文档了。 同时，也许你也会发现，这套库用起来比较烦琐，就是简单的查找一个控件也要花费我们不少功夫。所以，我们可以在这套库的基础上去做自己的扩展，编写出一套适合自己的UI自动化库。一个最常见的例子就是做一个安装程序的自动化，我们需要去点击上面的下一步按钮，按钮点击后会进行安装操作，这时候按钮是灰色的，安装完成后，按钮恢复可用状态，然后点击完成。因为需要等待完成按钮出现，在自动化实现过程中我们可以实现一个等待控件的通用函数： static&nbsp;AutomationElement&nbsp;WaitForElement(AutomationElement&nbsp;parent,&nbsp;Condition&nbsp;condition,&nbsp;int&nbsp;milisecondTimeout) { &nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;waitTime&nbsp;=&nbsp;0; &nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;element&nbsp;=&nbsp;parent.FindFirst(TreeScope.Children,&nbsp;condition); &nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(element&nbsp;==&nbsp;null) &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(waitTime&nbsp;&gt;=&nbsp;milisecondTimeout) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thread.Sleep(500); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;waitTime&nbsp;+=&nbsp;500; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;element&nbsp;=&nbsp;parent.FindFirst(TreeScope.Children,&nbsp;condition); &nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;element; } 往往我们使用控件的Name属性来标识，因此，我们可以再一步封装一下： static&nbsp;AutomationElement&nbsp;WaitForElement(int&nbsp;milisecondTimeout,&nbsp;params&nbsp;string[]&nbsp;controlTexts) { &nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;waitTime&nbsp;=&nbsp;0; &nbsp;&nbsp;&nbsp;&nbsp;AutomationElement&nbsp;child&nbsp;=&nbsp;null; &nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(true) &nbsp;&nbsp;&nbsp;&nbsp;{</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2009年11月10日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2009/11/10/1599732" rel="bookmark" title="C&#43;&#43;中根据HKey查找当前打开的注册表路径Key Name">C&#43;&#43;中根据HKey查找当前打开的注册表路径Key Name</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>在StackOverFlow里找到的，一定要收藏起来。 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;#include&nbsp;&lt;windows.h&gt; #include&nbsp;&lt;string&gt; typedef&nbsp;LONG&nbsp;NTSTATUS; #ifndef&nbsp;STATUS_SUCCESS #define&nbsp;STATUS_SUCCESS&nbsp;((NTSTATUS)0x00000000L) #endif #ifndef&nbsp;STATUS_BUFFER_TOO_SMALL #define&nbsp;STATUS_BUFFER_TOO_SMALL&nbsp;((NTSTATUS)0xC0000023L) #endif std::wstring&nbsp;GetKeyPathFromKKEY(HKEY&nbsp;key) { &nbsp;&nbsp;&nbsp;&nbsp;std::wstring&nbsp;keyPath; &nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(key&nbsp;!=&nbsp;NULL) &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HMODULE&nbsp;dll&nbsp;=&nbsp;LoadLibrary(L&ldquo;ntdll.dll&ldquo;); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(dll&nbsp;!=&nbsp;NULL)&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;typedef&nbsp;DWORD&nbsp;(__stdcall&nbsp;*ZwQueryKeyType)( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HANDLE&nbsp;&nbsp;KeyHandle, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;KeyInformationClass, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PVOID&nbsp;&nbsp;KeyInformation, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ULONG&nbsp;&nbsp;Length, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULONG&nbsp;&nbsp;ResultLength); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ZwQueryKeyType&nbsp;func&nbsp;=&nbsp;reinterpret_cast&lt;ZwQueryKeyType&gt;(::GetProcAddress(dll,&nbsp;&ldquo;ZwQueryKey&ldquo;)); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(func&nbsp;!=&nbsp;NULL)&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DWORD&nbsp;size&nbsp;=&nbsp;0; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DWORD&nbsp;result&nbsp;=&nbsp;0; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;func(key,&nbsp;3,&nbsp;0,&nbsp;0,&nbsp;&amp;size); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(result&nbsp;==&nbsp;STATUS_BUFFER_TOO_SMALL) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size&nbsp;=&nbsp;size&nbsp;+&nbsp;2; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wchar_t*&nbsp;buffer&nbsp;=&nbsp;new&nbsp;(std::nothrow)&nbsp;wchar_t[size]; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(buffer&nbsp;!=&nbsp;NULL) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;=&nbsp;func(key,&nbsp;3,&nbsp;buffer,&nbsp;size,&nbsp;&amp;size); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(result&nbsp;==&nbsp;STATUS_SUCCESS) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buffer[size&nbsp;/&nbsp;sizeof(wchar_t)]&nbsp;=&nbsp;L&lsquo;\0&lsquo;; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyPath&nbsp;=&nbsp;std::wstring(buffer&nbsp;+&nbsp;2); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete[]&nbsp;buffer; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FreeLibrary(dll); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;keyPath; } int&nbsp;_tmain(int&nbsp;argc,&nbsp;_TCHAR*&nbsp;argv[]) { &nbsp;&nbsp;&nbsp;&nbsp;HKEY&nbsp;key&nbsp;=&nbsp;NULL; &nbsp;&nbsp;&nbsp;&nbsp;LONG&nbsp;ret&nbsp;=&nbsp;ERROR_SUCCESS; &nbsp;&nbsp;&nbsp;&nbsp;ret&nbsp;=&nbsp;RegOpenKey(HKEY_LOCAL_MACHINE,&nbsp;L&ldquo;SOFTWARE\Microsoft&ldquo;,&nbsp;&amp;key); &nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(ret&nbsp;==&nbsp;ERROR_SUCCESS) &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wprintf_s(L&ldquo;Key&nbsp;path&nbsp;for&nbsp;%p&nbsp;is&nbsp;&rsquo;%s&rsquo;.&ldquo;,&nbsp;key,&nbsp;GetKeyPathFromKKEY(key).c_str());&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RegCloseKey(key); &nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;0; } 输出： Key&nbsp;path&nbsp;for&nbsp;00000FDC&nbsp;is&nbsp;'\REGISTRY\MACHINE\SOFTWARE\Microsoft'.</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2009年10月20日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2009/10/20/1586268" rel="bookmark" title="ReaderWriterLock（转）">ReaderWriterLock（转）</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>ReaderWriterLock类 通常来讲，一个类型的实例对于并行的读操作是线程安全的，但是并行地根性操作则不是（并行地读和更新也不是）。 这对于资源也是一样的，比如一个文件。当保护类型的实例安全时，使用一个简单的排它锁即解决问题，但是当有很多的读操作 而偶然的更新操作这就很不合理的限制了并发。一个例子就是这在一个业务程序服务器中，为了快速查找把数据缓存到静态字段中。 在这个方案中，ReaderWriterLock类被设计成提供最大容量的锁定。 ReaderWriterLock为读和写的锁提供了不同的方法&#8212;&#8212;AcquireReaderLock和AcquireWriterLock。两个方法都需要一个超时参数，并且在超时发生后抛出ApplicationException异常（不同于大多数线程类的返回false等效的方法）。超时发生相当容易在资源争用严重的时候。 调用 ReleaseReaderLock或ReleaseWriterLock释放锁。 这些方法支持嵌套锁，ReleaseLock方法也支持一次清除所有嵌套级别的锁。（你可以随后调用RestoreLock类重新锁定相同的级别，它在ReleaseLock之前执行&#8212;&#8212;如此来模仿Monitor.Wait的锁定切换行为）。 你可以调用AcquireReaderLock开始一个read-lock ，然后通过UpgradeToWriterLock把它升级为write-lock。这个方法返回一个可能被用于调用DowngradeFromWriterLock的信息。这个方式允许读程序临时地请求写访问同时不必必须在降级之后重新排队列。 在接下来的这个例子中，4个线程被启动：一个不停地往列表中增加项目；另一个不停地从列表中移除项目；其它两个不停地报告列表中项目的个数。前两者获得写的锁，后两者获得读的锁。每个锁的超时参数为10秒。（异常处理一般要使用来捕捉ApplicationException，这个例子中出于方便而省略了） class Program {&nbsp; static ReaderWriterLock rw = new ReaderWriterLock ();&nbsp; static List &lt;int&gt; items = new List &lt;int&gt; ();&nbsp; static Random rand = new Random ();&nbsp;&nbsp; static void Main (string[] args) {&nbsp;&nbsp;&nbsp; new Thread (delegate() { while (true) AppendItem(); } ).Start();&nbsp;&nbsp;&nbsp; new Thread (delegate() { while (true) RemoveItem(); } ).Start();&nbsp;&nbsp;&nbsp; new Thread (delegate() { while (true) WriteTotal(); }</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+                  
+                    
+                      <div class="post-row">
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2009年10月18日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2009/10/18/1585553" rel="bookmark" title=".NET Remoting相关的">.NET Remoting相关的</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>资料： &nbsp;http://code.google.com/p/coderzh/source/browse/trunk/Apress%20-%20Advanced%20.NET%20Remoting%20(CSharp%20Edition).chm 需要弄懂的几件事： 这东西的由来，和DCOM，WebService的区别？优势在哪？ 为啥远程对象成员使用NLog对象可以吗？ .NET Remoting到底有几种用法？服务端和客户端之间的交互式是怎么进行的？ 一个简单的例子</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2009年10月18日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2009/10/18/sharpsvn" rel="bookmark" title="使用SharpSvn方便调用svn">使用SharpSvn方便调用svn</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>需要调用svn去做一些操作时，有两种方式：调用svn.exe命令行和调用svn api接口。我不太喜欢调用命令行的方式，是因为它需要依赖一个外部的exe程序，同时，为了得到命令执行结果，还需要去捕捉命令行的输出控制台，然后去解析，使得不太可靠。因此，我选择了调用svn接口的方式，因为我使用的是c#，有一个现成的第三方包装的库SharpSvn可以调用。 SharpSvn主页： http://sharpsvn.open.collab.net/ 使用起来很简单，下面是一个例子： static&nbsp;void&nbsp;Main(string[]&nbsp;args) { &nbsp;&nbsp;&nbsp;&nbsp;using&nbsp;(SvnClient&nbsp;client&nbsp;=&nbsp;new&nbsp;SvnClient()) &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvnInfoEventArgs&nbsp;serverInfo; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvnInfoEventArgs&nbsp;clientInfo; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvnUriTarget&nbsp;repos&nbsp;=&nbsp;new&nbsp;SvnUriTarget("http://svn.test.com/demo"); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvnPathTarget&nbsp;local&nbsp;=&nbsp;new&nbsp;SvnPathTarget(@"d:\Work\Code\demo"); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.GetInfo(repos,&nbsp;out&nbsp;serverInfo); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.GetInfo(local,&nbsp;out&nbsp;clientInfo); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;path&nbsp;=&nbsp;@"d:\Work\Code\Demo"; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.CleanUp(path); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.Revert(path); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.Update(path); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(string.Format("serverInfo&nbsp;revision&nbsp;of&nbsp;{0}&nbsp;is&nbsp;{1}",&nbsp;repos,&nbsp;serverInfo.Revision)); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(string.Format("clientInfo&nbsp;revision&nbsp;of&nbsp;{0}&nbsp;is&nbsp;{1}", local,&nbsp;clientInfo.Revision)); &nbsp;&nbsp;&nbsp;&nbsp;} }</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                      </div>
+                    
+                  
+                
+              </div>
+
+              
+              
+
+<nav class="pagination group">
+  <div class="wp-pagenavi">
+    <span class="pages">
+        Page 15 of 38
+        (265 Posts)
+    </span>
+    
+      <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/14/">Prev &laquo;</a>
+    
+    
+    
+      <a class="nextpostslink" rel="next" href="http://blog.coderzh.com/paginator/16/">Next &raquo;</a>
+    
+  </div>
+</nav>
+
+              
+            </div>
+
+          </section>
+          <div class="sidebar s1">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>Follow:</p>
+      <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+    </div>
+
+    <div class="widget qrcode">
+    <img src="http://blog.coderzh.com/public/qrcode.jpg" width="129px" height="129px"/>
+    <p>微信扫一扫：<br/> 关注我的公众号： <br /> hacker-thinking</p>
+</div>
+
+
+    <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
+      <ul>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
+        
+        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="search-2" class="widget widget_search"><h3>Search</h3>
+
+      <form method="get" class="searchform themeform" action="https://www.google.com/search">
+        <div>
+          <input type="text" class="search" name="q" placeholder="Press enter to start searching">
+        </div>
+      </form>
+    </div>
+
+  </div>
+  
+</div>
+
+          <div class="sidebar s2">
+
+  <a class="sidebar-toggle" title="Expand Sidebar"><i class="fa icon-sidebar-toggle"></i></a>
+
+  <div class="sidebar-content">
+
+    <div class="sidebar-top group">
+      <p>More</p>
+    </div>
+
+
+    <div id="categories-2" class="widget widget_categories"><h3>Categories</h3>
+      <ul>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">技术文章</a>
+          </li>
+        
+          <li class="cat-item cat-item-1">
+            <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F/">思考感悟</a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <div id="tag_cloud-2" class="widget widget_tag_cloud"><h3>Tags</h3>
+
+      <div class="tagcloud">
+        <p class="post-tags">
+          
+              
+          
+        </p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+
+  <nav class="nav-container group" id="nav-footer">
+    <div class="nav-toggle"><i class="fa fa-bars"></i></div>
+    <div class="nav-text"></div>
+    <div class="nav-wrap">
+      <ul id="menu-default-menu-1" class="nav container group">
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">读书笔记</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0">技术文章</a>
+        </li>
+        
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a href="http://blog.coderzh.com/categories/%E6%80%9D%E8%80%83%E6%84%9F%E6%82%9F">思考感悟</a>
+        </li>
+        
+      </ul>
+    </div>
+  </nav>
+  
+
+  <section class="container" id="footer-bottom">
+    <div class="container-inner">
+      <a id="back-to-top" href="#"><i class="fa fa-angle-up"></i></a>
+      <div class="pad group">
+        <div class="grid one-half">
+          <div id="copyright">
+            <p>Copyright © 2015. All Rights Reserved. <br>Powered by
+              <a href="http://gohugo.io/" target="_blank">Hugo - the static site generator</a>.
+              <a href="http://golang.org" target="_blank">#golang</a>.
+            </p>
+          </div>
+          
+        </div>
+        
+        <div class="grid one-half last">
+          <ul class="social-links">
+    <li>
+    <a class="social-tooltip" title="On Twitter"
+        href="https://twitter.com/coderzh" target="_blank">
+        <i class="fa fa-twitter"></i>
+    </a>
+    </li>
+    <li>
+    <a class="social-tooltip" title="On GitHub"
+        href="https://github.com/coderzh" target="_blank">
+        <i class="fa fa-github"></i>
+    </a>
+    </li>
+</ul>
+
+        </div>
+      </div>
+
+    </div>
+    
+  </section>
+  
+
+</footer>
+
+</div>
+<script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="wp-content/themes/hueman/js/scripts.js"></script>
+<script type="text/javascript" src="assets/picturefill/picturefill.min.js"></script>
+<script type="text/javascript" src="assets/hubinfo/dist/hubinfo.js"></script>
+<script type="text/javascript" src="assets/js/jquery.matchHeight-min.js"></script>
+
+
+<script type="text/javascript">var bU = "http:\/\/blog.coderzh.com/wp-content/plugins/wp-youtube-lyte/lyte/";</script>
+<script type="text/javascript" async defer src="wp-content/plugins/wp-youtube-lyte/lyte/lyte.js"></script>
+<script type="text/javascript" async defer src="assets/js/myblog.js"></script>
+
+</body>
+</html>
+
