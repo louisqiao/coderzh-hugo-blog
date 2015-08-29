@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2010年01月26日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/01/26/Sharing-Master-Pages-By-DLL" rel="bookmark" title="将母版页或ASPX等其他资源编译到DLL，在多个ASP.NET工程中共享">将母版页或ASPX等其他资源编译到DLL，在多个ASP.NET工程中共享</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>这篇文章的标题实在不好取，因为需求比较复杂：希望将母版页或ASPX等其他资源编译到一个动态链接库中，然后在Web Application中添加这个动态链接库的引用，就能使用该Dll内部的aspx页面或母版页。 以模板页为例，实现的方法如下： 将母版页文件作为资源编译进动态链接库中。 方法是：文件右键 - 属性 - Build Action - Embedded Resource 实现自定义的VirtualPathProvider，从动态链接库的中加载母版页 在global.asax中注册自定义的VirtualPathProvider 我在博客园搜了一下VirtualPathProvider，曾经有人写过这方面的东西了，我就不重复了，最后我会链接一个代码示例工程并给出一些资料链接。 总之，基本原理是：注册自定义的VirtualPathProvider后，asp.net网站每当访问一个虚拟路径的资源时，都会经过我的VirtualPathProvider，由我去加载其中的文件内容，因此，即使这个文件物理上并不存在，我也可以从数据库中加载，或者像本文的从DLL的资源中加载。 参考文章： Virtualizing Access to Content: Serving Your Web Site from a ZIP File&nbsp; Sharing Master Pages amongst Applications by Embedding it in a Dll&nbsp; 代码示例： http://blogs.msdn.com/shahpiyush/attachment/1847195.ashx&nbsp; 在博客园上曾经有人讨论过的 VirtualPathProvider： http://www.cnblogs.com/firstyi/archive/2008/04/19/1161431.html&nbsp;</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2010年01月24日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2010年01月18日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2010/01/18/xUnit-Test-Patterns-2" rel="bookmark" title="《xUnit Test Patterns》学习笔记2 - Goal Of Test Automation">《xUnit Test Patterns》学习笔记2 - Goal Of Test Automation</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>或许有人觉得单元测试可有可无，因为觉得需要付出太多的精力，而客户并不需要它。这就涉及到投资回报率的问题，其实所付出的用于测试的投资，往往会收获到更多回报。它让我们减少了Bug的数量，减少了调试代码寻找Bug的时间。看下图，有效的自动化测试投资下，测试和开发付出的努力的时间图： 初期，随着测试的介入，开发付出的投入逐渐减少。后期，随着测试案例的完善和自动化，测试和开发所需要付出的投入都减少到一个很低的水平。阴影部分是节省的开发投入。 同时，如果自动化测试做的不好，在后期，将可能加大测试和开发的负担： &nbsp; 自动化测试的目标 Tests should help us improve quality. Tests should help us understand the SUT. Tests should reduce (and not introduce) risk. Tests should be easy to run. Tests should be easy to write and maintain. Tests should require minimal maintenance as the system evolves around them. Tests should help us improve quality Tests as Specification 测试案例可以验证产品的行为，验证是否&#8220;building the right software&#8221; Bug Repellent 自动化测试的主要目的不是发现Bug，而是预防或防止Bug的出现。 Defect Localization 顶层的customer tests只会告诉你案例失败了，unit</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 12 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/11/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

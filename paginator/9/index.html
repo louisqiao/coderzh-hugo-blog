@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2010年05月02日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/05/02/ubuntu-upgrade-from-910-to-1004" rel="bookmark" title="成功将ubuntu9.10升级到了10.04">成功将ubuntu9.10升级到了10.04</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>今天早上起来折腾Ubuntu10.04LTS，于是，首先我打算直接使用cn99的源通过sudo apt-get upgrade升级上来。但是升级完成后，发现并没有完全升级成功，虽然查看Ubuntu版本已经是10.04LTS了，但是从内核版本和界面上看来，显然没有升级成功。 于是，从网上下载了ubuntu-10.04-alternate-i386.iso，打算通过CDROM的方式升级上来。 下载完成后，通过下面的命令挂载到CDROM中： sudo&nbsp;mount&nbsp;-o&nbsp;loop&nbsp;~/Desktop/ubuntu-10.04-alternate-i386.iso&nbsp;/media/cdrom0 然后，如果自动运行了的话，会弹出一个升级的对话框： ![](https://help.ubuntu.com/community/KarmicUpgrades?action=AttachFile&amp;do=get&amp;target=umcd1.png)&nbsp; 如果，没有弹出，按ALT＋F2，输入下面的命令执行： gksu&nbsp;"sh&nbsp;/cdrom/cdromupgrade" 如果你运气好，直接就升级成功了。但是我一般没有那么幸运，老是遇到这样那样的错误。比如，这次折腾中就遇到了下面的问题。 #### 1. 安装的python崩溃，请修复'/usr/bin/python'链结 解决办法：升级时，python的默认版本需要是2.6，但我的机器默认是2.5。所以出错了。修改一下Python的链接： sudo&nbsp;ln&nbsp;-sf&nbsp;/usr/bin/python2.6&nbsp;/usr/bin/python 2. &lsquo;E:Internal Error, Could not perform immediate configuration (2) on util-linux&rsquo; 解决办法：我也不确定是怎么解决的，各种命令执行了一通。 首先把&#8220;软件源&#8221;里的&#8220;可从互联网下载&#8221;的可选框都去掉。执行： sudo&nbsp;dpkg&nbsp;--configure&nbsp;-a sudo&nbsp;apt-get&nbsp;upgrade&nbsp;--all #### 3. 升级过程中python2.6出错，导致升级终止。 解决办法：重新安装python2.6。 sudo&nbsp;apt-get&nbsp;install&nbsp;python2.6 折腾来折腾去，终于升级成功了。重启，内核版本已经是10.04的了，然后登录界面也变了。 进来后，发现窗口的&#8220;关闭，最小化，最大化&#8221;按钮跑到左上角了，还真有点不习惯。秀一下我的桌面吧。 ![](http://images.cnblogs.com/cnblogs_com/coderzh/ubuntu/ubuntu10.04.png)&nbsp;</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2010年04月30日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2010年04月24日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2010/04/24/csharp4-new-features" rel="bookmark" title="C# 4.0新特性学习资料汇总">C# 4.0新特性学习资料汇总</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>今天了解了一下C# 4.0的一些新特性，并在VS2010里试了几把，主要的特性包括： &nbsp;1. Dynamic binding &nbsp;2. Named and Optional Arguments &nbsp;3. Features for COM interop &nbsp;4. Variance &nbsp;5. Relationship with Visual Basic 学习资料 New Features in C# 4.0 [[翻 译] C# 4.0新特性（白皮书）- Anders Liu ](http://www.cnblogs.com/AndersLiu/archive/2008/11/03/new-features-in-csharp-4-ctp.html) C# 4.0&rsquo;s New Features Explained By Josh Fischer Generic Covariance and Contra-Variance in C# 4.0 c#4.0 新特性之(Dynamic Lookup1, 2 Named and Optional Parameters1,2) - 维生素C.net 示例代码 Visual Studio 2010 Samples for C# 4.0 关于C#4.0语言特性，主要关注以下几个工程： &nbsp;1. Named and Optional &nbsp;2.</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 9 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/8/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

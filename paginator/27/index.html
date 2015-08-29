@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2008年08月20日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/08/20/1272183" rel="bookmark" title="经典转载 - 缓冲区溢出的原理和实践(Phrack)">经典转载 - 缓冲区溢出的原理和实践(Phrack)</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>简&nbsp; &nbsp;介 &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 在过去的几个月中,被发现和利用的缓冲区溢出漏洞呈现上升趋势.例如syslog, splitvt, sendmail 8.7.5, Linux/FreeBSD mount, Xt library, at等等.本文试图 解释什么是缓冲区溢出, 以及如何利用. &nbsp; &nbsp; 汇编的基础知识是必需的. 对虚拟内存的概念, 以及使用gdb的经验是十分有益 的, 但不是必需的. 我们还假定使用Intel x86 CPU, 操作系统是Linux. &nbsp; &nbsp; 在开始之前我们给出几个基本的定义: 缓冲区,简单说来是一块连续的计算机内 存区域, 可以保存相同数据类型的多个实例. C程序员通常和字缓冲区数组打交道. 最常见的是字符数组. 数组, 与C语言中所有的变量一样, 可以被声明为静态或动态 的. 静态变量在程序加载时定位于数据段. 动态变量在程序运行时定位于堆栈之中. 溢出, 说白了就是灌满, 使内容物超过顶端, 边缘, 或边界. 我们这里只关心动态 缓冲区的溢出问题, 即基于堆栈的缓冲区溢出. &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;进程的内存组织形式 &nbsp; &nbsp; 为了理解什么是堆栈缓冲区, 我们必须首先理解一个进程是以什么组织形式在 内存中存在的.</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2008年08月19日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2008年07月23日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2008/07/23/1249919" rel="bookmark" title="Python天天美味(29) - 调用VC&#43;&#43;的动态链接库(DLL)">Python天天美味(29) - 调用VC&#43;&#43;的动态链接库(DLL)</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>1. 首先VC++的DLL的导出函数定义成标准C的导出函数： ![](http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif)#ifdef&nbsp;LRDLLTEST_EXPORTS #define&nbsp;LRDLLTEST_API&nbsp;__declspec(dllexport) #else #define&nbsp;LRDLLTEST_API&nbsp;__declspec(dllimport) #endif extern&nbsp;"C"&nbsp;LRDLLTEST_API&nbsp;int&nbsp;Sum(int&nbsp;a&nbsp;,&nbsp;int&nbsp;b); extern&nbsp;"C"&nbsp;LRDLLTEST_API&nbsp;void&nbsp;GetString(char*&nbsp;pChar); //a&nbsp;+&nbsp;b LRDLLTEST_API&nbsp;int&nbsp;Sum(int&nbsp;a&nbsp;,&nbsp;int&nbsp;b) { &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;a&nbsp;+&nbsp;b; } //Get&nbsp;a&nbsp;string LRDLLTEST_API&nbsp;void&nbsp;GetString(char*&nbsp;pChar) { &nbsp;&nbsp;&nbsp;&nbsp;strcpy(pChar,&nbsp;"Hello&nbsp;DLL"); } 2. Python中调用如下： from&nbsp;ctypes&nbsp;import&nbsp;* fileName="LRDllTest.dll" func=cdll.LoadLibrary(fileName) str&nbsp;=&nbsp;create_string_buffer(20) n&nbsp;=&nbsp;func.Sum(2,&nbsp;3) func.GetString(str) print&nbsp;n print&nbsp;str.raw 关于C语言中的一些参数类型详见：http://www.python.org/doc/2.5/lib/node454.html 3. 输出结果： 5 Hello&nbsp;DLL &nbsp; Python 天天美味系列（总） Python 天天美味(27) - 网络编程起步(Socket发送消息) &nbsp; Python 天天美味(28) - urlopen&nbsp;&nbsp; &nbsp; Python 天天美味(29) - 调用VC++的动态链接库(DLL)&nbsp; Python 天天美味(30) - python数据结构与算法之快速排序&nbsp; Python 天天美味(31) - python数据结构与算法之插入排序&nbsp; &hellip; &nbsp; &nbsp;</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 27 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/26/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

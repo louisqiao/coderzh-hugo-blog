@@ -211,6 +211,39 @@
 </div>
 
 <h2 class="post-title">
+  <a href="http://blog.coderzh.com/2009/04/06/1426758" rel="bookmark" title="玩转Google开源C&#43;&#43;单元测试框架Google Test系列(gtest)之一 - 初识gtest">玩转Google开源C&#43;&#43;单元测试框架Google Test系列(gtest)之一 - 初识gtest</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>一、前言 本篇将介绍一些gtest的基本使用，包括下载，安装，编译，建立我们第一个测试Demo工程，以及编写一个最简单的测试案例。 二、下载 如果不记得网址， 直接在google里搜gtest，第一个就是。目前gtest的最新版本为1.3.0，从下列地址可以下载到该最新版本： http://googletest.googlecode.com/files/gtest-1.3.0.zip&nbsp; http://googletest.googlecode.com/files/gtest-1.3.0.tar.gz&nbsp; http://googletest.googlecode.com/files/gtest-1.3.0.tar.bz2&nbsp; 三、编译 下载解压后， 里面有个msvc目录： &nbsp; 使用VS的同学可以直接打开msvc里面的工程文件， 如果你在使用的是VS2005或是VS2008，打开后会提示你升级，升完级后，我们直接编译里面的&#8220;gtest&#8221;工程，可以直接编过的。 这里要提醒一下的是，如果你升级为VS2008的工程，那么你的测试Demo最好也是VS2008工程，不然你会发现很郁闷，你的Demo怎么也编不过，我也曾折腾了好久，当时我升级为了VS2008工程，结果我使用VS2005工程建Demo，死活编不过。(这里有人误解了，并不是说只能在VS2008中编译，在VS2005中同样可以。如果要编译VS2005版本，最好保证gtest和你的测试工程都使用VS2005工程。) 编译之后，在msvc里面的Debug或是Release目录里看到编译出来的gtestd.lib或是gtest.lib文件。 四、第一个Demo 下面我们开始建立我们的第一个Demo了，假如之前使用的VS2008编译的gtest，那么，我们在VS2008中，新建一个Win32 Console Application。接着就是设置工程属性，总结如下： 1.设置gtest头文件路径 2.设置gtest.lib路径 3.Runtime Library设置 &nbsp; 如果是Release版本，Runtime Library设为/MT。当然，其实你也可以选择动态链接（/MD），前提是你之前编译的gtest也使用了同样是/MD选项。 工程设置后了后，我们来编写一个最简单测试案例试试，我们先来写一个被测试函数： int&nbsp;Foo(int&nbsp;a,&nbsp;int&nbsp;b) { &nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(a&nbsp;==&nbsp;0&nbsp;||&nbsp;b&nbsp;==&nbsp;0) &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;"don't&nbsp;do&nbsp;that"; &nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;c&nbsp;=&nbsp;a&nbsp;%&nbsp;b; &nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(c&nbsp;==&nbsp;0) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;b; &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Foo(b,&nbsp;c); } 没错，上面的函数是用来求最大公约数的。下面我们就来编写一个简单的测试案例。 #include&nbsp;&lt;gtest/gtest.h&gt; TEST(FooTest,&nbsp;HandleNoneZeroInput) { &nbsp;&nbsp;&nbsp;&nbsp;EXPECT_EQ(2,&nbsp;Foo(4,&nbsp;10)); &nbsp;&nbsp;&nbsp;&nbsp;EXPECT_EQ(6,&nbsp;Foo(30,&nbsp;18)); } 上面可以看到，编写一个测试案例是多么的简单。 我们使用了TEST这个宏，它有两个参数，官方的对这两个参数的解释为：[TestCaseName，TestName]，而我对这两个参数的定义是：[TestSuiteName，TestCaseName]，在下一篇我们再来看为什么这样定义。 对检查点的检查，我们上面使用到了EXPECTEQ这个宏，这个宏用来比较两个数字是否相等。Google还包装了一系列EXPECT* 和ASSERT_*的宏，而EXPECT系列和ASSERT系列的区别是： &nbsp;&nbsp;&nbsp; 1. EXPECT_*&nbsp; 失败时，案例继续往下执行。 &nbsp;&nbsp;&nbsp; 2. ASSERT* 失败时，直接在当前函数中返回，当前函数中ASSERT*后面的语句将不会执行。 在下一篇，我们再来具体讨论这些断言宏。为了让我们的案例运行起来，我们还需要在main函数中添加如下代码： int&nbsp;_tmain(int&nbsp;argc,&nbsp;_TCHAR*&nbsp;argv[]) { &nbsp;&nbsp;&nbsp;&nbsp;testing::InitGoogleTest(&amp;argc,&nbsp;argv); &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;RUN_ALL_TESTS(); } &#8220;testing::InitGoogleTest(&amp;argc, argv);&#8221; ：gtest的测试案例允许接收一系列的命令行参数，因此，我们将命令行参数传递给gtest，进行一些初始化操作。gtest的命令行参数非常丰富，在后面我们也会详细了解到。 &#8220;RUN_ALL_TESTS()&#8221; ：运行所有测试案例 OK，一切就绪了，我们直接运行案例试试（一片绿色，非常爽）： 五、总结 本篇内容确实是非常的初级，目的是让从来没有接触过gtest的同学了解gtest最基本的使用。gtest还有很多更高级的使用方法，我们将会在后面讨论。总结本篇的内容的话： &nbsp;&nbsp;&nbsp; 1.</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2009年04月06日</p>
+</div>
+
+<h2 class="post-title">
   <a href="http://blog.coderzh.com/2009/04/06/1430396" rel="bookmark" title="玩转Google开源C&#43;&#43;单元测试框架Google Test系列(gtest)之三 - 事件机制">玩转Google开源C&#43;&#43;单元测试框架Google Test系列(gtest)之三 - 事件机制</a>
 </h2>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2009年03月19日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2009/03/19/1416192" rel="bookmark" title="最近遇到个关于接口的奇怪的问题">最近遇到个关于接口的奇怪的问题</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>接口的作用众所周知了，而且C#的接口，必须明确两点： 1.必须实现接口中定义的方法、属性等，原型必须一样（返回值类型、函数名，参数类型） 2.实现接口的类中必须使用public修饰符 那我们下面来看一个例子： var&nbsp;array&nbsp;=&nbsp;new&nbsp;string[10]; foreach&nbsp;(var&nbsp;tp&nbsp;in&nbsp;array.GetType().GetInterfaces()) { &nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(tp.Name); } &nbsp; 上面的例子取出了对象array实现的所有接口名称，我们看到有下面这些： &nbsp; ICloneable IList ICollection IEnumerable IList`1 ICollection`1 IEnumerable`1 我们看到array实现了ICollection接口，我们跳到这个接口代码区看下： [ComVisible(true)] public&nbsp;interface&nbsp;ICollection&nbsp;:&nbsp;IEnumerable { &nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;Count&nbsp;{&nbsp;get;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;bool&nbsp;IsSynchronized&nbsp;{&nbsp;get;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;object&nbsp;SyncRoot&nbsp;{&nbsp;get;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;CopyTo(Array&nbsp;array,&nbsp;int&nbsp;index); } &nbsp; 我们发现上面有个Count属性，这个&#8230;&#8230;我们都知道string[]类型的对象是不会有Count属性的，只会有Length属性。 这样的话，其实已经违背了上面列的两条了。而且我发现在NHibernate里面也有一个这样的类，实现了IEnumerable接口，却没有提供IEnumerator GetEnumerator()的实现。 这就是我百思不得其解的地方。查了些资料，没找到合理解释，希望谁能来解释一下！</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 20 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/19/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

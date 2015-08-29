@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2009年11月25日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2009/11/25/1610939" rel="bookmark" title="google app engine备忘录">google app engine备忘录</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>删除本地数据库 http://code.google.com/appengine/docs/python/tools/devserver.html&nbsp; &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;dev_appserver.py&nbsp;&ndash;clear_datastore&nbsp;myapp &nbsp; 跳转页面 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;self.redirect(&lsquo;/home&lsquo;) &nbsp; 获取记录的key。 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;str(blog.key()) 引用外部模板 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;{%&nbsp;include&nbsp;&ldquo;../pager.html&ldquo;&nbsp;%} &nbsp;</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2009年11月15日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2009年10月18日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2009/10/18/sharpsvn" rel="bookmark" title="使用SharpSvn方便调用svn">使用SharpSvn方便调用svn</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>需要调用svn去做一些操作时，有两种方式：调用svn.exe命令行和调用svn api接口。我不太喜欢调用命令行的方式，是因为它需要依赖一个外部的exe程序，同时，为了得到命令执行结果，还需要去捕捉命令行的输出控制台，然后去解析，使得不太可靠。因此，我选择了调用svn接口的方式，因为我使用的是c#，有一个现成的第三方包装的库SharpSvn可以调用。 SharpSvn主页： http://sharpsvn.open.collab.net/ 使用起来很简单，下面是一个例子： static&nbsp;void&nbsp;Main(string[]&nbsp;args) { &nbsp;&nbsp;&nbsp;&nbsp;using&nbsp;(SvnClient&nbsp;client&nbsp;=&nbsp;new&nbsp;SvnClient()) &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvnInfoEventArgs&nbsp;serverInfo; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvnInfoEventArgs&nbsp;clientInfo; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvnUriTarget&nbsp;repos&nbsp;=&nbsp;new&nbsp;SvnUriTarget("http://svn.test.com/demo"); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SvnPathTarget&nbsp;local&nbsp;=&nbsp;new&nbsp;SvnPathTarget(@"d:\Work\Code\demo"); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.GetInfo(repos,&nbsp;out&nbsp;serverInfo); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.GetInfo(local,&nbsp;out&nbsp;clientInfo); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;path&nbsp;=&nbsp;@"d:\Work\Code\Demo"; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.CleanUp(path); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.Revert(path); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.Update(path); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(string.Format("serverInfo&nbsp;revision&nbsp;of&nbsp;{0}&nbsp;is&nbsp;{1}",&nbsp;repos,&nbsp;serverInfo.Revision)); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(string.Format("clientInfo&nbsp;revision&nbsp;of&nbsp;{0}&nbsp;is&nbsp;{1}", local,&nbsp;clientInfo.Revision)); &nbsp;&nbsp;&nbsp;&nbsp;} }</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 15 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/14/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2010年01月01日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/01/01/Tornado-Unit-Testing" rel="bookmark" title="Tornado Unit Testing - Tornado应用的单元测试">Tornado Unit Testing - Tornado应用的单元测试</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>之前在测试Django应用时，使用了非常方便的django.test.TestCase。在测试Tornado时，我也包装了一个TestCase类，提供和Django一样便捷的测试方法。最终，测试案例的代码将会是这样： &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;from&nbsp;testclient&nbsp;import&nbsp;TestCase class&nbsp;QueryTest(TestCase): &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;setUp(self): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;test_query(self): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file&nbsp;=&nbsp;open(&lsquo;uploadfile.dat&lsquo;,&nbsp;&lsquo;rb&lsquo;) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;response&nbsp;=&nbsp;self.client.post(&lsquo;/query&lsquo;,&nbsp;{&nbsp;&lsquo;a&lsquo;:&nbsp;&lsquo;1&lsquo;,&nbsp;&lsquo;b&lsquo;:&nbsp;&lsquo;2&lsquo;, &lsquo;upload&lsquo;:&nbsp;file&nbsp;}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.failUnlessEqual(response.status_code,&nbsp;200) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.failUnlessEqual(response.content,&nbsp;&lsquo;ok&lsquo;) testclient.py的代码如下：&nbsp; 代码&lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;#!/usr/bin/env&nbsp;python #coding:utf-8 # #&nbsp;Copyright&nbsp;2009&nbsp;CoderZh.com. #&nbsp;Licensed&nbsp;under&nbsp;the&nbsp;Apache&nbsp;License,&nbsp;Version&nbsp;2.0&nbsp;(the&nbsp;&ldquo;License&rdquo;); #&nbsp;you&nbsp;may&nbsp;not&nbsp;use&nbsp;this&nbsp;file&nbsp;except&nbsp;in&nbsp;compliance&nbsp;with&nbsp;the&nbsp;License. #&nbsp;You&nbsp;may&nbsp;obtain&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;License&nbsp;at # #&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.apache.org/licenses/LICENSE-2.0 # #&nbsp;Unless&nbsp;required&nbsp;by&nbsp;applicable&nbsp;law&nbsp;or&nbsp;agreed&nbsp;to&nbsp;in&nbsp;writing,&nbsp;software #&nbsp;distributed&nbsp;under&nbsp;the&nbsp;License&nbsp;is&nbsp;distributed&nbsp;on&nbsp;an&nbsp;&ldquo;AS&nbsp;IS&rdquo;&nbsp;BASIS, #&nbsp;WITHOUT&nbsp;WARRANTIES&nbsp;OR&nbsp;CONDITIONS&nbsp;OF&nbsp;ANY&nbsp;KIND,&nbsp;either&nbsp;express&nbsp;or&nbsp;implied. #&nbsp;See&nbsp;the&nbsp;License&nbsp;for&nbsp;the&nbsp;specific&nbsp;language&nbsp;governing&nbsp;permissions&nbsp;and #&nbsp;limitations&nbsp;under&nbsp;the&nbsp;License. author&nbsp;=&nbsp;&lsquo;CoderZh&lsquo; import&nbsp;tornado.ioloop import&nbsp;unittest import&nbsp;mimetypes import&nbsp;tornado.httpclient import&nbsp;tornado.ioloop TEST_PORT&nbsp;=&nbsp;8989 def&nbsp;encodemultipart_formdata(fields,&nbsp;files): &nbsp;&nbsp;&nbsp;&nbsp;&rdquo;&ldquo;&rdquo; &nbsp;&nbsp;&nbsp;&nbsp;fields&nbsp;is&nbsp;a&nbsp;sequence&nbsp;of&nbsp;(name,&nbsp;value)&nbsp;elements&nbsp;for&nbsp;regular&nbsp;form&nbsp;fields. &nbsp;&nbsp;&nbsp;&nbsp;files&nbsp;is&nbsp;a&nbsp;sequence&nbsp;of&nbsp;(name,&nbsp;filename,&nbsp;value)&nbsp;elements&nbsp;for&nbsp;data&nbsp;to&nbsp;be&nbsp;uploaded&nbsp;as&nbsp;files &nbsp;&nbsp;&nbsp;&nbsp;Return&nbsp;(content_type,&nbsp;body)&nbsp;ready&nbsp;for&nbsp;httplib.HTTP&nbsp;instance &nbsp;&nbsp;&nbsp;&nbsp;&rdquo;&ldquo;&rdquo; &nbsp;&nbsp;&nbsp;&nbsp;BOUNDARY&nbsp;=&nbsp;&lsquo;&mdash;&mdash;&mdash;-ThIs_Is_tHe_bouNdaRY$&lsquo; &nbsp;&nbsp;&nbsp;&nbsp;CRLF&nbsp;=&nbsp;&lsquo;\r\n&lsquo; &nbsp;&nbsp;&nbsp;&nbsp;L&nbsp;=&nbsp;[] &nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(key,&nbsp;value)&nbsp;in&nbsp;fields: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L.append(&lsquo;&ndash;&lsquo;&nbsp;+&nbsp;BOUNDARY) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L.append(&lsquo;Content-Disposition:&nbsp;form-data;&nbsp;name=&ldquo;%s&rdquo;&lsquo;&nbsp;%&nbsp;key) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L.append(&ldquo;) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L.append(value) &nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(key,&nbsp;filename,&nbsp;value)&nbsp;in&nbsp;files: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L.append(&lsquo;&ndash;&lsquo;&nbsp;+&nbsp;BOUNDARY) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L.append(&lsquo;Content-Disposition:&nbsp;form-data;&nbsp;name=&ldquo;%s&rdquo;;&nbsp;filename=&ldquo;%s&rdquo;&lsquo;&nbsp;%&nbsp;(key,&nbsp;filename)) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L.append(&lsquo;Content-Type:&nbsp;%s&lsquo;&nbsp;%&nbsp;get_content_type(filename)) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L.append(&ldquo;) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L.append(value) &nbsp;&nbsp;&nbsp;&nbsp;L.append(&lsquo;&ndash;&lsquo;&nbsp;+&nbsp;BOUNDARY&nbsp;+&nbsp;&lsquo;&ndash;&lsquo;) &nbsp;&nbsp;&nbsp;&nbsp;L.append(&ldquo;) &nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;CRLF.join(L) &nbsp;&nbsp;&nbsp;&nbsp;content_type&nbsp;=&nbsp;&lsquo;multipart/form-data;&nbsp;boundary=%s&lsquo;&nbsp;%&nbsp;BOUNDARY &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;content_type,&nbsp;body def&nbsp;get_content_type(filename): &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;mimetypes.guess_type(filename)[0]&nbsp;or&nbsp;&lsquo;application/octet-stream&lsquo; class&nbsp;Response: &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;init(self,&nbsp;status_code,&nbsp;content): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.status_code&nbsp;=&nbsp;status_code &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.content&nbsp;=&nbsp;content class&nbsp;Client: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;handle_request(self,&nbsp;response): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.response&nbsp;=&nbsp;response &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tornado.ioloop.IOLoop.instance().stop() &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;post(self,&nbsp;url,&nbsp;data={}): &nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;=&nbsp;&lsquo;http://127.0.0.1:%s%s&lsquo;&nbsp;%&nbsp;(TEST_PORT,&nbsp;url) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fields&nbsp;=&nbsp;[] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files&nbsp;=&nbsp;[] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;key,&nbsp;value&nbsp;in&nbsp;data.items(): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;isinstance(value,&nbsp;file): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files.append([key,&nbsp;value.name,&nbsp;value.read()]) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fields.append([key,&nbsp;value]) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content_type,&nbsp;body&nbsp;=&nbsp;encode_multipart_formdata(fields,&nbsp;files) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers&nbsp;=&nbsp;{&lsquo;Content-Type&lsquo;&nbsp;:&nbsp;content_type} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;request&nbsp;=&nbsp;tornado.httpclient.HTTPRequest(url=url, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method=&lsquo;POST&lsquo;, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers=headers, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=body) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client&nbsp;=&nbsp;tornado.httpclient.AsyncHTTPClient() &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;client.fetch(request&nbsp;,&nbsp;self.handle_request)&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tornado.ioloop.IOLoop.instance().start() &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;Response(self.response.code,&nbsp;self.response.body) &nbsp;&nbsp;&nbsp;&nbsp; class&nbsp;TestCase(unittest.TestCase): &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;_pre_setup(self): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pass &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;_post_teardown(self): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pass &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;call(self,&nbsp;result=None): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rdquo;&ldquo;&rdquo; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wrapper&nbsp;around&nbsp;default&nbsp;call&nbsp;method&nbsp;to&nbsp;perform&nbsp;My&nbsp;test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set&nbsp;up.&nbsp;This&nbsp;means&nbsp;that&nbsp;user-defined&nbsp;Test&nbsp;Cases&nbsp;aren&rsquo;t&nbsp;required&nbsp;to &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;include&nbsp;a&nbsp;call&nbsp;to&nbsp;super().setUp().</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2009年12月26日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2009年12月01日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2009/12/01/pythoncoverage" rel="bookmark" title="Python 代码覆盖率统计工具 coverage.py">Python 代码覆盖率统计工具 coverage.py</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>coverage.py是一个用来统计python程序代码覆盖率的工具。它使用起来非常简单，并且支持最终生成界面友好的html报告。在最新版本中，还提供了分支覆盖的功能。 官方网站： http://nedbatchelder.com/code/coverage/&nbsp; win32版本下载地址： http://pypi.python.org/pypi/coverage 或者通过easy-install来安装： easy_install&nbsp;coverage 装好后，在c:\Python25.cripts\（假设装在c盘）目录会有一个coverage.exe。通过这个exe基本上可以完成我们所有需要的功能。运行一下，如果发现少了那个模块，请先安装easy_install。 Coverage Command Line 命令行使用说明： 详见：http://nedbatchelder.com/code/coverage/cmd.html 最关键核心的几个参数使用如下： run 执行代码覆盖率统计，只需要通过coverage的run参数执行被统计代码即可。 ![](http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif)$&nbsp;coverage&nbsp;run&nbsp;my_program.py&nbsp;arg1&nbsp;arg2 跑完后，会自动生成一个覆盖率统计结果文件（data file）：.coverage。如果要修改这个默认的文件名也可以，只要设置COVERAGE_FILE环境变量。 report 有了覆盖率统计结果文件，只需要再运行report参数，就可以在命令里看到统计的结果。 ![](http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif)$&nbsp;coverage&nbsp;report Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stmts&nbsp;&nbsp;&nbsp;Exec&nbsp;&nbsp;Cover --------------------------------------------- my_program&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16&nbsp;&nbsp;&nbsp;&nbsp;80% my_module&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13&nbsp;&nbsp;&nbsp;&nbsp;86% my_other_module&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;56&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;89% --------------------------------------------- TOTAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;91&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;79&nbsp;&nbsp;&nbsp;&nbsp;87% html 最帅最酷的功能了，直接生成html的测试报告。 ![](http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif)$&nbsp;coverage&nbsp;html&nbsp;-d&nbsp;covhtml 生成的报告非常酷，直接关联代码，高亮显示覆盖和未覆盖的代码，支持排序。可以在这个地址预览一下： http://nedbatchelder.com/code/coverage/sample_html/&nbsp; 效果如下： &nbsp; &nbsp; combine 用过代码覆盖率工具的都知道，多份结果的合并至关重要。combine这个参数我琢磨了很久，开始总是合并不成功。后来终于明白了。执行合并操作很简单，只要把需要合并的覆盖率结果数据文件放在同一个目录里，然后执行： ![](http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif)coverage&nbsp;combine &nbsp;即可。但是，其实对目录里的结果文件是有要求的，要求就是文件名的格式，需要合并的文件必须有同样的前缀，然后后面跟一个名称（通常是机器名），然后再跟一个数字（通常是进程ID），比如： &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;.coverage.CoderZh.1234 .coverage.Cnblogs.5678 为了方便执行结果的合并，我们在前面执行统计时，在run参数后面跟一个-p参数，会自动生成符合合并条件的结果文件。 ![](http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif)$&nbsp;coverage&nbsp;run&nbsp;-p&nbsp;my_program.py&nbsp;arg1&nbsp;arg2 合并后，会再生成一个.coverage文件，然后再执行html查看合并后的报告吧。 其他几个erase annotate debug 参数就不介绍了。 Coverage API 除了使用命令行，还可以在python代码中直接调用coverage模块执行代码覆盖率的统计。使用方法也非常简单： ![](http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif)import&nbsp;coverage cov&nbsp;=&nbsp;coverage.coverage() cov.start() #&nbsp;..&nbsp;run&nbsp;your&nbsp;code&nbsp;.. cov.stop() cov.save() coverage的构造函数可以设置结果文件的名称等。有个函数容易弄错，就是use_cache，如果设置的use_cache(0)，表示不在硬盘上读写结果文件。如果需要结果数据用来合并，一定要设置use_cache(1)。 coverage提供一些很好用的函数，如：exclude（排除统计的代码），html_report（生成html报告），report（控制台输出结果）</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 14 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/13/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

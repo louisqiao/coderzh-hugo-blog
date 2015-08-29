@@ -211,6 +211,39 @@
 </div>
 
 <h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/11/25/1340862" rel="bookmark" title="C# 中使用JSON - DataContractJsonSerializer">C# 中使用JSON - DataContractJsonSerializer</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>C#中使用JSON不需要使用第三方库，使用.NET Framwork3.5自带的System.Runtime.Serialization.Json即可很好的完成JSON的解析。 关于JSON的入门介绍见(首页的图很形象)： http://www.json.org/ 一、Using 需要添加引用：System.ServiceModel.Web 和 System.Runtime.Serialization，然后使用Using： using&nbsp;System.Runtime.Serialization.Json; using&nbsp;System.Runtime.Serialization; &nbsp;二、定义序列化的类 假如我们要转化的JSON字符串格式为： { &nbsp;&nbsp;&nbsp;&nbsp;"encoding":"UTF-8", &nbsp;&nbsp;&nbsp;&nbsp;"plug-ins":["python","c++","ruby"], &nbsp;&nbsp;&nbsp;&nbsp;"indent":{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"length":3, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"use_space":true &nbsp;&nbsp;&nbsp;&nbsp;} } 然后编写相应的序列化的类，注意下面类加的Attribute： ![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedBlock.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockStart.gif)JSON Object[DataContract(Namespace&nbsp;=&nbsp;"http://coderzh.cnblogs.com")] class&nbsp;Config { &nbsp;&nbsp;&nbsp;&nbsp;[DataMember(Order&nbsp;=&nbsp;0)] &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;string&nbsp;encoding&nbsp;{&nbsp;get;&nbsp;set;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;[DataMember(Order&nbsp;=&nbsp;1)] &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;string[]&nbsp;plugins&nbsp;{&nbsp;get;&nbsp;set;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;[DataMember(Order&nbsp;=&nbsp;2)] &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;Indent&nbsp;indent&nbsp;{&nbsp;get;&nbsp;set;&nbsp;} } [DataContract(Namespace&nbsp;=&nbsp;"http://coderzh.cnblogs.com")] class&nbsp;Indent { &nbsp;&nbsp;&nbsp;&nbsp;[DataMember(Order&nbsp;=&nbsp;0)] &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;length&nbsp;{&nbsp;get;&nbsp;set;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;[DataMember(Order&nbsp;=&nbsp;1)] &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;bool&nbsp;use_space&nbsp;{&nbsp;get;&nbsp;set;&nbsp;} } 三、对象转化为JSON字符串 使用WriteObject方法： ![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedBlock.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockStart.gif)WriteObject var&nbsp;config&nbsp;=&nbsp;new&nbsp;Config(){ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;=&nbsp;"UTF-8", &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plugins&nbsp;=&nbsp;new&nbsp;string[]{"python",&nbsp;"C++",&nbsp;"C#"}, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;indent&nbsp;=&nbsp;new&nbsp;Indent(){&nbsp;length&nbsp;=&nbsp;4,&nbsp;use_space&nbsp;=&nbsp;false} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}; var&nbsp;serializer&nbsp;=&nbsp;new&nbsp;DataContractJsonSerializer(typeof(Config)); var&nbsp;stream&nbsp;=&nbsp;new&nbsp;MemoryStream(); serializer.WriteObject(stream,&nbsp;config); byte[]&nbsp;dataBytes&nbsp;=&nbsp;new&nbsp;byte[stream.Length]; stream.Position&nbsp;=&nbsp;0; stream.Read(dataBytes,&nbsp;0,&nbsp;(int)stream.Length); string&nbsp;dataString&nbsp;=&nbsp;Encoding.UTF8.GetString(dataBytes); Console.WriteLine("JSON&nbsp;string&nbsp;is:"); Console.WriteLine(dataString); 四、JSON字符串转对象 使用ReadObject方法： ![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedBlock.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockStart.gif)ReadObject var&nbsp;mStream&nbsp;=&nbsp;new&nbsp;MemoryStream(Encoding.Default.GetBytes(dataString)); Config&nbsp;readConfig&nbsp;=&nbsp;(Config)serializer.ReadObject(mStream); Console.WriteLine("Encoding&nbsp;is:&nbsp;{0}",&nbsp;readConfig.encoding); foreach&nbsp;(string&nbsp;plugin&nbsp;in&nbsp;readConfig.plugins) { &nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("plugins&nbsp;is:&nbsp;{0}",&nbsp;plugin); } Console.WriteLine("indent.length&nbsp;is:&nbsp;{0}",&nbsp;readConfig.indent.length); Console.WriteLine("indent.use_space&nbsp;is:&nbsp;{0}",&nbsp;readConfig.indent.use_space); &nbsp;五、输出结果：</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年11月25日</p>
+</div>
+
+<h2 class="post-title">
   <a href="http://blog.coderzh.com/2008/11/25/1340794" rel="bookmark" title="C# 发送Http请求 - WebClient类">C# 发送Http请求 - WebClient类</a>
 </h2>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2008年11月18日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2008/11/18/1335755" rel="bookmark" title="Linux 命令">Linux 命令</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>netstat -n|awk &lsquo;/^tcp/{++S[$NF]} END {for(a in S) print a,S[a]}&rsquo;</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 24 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/23/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

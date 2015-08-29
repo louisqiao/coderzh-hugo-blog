@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2008年05月10日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/10/1191649" rel="bookmark" title="linecache.py">linecache.py</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)"""Cache&nbsp;lines&nbsp;from&nbsp;files. ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)This&nbsp;is&nbsp;intended&nbsp;to&nbsp;read&nbsp;lines&nbsp;from&nbsp;modules&nbsp;imported&nbsp;--&nbsp;hence&nbsp;if&nbsp;a&nbsp;filename ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)is&nbsp;not&nbsp;found,&nbsp;it&nbsp;will&nbsp;look&nbsp;down&nbsp;the&nbsp;module&nbsp;search&nbsp;path&nbsp;for&nbsp;a&nbsp;file&nbsp;by ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)that&nbsp;name. ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)""" ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)import&nbsp;sys ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)import&nbsp;os ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)__all__&nbsp;=&nbsp;["getline",&nbsp;"clearcache",&nbsp;"checkcache"] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;getline(filename,&nbsp;lineno,&nbsp;module_globals=None): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;lines&nbsp;=&nbsp;getlines(filename,&nbsp;module_globals) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;1&nbsp;&lt;=&nbsp;lineno&nbsp;&lt;=&nbsp;len(lines): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;lines[lineno-1] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;else: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;'' ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)#&nbsp;The&nbsp;cache ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)cache&nbsp;=&nbsp;{}&nbsp;#&nbsp;The&nbsp;cache ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;clearcache(): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;"""Clear&nbsp;the&nbsp;cache&nbsp;entirely.""" ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;global&nbsp;cache ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;=&nbsp;{} ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;getlines(filename,&nbsp;module_globals=None): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;"""Get&nbsp;the&nbsp;lines&nbsp;for&nbsp;a&nbsp;file&nbsp;from&nbsp;the&nbsp;cache. ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;Update&nbsp;the&nbsp;cache&nbsp;if&nbsp;it&nbsp;doesn't&nbsp;contain&nbsp;an&nbsp;entry&nbsp;for&nbsp;this&nbsp;file&nbsp;already.""" ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;filename&nbsp;in&nbsp;cache: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;cache[filename][2] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;else: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;updatecache(filename,&nbsp;module_globals) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;checkcache(filename=None): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;"""Discard&nbsp;cache&nbsp;entries&nbsp;that&nbsp;are&nbsp;out&nbsp;of&nbsp;date. ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;(This&nbsp;is&nbsp;not&nbsp;checked&nbsp;upon&nbsp;each&nbsp;call!)""" ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;filename&nbsp;is&nbsp;None: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filenames&nbsp;=&nbsp;cache.keys() ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;else: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;filename&nbsp;in&nbsp;cache: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filenames&nbsp;=&nbsp;[filename] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;filename&nbsp;in&nbsp;filenames: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size,&nbsp;mtime,&nbsp;lines,&nbsp;fullname&nbsp;=&nbsp;cache[filename] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;mtime&nbsp;is&nbsp;None: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue&nbsp;&nbsp;&nbsp;#&nbsp;no-op&nbsp;for&nbsp;files&nbsp;loaded&nbsp;via&nbsp;a&nbsp;__loader__ ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stat&nbsp;=&nbsp;os.stat(fullname) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;os.error: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;del&nbsp;cache[filename] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;size&nbsp;!=&nbsp;stat.st_size&nbsp;or&nbsp;mtime&nbsp;!=&nbsp;stat.st_mtime: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;del&nbsp;cache[filename] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;updatecache(filename,&nbsp;module_globals=None): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;"""Update&nbsp;a&nbsp;cache&nbsp;entry&nbsp;and&nbsp;return&nbsp;its&nbsp;list&nbsp;of&nbsp;lines. ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;something's&nbsp;wrong,&nbsp;print&nbsp;a&nbsp;message,&nbsp;discard&nbsp;the&nbsp;cache&nbsp;entry, ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;return&nbsp;an&nbsp;empty&nbsp;list.""" ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;filename&nbsp;in&nbsp;cache: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;del&nbsp;cache[filename] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;not&nbsp;filename&nbsp;or&nbsp;filename[0]&nbsp;+&nbsp;filename[-1]&nbsp;==&nbsp;'&lt;&gt;': ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;[] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;fullname&nbsp;=&nbsp;filename ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;try: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stat&nbsp;=&nbsp;os.stat(fullname) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;os.error,&nbsp;msg: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;basename&nbsp;=&nbsp;os.path.split(filename)[1] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Try&nbsp;for&nbsp;a&nbsp;__loader__,&nbsp;if&nbsp;available ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;module_globals&nbsp;and&nbsp;'__loader__'&nbsp;in&nbsp;module_globals: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;module_globals.get('__name__') ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loader&nbsp;=&nbsp;module_globals['__loader__'] ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get_source&nbsp;=&nbsp;getattr(loader,&nbsp;'get_source',&nbsp;None) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;name&nbsp;and&nbsp;get_source: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;basename.startswith(name.split('.')[-1]+'.'): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;get_source(name) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;(ImportError,&nbsp;IOError): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;data&nbsp;is&nbsp;None: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;No&nbsp;luck,&nbsp;the&nbsp;PEP302&nbsp;loader&nbsp;cannot&nbsp;find&nbsp;the&nbsp;source ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;for&nbsp;this&nbsp;module.</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2008年05月09日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2008年05月04日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2008/05/04/1181340" rel="bookmark" title="Python天天美味(11) - 可爱的大小写">Python天天美味(11) - 可爱的大小写</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>转换大小写 和其他语言一样，Python为string对象提供了转换大小写的方法：upper() 和 lower()。还不止这些，Python还为我们提供了首字母大写，其余小写的capitalize()方法，以及所有单词首字母大写，其余小写的title()方法。函数较简单，看下面的例子： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)s&nbsp;=&nbsp;'hEllo&nbsp;pYthon' ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;s.upper() ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;s.lower() ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;s.capitalize() ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;s.title() 输出结果： HELLO PYTHON hello python Hello python Hello Python 判断大小写 Python提供了isupper()，islower()，istitle()方法用来判断字符串的大小写。注意的是： 没有提供 iscapitalize()方法，下面我们会自己实现，至于为什么Python没有为我们实现，就不得而知了。 如果对空字符串使用isupper()，islower()，istitle()，返回的结果都为False。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;'A'.isupper()&nbsp;#True ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;'A'.islower()&nbsp;#False ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;'Python&nbsp;Is&nbsp;So&nbsp;Good'.istitle()&nbsp;#True ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)#print&nbsp;'Dont&nbsp;do&nbsp;that!'.iscapitalize()&nbsp;#错误，不存在iscapitalize()方法 实现iscapitalize 如果我们只是简单比较原字符串与进行了capitallize()转换的字符串的话，如果我们传入的原字符串为空字符串的话，返回结果会为True，这不符合我们上面提到的第2点。 ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;iscapitalized(s): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;s&nbsp;==&nbsp;s.capitalize(&nbsp;) 有人想到返回时加入条件，判断len(s)&gt;0，其实这样是有问题的，因为当我们调用iscapitalize('123')时，返回的是True，不是我们预期的结果。 2. 因此，我们回忆起了之前的translate方法，去判断字符串是否包含任何英文字母。实现如下： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)import&nbsp;string ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)notrans&nbsp;=&nbsp;string.maketrans('',&nbsp;'') ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;containsAny(str,&nbsp;strset): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;len(strset)&nbsp;!=&nbsp;len(strset.translate(notrans,&nbsp;str)) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)def&nbsp;iscapitalized(s): ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;s&nbsp;==&nbsp;s.capitalize(&nbsp;)&nbsp;and&nbsp;containsAny(s,&nbsp;string.letters) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;#return&nbsp;s&nbsp;==&nbsp;s.capitalize(&nbsp;)&nbsp;and&nbsp;len(s)&nbsp;&gt;&nbsp;0&nbsp;#如果s为数字组成的字符串，这个方法将行不通 调用一下试试： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;iscapitalized('123') ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;iscapitalized('') ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;iscapitalized('Evergreen&nbsp;is&nbsp;zcr1985') 输出结果： False False True Python 天天美味系列（总） Python 天天美味(9) - translator &nbsp; Python 天天美味(10) - 除法小技巧 &nbsp; Python 天天美味(11) - 可爱的大小写 Python 天天美味(12) - 条件判断的缩写&nbsp; Python</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 33 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/32/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

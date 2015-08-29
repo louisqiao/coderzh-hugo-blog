@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2010年11月08日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/11/08/nancywiki1_0_1" rel="bookmark" title="NancyWiki1.0.1更新 - 代码自动着色">NancyWiki1.0.1更新 - 代码自动着色</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>NancyWiki是基于Google&nbsp;App&nbsp;Engine开发的，使用的语言是Python。Wiki标记语言采用的是Markdown，因为它简单，易用。&nbsp;NancyWiki致力于打造用户真正想要的个人Wiki系统。多看书，多学习，多记笔记，就用NancyWiki！ 看到有一些朋友下载并且使用NancyWiki，感到很欣慰！于是这个周末对NancyWiki进行了一些更新，希望使用NancyWiki的朋友之后能继续给我提意见，让NancyWiki越来越好用！ NancyWiki1.0.1版本更新如下： 增加&#8220;索引&#8221;菜单链接。 代码自动着色。（无需指定编程语言） 修复代码中&#8220;_&#8221;被转义成&#8220;&amp;# 95;&#8221; 的BUG。 代码自动着色 大部分代码着色工具，像syntaxhighlighter，使用时都需要指定代码所使用的语言。对于使用标准MarkDown来说，使用改变标准的方式去给一段代码着色是不太友好的，而且，用户使用起来也会比较麻烦。因为需要用户自己去写类似class=&ldquo;brush:python&rdquo;之类的东西。于是，我想的是，在不改变MarkDown标准的情况下，不需要指定代码所使用的语言，就能对不同代码进行着色。 标准MarkDown贴代码的方式有两种： 将代码放入``中，比如： `printf("Hello&nbsp;World");` ``的方式适用于单行，或是没有空白行的多行代码。如果需要贴多行代码，同时中间还有空白的行，可以使用四个空格或Tab。比如： &nbsp;&nbsp;&nbsp; int&nbsp;a&nbsp;=&nbsp;1; &nbsp;&nbsp;&nbsp; a&nbsp;=&nbsp;a&nbsp;+&nbsp;1; 上述两种标记方法，都会被自动转化为以下的格式： &lt;pre&gt;&lt;code&gt;xxxcode&gt;pre&gt;&nbsp;或&nbsp;&lt;code&gt;xxxcode&gt; 知道转化原则后，我们再来突破一下着色难点，即，不需要指定代码语言的情况下，对代码进行着色。所幸，prettify 正是我所要的，它只需要在任何代码处，使用如下的格式就能进行着色： &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;&lt;pre&nbsp;class=&ldquo;prettyprint&ldquo;&gt;xxx&lt;!&ndash;pre&gt; 或 &lt;code&nbsp;class="prettyprint"&gt;xxxcode&gt; 嗯，和MarkDown转化的代码只差一步，就是class=&ldquo;prettyprint&rdquo;，我需要自动加上这个class。这时候，jquery就派上用场了。我需要给每个code节点自动加上class属性： &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;&lt;script&nbsp;type=&ldquo;text/javascript&rdquo;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(&lsquo;code&lsquo;).addClass(&lsquo;prettyprint&lsquo;);&nbsp;&nbsp; &lt;/script&gt; &nbsp; 于是，效果就出来了。你还是像往常一样贴代码，而NancyWiki会自动根据你的代码语言，进行着色。下面是效果： &nbsp; 原始的着色前的代码（代码行每行前面4个空格）： &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt; C#代码示例： &nbsp;&nbsp;&nbsp; [TestMethod] &nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;Test_ExecuteCommands() &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plateau&nbsp;plateau&nbsp;=&nbsp;new&nbsp;Plateau(5,&nbsp;5); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;roverFactory&nbsp;=&nbsp;new&nbsp;NASARoverFactory(); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rover&nbsp;rover1&nbsp;=&nbsp;roverFactory.Create(); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rover1.Deploy(1,&nbsp;2,&nbsp;&ldquo;N&ldquo;,&nbsp;plateau);</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2010年10月07日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2010年09月16日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2010/09/16/Pyjamas-python-write-javascirpt" rel="bookmark" title="Pyjamas - 用python代替javascript编写基于浏览器的应用">Pyjamas - 用python代替javascript编写基于浏览器的应用</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>如果能用python代替Javascript编写基于浏览器的应用，该有多好啊。但是，Javascript是唯一一种能在浏览器里执行的语言（Flash或Silverlight除外）。换个思路，先用Python编写代码，然后在通过编译器转为为Javascript脚本，这样确实是可行的。嗯，已经有人这么干了，就是这个：Pyjamas Pyjamas的介绍： Google 的 Web Toolkit (GWT) 让我们能够完全用 Java&#8482; 代码开发具有 Ajax 功能的 Rich Internet Application (RIA)。可以使用丰富的 Java 工具集（IDE、重构、代码补全、调试器等等）开发出可以部署在所有主流 Web 浏览器中的应用程序。在 GWT 的帮助下，可以编写出在浏览器中运行但是表现与桌面应用程序相似的应用程序。 和GWT类似，Pyjamas是一个跨浏览器API，有了它，你可以使用Python编写客户端功能。 使用Pyjamas的优点是你可以用 Python代替HTML和JavaScript编写网络程序，你可以重复使用和导入类和模块。 此外AJAX库还可以解决互用性问题，不用担心程序在IE6, IE7, Firefox, Safari, Opera等浏览器上的兼容问题。 &nbsp; &nbsp; 是不是觉得很酷呢？pyjamas有一个演示页面，里面有多个的效果。 比如： 火星登陆游戏：http://pyjs.org/examples/asteroids/output/Space.html 邮件客户端：http://pyjs.org/examples/mail/output/Mail.html GWTCanvas：http://pyjs.org/examples/gwtcanvas/output/GWTCanvasDemo.html (HTML5 Canvas?? 有人讨论这个问题在这里) &nbsp; 更多内容直接浏览pyjamas的主页了：http://pyjs.org 最近打算学习HTML5，但是HTML5说到底，还是在那摆弄着一堆的Javascript。所以，先玩玩pyjamas也无妨啊！~&nbsp;</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 6 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/5/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>
