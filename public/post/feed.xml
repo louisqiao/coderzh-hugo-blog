@@ -6,7 +6,208 @@
         <language>zh-CN</language>
         <author>CoderZh</author>
         <rights>Copyright (c) 2015, CoderZh; all rights reserved.</rights>
-        <updated>Sun, 16 Aug 2015 00:00:00 UTC</updated>
+        <updated>Sat, 29 Aug 2015 16:52:15 CST</updated>
+        
+        <item>
+            <title>手把手教你使用hugo搭建个人博客站点</title>
+            <link>http://blog.coderzh.com/2015/08/29/hugo</link>
+            <pubDate>Sat, 29 Aug 2015 16:52:15 CST</pubDate>
+            <author>CoderZh</author>
+            <guid>http://blog.coderzh.com/2015/08/29/hugo</guid>
+            <description>
+
+&lt;p&gt;Hugo是一个用Go语言编写的静态网站生成器，它使用起来非常简单，相对于Jekyll复杂的安装设置来说，Hugo仅需要一个二进制文件hugo(hugo.exe)及可轻松用于本地调试和生成静态页面。&lt;/p&gt;
+
+&lt;p&gt;Hoho生成静态页面的效率很高，我的260多篇博客文章生成时间几户是瞬间完成的，而之前用Jekyll需要等待10秒左右。&lt;/p&gt;
+
+&lt;p&gt;Hugo自带watch的调试模式，可以在我修改MarkDown文章之后切换到浏览器后，页面会检测到更新并且自动刷新页面呈现出最终效果，能极大的提高博客书写效率。再加上Hugo是使用Go语言编写，已经没有任何理由不使用Hugo来代替Jekyll作为我的个人博客站点生成器了。&lt;/p&gt;
+
+&lt;h3 id=&#34;静态网站生成器:826b8fbf4b1c9d49ecec9c1552f05b58&#34;&gt;静态网站生成器&lt;/h3&gt;
+
+&lt;p&gt;什么是静态网站生成器？如果追溯到最早的网站形式，那时候的网页都是静态的，即一个内容不变的html文件放在服务器上，人们通过互联网访问浏览的都是这个一成不变的页面。后来，人们发现，需要和网页进行交互，能根据用户的输入动态的呈现出相应的内容，这就是动态网站。那，为什么现在又回归使用静态网站呢？特别是对于博客网站这种特殊的形式。我的理解是：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;访问速度提升。静态页面不需要像动态页面那样经常去查询数据库，而是直接将最终页面内容返回。&lt;/li&gt;
+&lt;li&gt;搜素引擎友好。便于搜索引擎索引，比如很多动态网站的页面地址是一样的，只是后面传入的参数不一样，容易让搜索引擎误认为是同一个页面。（虽然不会）&lt;/li&gt;
+&lt;li&gt;可以完全抛弃数据库，减少复杂度，将最复杂的一步交给静态网站生成器，自己只专注写作、生成、发布三个步骤。&lt;/li&gt;
+&lt;li&gt;博客文章可以以文本文件的方式（MarkDown）在本地维护管理，不需要像之前那样在网页的编辑器里提交到网站数据库。你可以方便的使用github管理的你的博客文章，不会丢失，又能追溯到每一次的内容变更。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;目前最流行的静态网站生成器是Jekyll，它是github创始人自己实现的一套ruby的静态网站生成器。一经推出，各个程序哥竞相效仿，一时间使用Jekyll搭建自己的博客变成了一件很高逼格的事情。&lt;/p&gt;
+
+&lt;p&gt;我也是跟风者之一，在Jekyll之前，我主要也是在博客园写文章，同时独立博客这块也尝试过自己实现的博客程序，用GAE写过，后来又用Tornado写过，都是动态网站。自己实现博客程序，总是在开始一段时间内很狂热，当一切实现完成，细节修缮好之后很快就失去了兴趣。因为你的注意力从只是写文章，经常需要转移到网站不好看，需要去改一改网站的风格样式，修复BUG，加一加功能。&lt;/p&gt;
+
+&lt;p&gt;所以，如果只是专注于写作，还是找一个稳定一些，提供大量现成皮肤，有稳定专业的组织维护更新的博客系统。使用Jekyll确实让我眼前一亮，原来博客程序可以这么玩。于是利用周末的时间，我将我之前所有的文章，包括博客园的文章，都迁移到了Jekyll上来。自从有了Jekyll，我终于可以开开心心的专注的写文章了，而且使用喜欢的MarkDown格式。：）&lt;/p&gt;
+
+&lt;p&gt;在使用了Jekyll一段时间后，它的问题也逐渐暴露出来：静态页面生成的效率不够高。因为我把以前的文章都导入了过来，一共有260来篇，每次编辑文章后，需要等等10秒，待它将所有页面检查并生成完成之后，才能看到最终的效果。这是我最不能忍受的一点。对于初学者，Jekyll还有很多问题，比如环境搭建非常复杂，导致使用Jekyll的人大都是一些喜欢折腾，不怕折腾的程序哥。&lt;/p&gt;
+
+&lt;p&gt;随着Go1.5版本的发布，让我意识到是时候好好玩一玩Go语言了。使用Go语言实现的静态网站生成器Hugo（雨果）立即吸引了我，它解决了我最大的痛点：生成的效率。文档、社区各方面的支持都不错，使用起来非常简单，各种皮肤直接套用，于是我又开始了Jekyll迁移到Hugo的漫漫长路。（一个周末的时间）&lt;/p&gt;
+
+&lt;p&gt;即使迁移到了Hugo，我还保留着原来的Jekyll博客，只是不会再更新了，用来怀念？还是哪天突然又跳回来也不一定。&lt;/p&gt;
+
+&lt;p&gt;我的Jeklly博客：&lt;a href=&#34;http://jekyll.coderzh.com&#34;&gt;http://jekyll.coderzh.com&lt;/a&gt;
+我的Hugo博客：&lt;a href=&#34;http://blog.coderzh.com&#34;&gt;http://blog.coderzh.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;github-pages:826b8fbf4b1c9d49ecec9c1552f05b58&#34;&gt;GitHub Pages&lt;/h3&gt;
+
+&lt;p&gt;使用静态网站生成器生成好静态页面之后，需要把文件放到服务器上供别人浏览。比较传统的方式是租用VPS虚拟服务器，比如：linode、digitalocean。将生成好的静态页面手工上传到服务器上。如果你习惯这种方式部署，推荐你使用&lt;a href=&#34;https://www.digitalocean.com/?refcode=e131e2bba197&#34;&gt;digitalocean&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;当然， 还有更好的方式，就是直接把网址托管到GitHub Pages。你只需要在GitHub上创建一个项目，然后将生成出来的静态页面文件push到这个项目的gh-pages分支，保证根目录有一个index.html文件即可。这样，一个免费、无限流量的博客系统就搭建完成了。同时，通过github你可以方便对博客文章进行管理和追踪。&lt;/p&gt;
+
+&lt;h3 id=&#34;hugo:826b8fbf4b1c9d49ecec9c1552f05b58&#34;&gt;Hugo&lt;/h3&gt;
+
+&lt;p&gt;前面的铺垫介绍的差不多了，该主角上场了。Hugo是什么？它主要做了什么？&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Hugo只有一个二进制文件（比如Windows里只是一个hugo.exe）&lt;/li&gt;
+&lt;li&gt;Hugo可以将你写好的MarkDown格式的文章自动转换为静态的网页。&lt;/li&gt;
+&lt;li&gt;Hugo内置web服务器，可以方便的用于本地调试。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;hello-hugo:826b8fbf4b1c9d49ecec9c1552f05b58&#34;&gt;Hello Hugo&lt;/h3&gt;
+
+&lt;p&gt;Hugo官方主页：&lt;a href=&#34;https://gohugo.io/&#34;&gt;https://gohugo.io/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Hugo的安装方式有两种，一种是直接下载编译好的Hugo二进制文件。如果只是使用Hugo推荐用这种方式。另一种方式是获取Hugo的源码，自己编译。由于各种不可预料的网络问题，第二种方式不是那么轻易能成功，虽然最后我还是折腾出来了。&lt;/p&gt;
+
+&lt;p&gt;Hugo二进制下载地址：&lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;https://github.com/spf13/hugo/releases&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;下载下来后，只有一个叫hugo或者hugo.exe的程序，接下来开始生成自己的站点：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hugo new site /path/to/site
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后hugo会自动生成这样一个目录结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  ▸ archetypes/
+  ▸ content/
+  ▸ layouts/
+  ▸ static/
+    config.toml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;简要介绍一下，config.toml是网站的配置文件，这是一个TOML文件，全称是Tom&amp;rsquo;s Obvious, Minimal Language，因为它的作者是 GitHub联合创始人Tom Preston-Werner 觉得YAML不够优雅，捣鼓出来的一个新格式。如果你不喜欢这种格式，你可以将config.toml替换为YAML格式的config.yaml，或者json格式的config.json。hugo都支持。&lt;/p&gt;
+
+&lt;p&gt;content目录里放的是你写的markdown文章，layouts目录里放的是网站的模板文件，static目录里放的是一些图片、css、js等资源。&lt;/p&gt;
+
+&lt;p&gt;创建一个页面：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hugo new about.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果是博客日志，最好将md文件放在content的post目录里。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hugo new post/first.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行完后，会在content/post目录自动生成一个MarkDown格式的first.md文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+++
+date = &amp;quot;2015-01-08T08:36:54-07:00&amp;quot;
+draft = true
+title = &amp;quot;first&amp;quot;
+ 
++++
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;+++可以替换为Jekyll一样的&amp;mdash;，里面的内容是这篇文章的一些信息。下面就可以开始写你的文章内容，比如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;+++
+date = &amp;quot;2015-01-08T08:36:54-07:00&amp;quot;
+draft = true
+title = &amp;quot;first&amp;quot;
+ 
++++
+
+### Hello Hugo
+
+ 1. aaa
+ 1. bbb
+ 1. ccc
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;OK，刚才的about.md也有内容，该看看最后的效果了。然后你屁颠屁颠的使用hugo server启动，打开浏览器里一看，发现毛都没有！这是肿么了！&lt;/p&gt;
+
+&lt;p&gt;这是Hugo对初学者非常不友好的地方，就是默认生成的网站是没有任何皮肤模板的。为了看看第一个写的示例，还得去Github上把一个网页模板下载下来。如果你网络够好，网速够快，你可以在刚才的目录将Hugo官方的所有模板都下载下来：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git clone --recursive https://github.com/spf13/hugoThemes themes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我尝试过，也失败过，且从未成功过一次性将所有的模板下载下来。所以，我们还是老老实实只下载其中一个模板来看看效果吧：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd themes
+$ git clone https://github.com/spf13/hyde.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;启动本地调试：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ hugo server --theme=hyde --buildDrafts --watch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;浏览器里打开：&lt;a href=&#34;http://127.0.0.1:1313&#34;&gt;http://127.0.0.1:1313&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://mmbiz.qlogo.cn/mmbiz/otHvoL6neeKAMQ4BG3zdDBPKa2vBBR205C0HSCzibticmp8eOVXyQY3vhYgG8qMiaZZiaSYFyYe2Hr3TvAFN1VeRmg/0?wx_fmt=png&#34; alt=&#34;HugoFirstPost&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;ndash;watch或者-w 选项打开的话，将会监控到文章的改动从而自动去刷新浏览器，不需要自己手工去刷新浏览器，非常方便。&lt;/p&gt;
+
+&lt;p&gt;如果你看了上面的说明已经有冲动去试一试Hugo了，我的目的也算达到了，接下来你需要的只是查看官方的说明文档就够了，所以具体的一些设置我就不重复了。&lt;/p&gt;
+
+&lt;p&gt;官方文档：&lt;a href=&#34;https://gohugo.io/overview/introduction/&#34;&gt;https://gohugo.io/overview/introduction/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;皮肤列表：&lt;a href=&#34;https://github.com/spf13/hugoThemes&#34;&gt;https://github.com/spf13/hugoThemes&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;常用文档：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/overview/configuration/&#34;&gt;Configuring Hugo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/content/front-matter/&#34;&gt;Front Matter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/extras/menus/&#34;&gt;Menus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/templates/variables/&#34;&gt;Template Variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;Hosting on GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;遇到的问题:826b8fbf4b1c9d49ecec9c1552f05b58&#34;&gt;遇到的问题&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;默认的ServerSide的代码着色会有问题，有些字的颜色会和背景色一样导致看不见。
+解决方法：使用ClientSide的代码着色方案即可解决。（见：&lt;a href=&#34;https://gohugo.io/extras/highlighting/#client-side:c4210b265c792cac9a6cf6a5f53b671d&#34;&gt;Client-side Syntax Highlighting&lt;/a&gt;）&lt;/li&gt;
+&lt;li&gt;URL全部被转成了小写，如果是旧博客迁移过来，将是无法接受的。
+解决方法：我是直接改了Hugo的代码，将URL强制转换为小写那段逻辑去掉了，之后考虑在config里提供配置开关，然后给Hugo提一个PR。如果是Windows用户可以直接&lt;a href=&#34;https://github.com/coderzh/ConvertToHugo&#34;&gt;https://github.com/coderzh/ConvertToHugo&lt;/a&gt; 下载到我修改后的版本myhugo.exe。&lt;/li&gt;
+&lt;li&gt;文章的内容里不能像Jekyll一样可以内嵌代码模板了。最终会生成哪些页面，有一套相对固定而复杂的规则，你会发现想创建一个自定义界面会非常的困难。
+解决方法：无，看文档，了解它的规则。博客程序一般也不需要特别的自定义界面。Hugo本身已经支持了类似posts, tags, categories等内容聚合的页面，同时支持rss.xml，404.html等。如果你的博客程序复杂到需要其他的页面，好好想想是否必须吧。&lt;/li&gt;
+&lt;li&gt;如何将rss.xml替换为feed.xml？
+解决方法：在config.yaml里加入：&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code&gt; rssuri: &amp;quot;feed.xml&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;jekyll迁移到hugo:826b8fbf4b1c9d49ecec9c1552f05b58&#34;&gt;Jekyll迁移到Hugo&lt;/h3&gt;
+
+&lt;p&gt;Jekyll的文章内容迁移到Hugo中，大部分内容是兼容的，但也有一些地方是不兼容的。主要有以下几个地方需要修改：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Jekyll文章能从文件名里的日期部分读取到日期，并将剩余的部分当做的页面url的名称，比如：2015-08-29-first.md。而Hugo只认md文件里的date字段，url的名称如果用文件名的话将会使用完整的文件名（不会去除日期部分）。为了兼容，必须在md的Front Matter里写入url字段，用来说明该页面的相对url地址，从而保持兼容。&lt;/li&gt;
+&lt;li&gt;tags, categories等字段必须用列表的方式，不像Jekyll中那样随意了。&lt;/li&gt;
+&lt;li&gt;{% raw %} {% endraw %}将不需要了。&lt;/li&gt;
+&lt;li&gt;{% highlight ruby %} 变成了{{&amp;lt; highlight ruby &amp;gt;}} 。不过我还是推荐使用``` ruby ```形式，然后使用ClientSide的Highlight，这样两边都兼容。&lt;/li&gt;
+&lt;li&gt;需要将Jekyll里的public里的文件拷贝到Hugo的static目录里。&lt;/li&gt;
+&lt;li&gt;Jekyll的文章必须放到Hugo的content/post目录里。&lt;/li&gt;
+&lt;li&gt;Jekyll只需要push文章内容到github，服务器会自动生成静态页面。毕竟是github的亲儿子。而Hugo需要你将生成的public目录里的内容做为gh-pages分支push上去。具体的简便的方法见：&lt;a href=&#34;https://gohugo.io/tutorials/github-pages-blog/&#34;&gt;Hosting on GitHub Pages&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;假如你之前的博客和我一样是Jekyll的，可以尝试使用我写的&lt;a href=&#34;https://github.com/coderzh/ConvertToHugo/blob/master/ConvertToHugo.py&#34;&gt;ConvertToHugo.py&lt;/a&gt; 工具。这个转换工具逻辑相对比较简单和清晰，如果满足不了你的需求你也可以轻易在此基础上做些修改，如果我能收到PR当然是最好了。&lt;/p&gt;
+
+&lt;p&gt;反正，我是完全使用CovertToHugo.py将我原来的Jekyll博客全部转过来了。而且，我找到了一个非常炫酷的主题，并且在此基础稍微修改下。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://mmbiz.qlogo.cn/mmbiz/otHvoL6neeKAMQ4BG3zdDBPKa2vBBR20hnPXA1PdrfOB2cIveaTh58IMIRkFYzFrCDD70YIhJSnPjfloueBziaA/0?wx_fmt=jpeg&#34; alt=&#34;HugoBlog&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Blog地址：&lt;a href=&#34;http://blog.coderzh.com&#34;&gt;http://blog.coderzh.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Github: &lt;a href=&#34;https://github.com/coderzh/coderzh-hugo-blog&#34;&gt;https://github.com/coderzh/coderzh-hugo-blog&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
         
         <item>
             <title>最近读的几本书</title>
@@ -81,7 +282,7 @@
 
 &lt;p&gt;我之前的方法，在index.html中&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;{% raw %} {{ post.content ||split:&#39;&#39; | first }} {% endraw %}
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt; {{ post.content ||split:&#39;&#39; | first }} 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后在Post里，需要分隔的摘要后面加&lt;code&gt;。&lt;/code&gt;&lt;/p&gt;
@@ -100,12 +301,12 @@
 
 &lt;p&gt;然后，在index.html中：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;{% raw %} {{ post.excerpt }} {% endraw %}
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt; {{ post.excerpt }} 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;一般情况下，摘要需要去掉html标签，所以一般这样用：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt; {% raw %} {{ post.excerpt | strip_html }} {% endraw %}
+&lt;pre&gt;&lt;code class=&#34;language-html&#34;&gt;  {{ post.excerpt | strip_html }} 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;然后，和前一种方法一样，在摘要后面加``  即可。&lt;/p&gt;
@@ -1000,196 +1201,6 @@ def find_matches(lines, regex, exclude_list):
 &lt;p&gt;&lt;strong&gt;Jenkins集成&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;https://mmbiz.qlogo.cn/mmbiz/otHvoL6neeLysCAtuhz1cP8vL08tZxInSibobsDET0XDbeIE8rloZFIiboibwgCPeaqicbbM6zR7eVy4JsgJAKmk7w/0&#34; alt=&#34;JenkinsOpenCppCoverage&#34; /&gt;&lt;/p&gt;
-</description>
-        </item>
-        
-        <item>
-            <title>Facebook网络模拟测试工具ATC使用</title>
-            <link>http://blog.coderzh.com/2015/03/29/AugmentedTrafficControl</link>
-            <pubDate>Sun, 29 Mar 2015 00:00:00 UTC</pubDate>
-            <author>CoderZh</author>
-            <guid>http://blog.coderzh.com/2015/03/29/AugmentedTrafficControl</guid>
-            <description>&lt;p&gt;就在上周，Facebook在其工程博客（&lt;a href=&#34;https://code.facebook.com/posts/1561127100804165/augmented-traffic-control-a-tool-to-simulate-network-conditions/&#34;&gt;原文&lt;/a&gt;）上宣布开源移动网络测试工具Augmented Traffic Control（&lt;a href=&#34;https://github.com/facebook/augmented-traffic-control&#34;&gt;ATC&lt;/a&gt;），我迅速试用了一番，非常不错，对手游或者其他APP的调试和测试都非常有帮助，介绍给大家。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://mmbiz.qlogo.cn/mmbiz/otHvoL6neeItlTepjqhK1AVR73sOJicqy0kFRDzrtvVCw81xFH0wrZgH0ibYljADibliaWsKib6lHaba2Jials5poc2Q/0&#34; alt=&#34;ATC&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;现在已经是APP时代了，由于手机网络的特殊性，移动APP需要面临更加复杂的网络环境。在设计之初就要考虑如何应对各种网络环境，比如很高的延迟，经常丢包，频繁的断线。特别是手游，断线重连机制设计的好坏直接影响到游戏的体验。&lt;/p&gt;
-
-&lt;p&gt;所以，在开发过程中模拟各种网络环境进行测试变得越来越重要。在ATC出来之前，微软曾经有一个网络模拟工具NEWT（Network Emulator for Windows Toolkit），使用起来也是方便。（NEWT的诞生也蛮有意思，见：&lt;a href=&#34;http://blog.sina.com.cn/s/blog_4caedc7a0100g9y6.html&#34;&gt;NEWT的前世今生&lt;/a&gt;）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://mmbiz.qlogo.cn/mmbiz/otHvoL6neeItlTepjqhK1AVR73sOJicqyfvibaiciciaXjY6BBa4fqtMJwGibwKzQjELwJ9vQk6PhicIoweFP5pS7NDjw/0&#34; alt=&#34;NEWT&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;那么，对比NEWT，ATC有些什么特点呢？&lt;/p&gt;
-
-&lt;p&gt;ATC有两个最吸引人的特点：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;在手机上通过Web界面就可以随时切换不同的网络环境。&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;多个手机可以连接到同一个WIFI下，相互之间模拟的网络环境各不影响。&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;可以想象一下这个场景：一群程序猿和测试猴子热火朝天的在办公室忙活着，这时有一个叫ATC WiFi的热点，任何人都可以将手机连接上去，通过Web界面随意切换到各种不同的网络环境下进行调试和测试……&lt;/p&gt;
-
-&lt;p&gt;想想都有点小激动呢，接下来就来试用一把，感受一下ATC的威力。&lt;/p&gt;
-
-&lt;p&gt;ATC只能运行在Linux上，所以搭建部署稍显麻烦一些。本文将介绍在虚拟机里如何搭建ATC环境。大致有以下几个步骤：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;VMWare装个Ubuntu系统吧（以前我常用VirtualBox，各种兼容性问题被坑惨了不敢用了）。&lt;/li&gt;
-&lt;li&gt;除非你的机器有无线网卡，不然找一个USB无线网卡，用来设置WIFI热点。&lt;/li&gt;
-&lt;li&gt;部署ATC&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Ubuntu中设置WiFi热点功能，在系统自带的工具里可以直接开启。但是，由于是Ad-hoc模式，Android手机根本搜不到信号。所以必须设置AP模式才能让Android手机搜到。我折腾了好一阵，最后发现这篇文章最靠谱：&lt;a href=&#34;http://my.oschina.net/eechen/blog/227230&#34;&gt;http://my.oschina.net/eechen/blog/227230&lt;/a&gt;，照着设置一般就OK了。&lt;/p&gt;
-
-&lt;p&gt;接下来是部署ATC，其实也很简单，官方文档上写的也很清楚：&lt;a href=&#34;https://github.com/facebook/augmented-traffic-control&#34;&gt;https://github.com/facebook/augmented-traffic-control&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;首先，必须安装Python2.7以上版本，然后安装pip：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo apt-get install python-pip python-dev build-essential）
-sudo pip install --upgrade pip 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后，使用pip直接安装好ATC所有组件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pip install atc_thrift atcd django-atc-api django-atc-demo-ui django-atc-profile-storage
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;接下来部署Django的web工程，提供手机访问并用来配置和切换网络用的。&lt;/p&gt;
-
-&lt;p&gt;1.使用django-admin生成一个新的django工程：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;django-admin startproject atcui
-cd atcui
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;2.修改atcui/settings.py，加入ATC相关的内容：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;INSTALLED_APPS = (
-    ...
-    # Django ATC API
-    &#39;rest_framework&#39;,
-    &#39;atc_api&#39;,
-    # Django ATC Demo UI
-    &#39;bootstrap_themes&#39;,
-    &#39;django_static_jquery&#39;,
-    &#39;atc_demo_ui&#39;,
-    # Django ATC Profile Storage
-    &#39;atc_profile_storage&#39;,
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;3.修改atcui/urls.py，urlpatterns 中加入atc的url页面：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;...
-...
-from django.views.generic.base import RedirectView
- 
-urlpatterns = patterns(&#39;&#39;,
-    ...
-    # Django ATC API
-    url(r&#39;^api/v1/&#39;, include(&#39;atc_api.urls&#39;)),
-    # Django ATC Demo UI
-    url(r&#39;^atc_demo_ui/&#39;, include(&#39;atc_demo_ui.urls&#39;)),
-    # Django ATC profile storage
-    url(r&#39;^api/v1/profiles/&#39;, include(&#39;atc_profile_storage.urls&#39;)),
-    url(r&#39;^$&#39;, RedirectView.as_view(url=&#39;/atc_demo_ui/&#39;, permanent=False)),
-)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;4.更新一下数据库：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;python manage.py migrate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;万事俱备，就差启动了……&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;前面设置WiFI热点时，你还记得设置的无线网卡的名字吗？嗯，就是wlan0，这个很重要。接下来要启动网络控制的核心组件atcd，需要通过参数指定提供Wifi热点的内网用的网卡名字，外网访问的网卡名默认是eth0（如果不是也需要通过&amp;ndash;atcd-wan指定）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo atcd --atcd-lan wlan0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后，启动Django的工程：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo python manage.py runserver 0.0.0.0:8000
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;用手机连接上去试试吧。看看虚拟机的IP，比如我设置的是192.168.6.1，手机浏览器里访问：&lt;a href=&#34;http://192.168.6.1:8000&#34;&gt;http://192.168.6.1:8000&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://mmbiz.qlogo.cn/mmbiz/otHvoL6neeItlTepjqhK1AVR73sOJicqycIPjpq7icu4ic5n5RlBZ4RXx6TsWKGYvpIp2Cxz4oiaN0yjlic5j298EYQ/0&#34; alt=&#34;NewStart&#34; width=&#34;450&#34; height=&#34;800&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在手机的界面里，你可以分别对网络上行下行进行设置，主要设置的参数有：&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;网络带宽（bandwidth）&lt;/li&gt;
-&lt;li&gt;延迟（latency）&lt;/li&gt;
-&lt;li&gt;丢包率（packet loss）&lt;/li&gt;
-&lt;li&gt;错包率（corrupted packets）&lt;/li&gt;
-&lt;li&gt;乱序率（packets ordering）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;通过设置上面的参数，可以模拟出各种常用的网络环境，比如：2G，3G，4G，WiFi等等，同时也可以模拟一些异常情况，比如信号很差，延迟很大，丢包率高的情况。具体有哪些场景和参数设置，欢迎大家一起交流交流，下面是&lt;a href=&#34;https://github.com/tylertreat/Comcast&#34;&gt;Comcast&lt;/a&gt;提供的一份参数配置（国外的网络和国内的很不一样吧，仅供参考，欢迎大家修正和补充）&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;Name&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;Latency&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;Bandwidth&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;Packet-loss&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;GPRS (good)&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;500&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;50&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;EDGE (good)&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;300&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;250&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.5&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;3G/HSDPA (good)&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;250&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;750&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1.5&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;DIAL-UP (good)&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;185&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;DSL (poor)&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;70&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2000&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;DSL (good)&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;8000&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.5&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;WIFI (good)&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;30000&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Satellite&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;1500&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;-&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;0.2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 </description>
         </item>
         

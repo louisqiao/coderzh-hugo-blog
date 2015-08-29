@@ -202,7 +202,7 @@
                   <h1 class="post-title">使用Jekyll官方的ReadMore摘要功能</h1>
 
                   <p class="post-byline">
-                    by  · 2015年08月15日 · 46 Words ·
+                    by  · 2015年08月15日 · 28 Words ·
                     ~1min reading time |
                     <a href="https://github.com/coderzh/coderzh-hugo-blog/blob/master/content/post/2015/2015-08-15-JekyllReadMore.md"
                        target="_blank">Improve on <i class="fa fa-github"></i></a>
@@ -219,7 +219,7 @@
 
 <p>我之前的方法，在index.html中</p>
 
-<pre><code class="language-html">{% raw %} {{ post.content ||split:'' | first }} {% endraw %}
+<pre><code class="language-html"> {{ post.content ||split:'' | first }} 
 </code></pre>
 
 <p>然后在Post里，需要分隔的摘要后面加<code>。</code></p>
@@ -238,12 +238,12 @@
 
 <p>然后，在index.html中：</p>
 
-<pre><code class="language-html">{% raw %} {{ post.excerpt }} {% endraw %}
+<pre><code class="language-html"> {{ post.excerpt }} 
 </code></pre>
 
 <p>一般情况下，摘要需要去掉html标签，所以一般这样用：</p>
 
-<pre><code class="language-html"> {% raw %} {{ post.excerpt | strip_html }} {% endraw %}
+<pre><code class="language-html">  {{ post.excerpt | strip_html }} 
 </code></pre>
 
 <p>然后，和前一种方法一样，在摘要后面加``  即可。</p>
@@ -373,6 +373,8 @@ var duoshuoQuery = {short_name:"coderzh"};
     <div class="widget widget_recent_entries sidebarLeft"><h3>Last Posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -380,8 +382,6 @@ var duoshuoQuery = {short_name:"coderzh"};
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

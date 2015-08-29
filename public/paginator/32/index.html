@@ -211,6 +211,39 @@
 </div>
 
 <h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/05/16/1201074" rel="bookmark" title="Python天天美味(19) - 时间处理datetime">Python天天美味(19) - 时间处理datetime</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>Python Cook书中有很多章节都是针对某个库的使用进行介绍或是通过组合多个函数实现一些复杂的功能。我这里直接跳过了上一章节中对于文件处理的一些章节，直接进入对时间操作的章节。同时，关于datetime也是简单介绍。因为有很多东西需要自己去使用，去查帮助才最有效。 例子： 计算上一个星期五并输出。 解答： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)import&nbsp;datetime,&nbsp;calendar ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)lastFriday&nbsp;=&nbsp;datetime.date.today(&nbsp;) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)oneday&nbsp;=&nbsp;datetime.timedelta(days=1) ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)lastFriday&nbsp;-=&nbsp;oneday ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)while&nbsp;lastFriday.weekday(&nbsp;)&nbsp;!=&nbsp;calendar.FRIDAY: ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)&nbsp;&nbsp;&nbsp;&nbsp;lastFriday&nbsp;-=&nbsp;oneday ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;lastFriday.strftime('%A,&nbsp;%d-%b-%Y') 输出结果： Friday, 09-May-2008 获取当前时间并计算时间差： t1&nbsp;=&nbsp;datetime.datetime.now() quickshort(data,&nbsp;0,&nbsp;len(data)&nbsp;-&nbsp;1) t2&nbsp;=&nbsp;datetime.datetime.now() print&nbsp;t1&nbsp;-&nbsp;t2 &nbsp; Python 天天美味系列（总） Python 天天美味(17) - open读写文件 &nbsp; Python 天天美味(18) - linecache.getline()读取文件中特定一行 &nbsp; Python 天天美味(19) - 时间处理datetime &nbsp; Python 天天美味(20) - 命令行参数sys.argv&nbsp; &nbsp; Python 天天美味(21) - httplib，smtplib &nbsp; &hellip;</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年05月16日</p>
+</div>
+
+<h2 class="post-title">
   <a href="http://blog.coderzh.com/2008/05/16/1201079" rel="bookmark" title="Python天天美味(20) - 命令行参数sys.argv">Python天天美味(20) - 命令行参数sys.argv</a>
 </h2>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2008年05月10日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2008/05/10/1191641" rel="bookmark" title="Python天天美味(18) - linecache.getline()读取文件中特定一行">Python天天美味(18) - linecache.getline()读取文件中特定一行</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>Python中使用标准库中的linecache中的getline方法可以从某个文件中读取出特定的一行。比如： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)import&nbsp;linecache ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)print&nbsp;linecache.getline('2.1_open.py',&nbsp;4) 将返回我上一节事例代码文件2.1_open.py的第4行文字，输出结果： f = open(&lsquo;/home/evergreen/桌面/test&rsquo;) 查看linecache中的实现(我用的是Ulipad，所以直接将光标停留在linecache处，按F6键) linecache.py &nbsp; Python 天天美味系列（总） [Python 天天美味(16) - 过滤字符串的技巧,map与itertools.imap](http://www.cnblogs.com/coderzh/archive/2008/05/09/1190173.html) &nbsp; [Python 天天美味(17) - open读写文件](http://www.cnblogs.com/coderzh/archive/2008/05/10/1191410.html) &nbsp; [Python 天天美味(18) - linecache.getline()读取文件中特定一行](http://www.cnblogs.com/coderzh/archive/2008/05/10/1191641.html) &nbsp; [Python 天天美味(19) - 时间处理datetime](http://www.cnblogs.com/coderzh/archive/2008/05/16/1201074.html) &nbsp; [Python 天天美味(20) - 命令行参数sys.argv](http://www.cnblogs.com/coderzh/archive/2008/05/16/1201079.html)&nbsp; &nbsp; ...</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 32 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/31/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

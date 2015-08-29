@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2008年12月31日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/12/31/1365994" rel="bookmark" title="代码安全系列(2) - Race Condition">代码安全系列(2) - Race Condition</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>Race Condion 中文名不知道怎么翻译，竞态条件？紊乱条件？冲突条件？在多线程编程过程中，我们常常关心的是我们的线程是否会出现死锁(deadlock)的情况，而忽视Race Condion。到底Race Condtion是什么呢？ Race Condion是在多线程（或者说多个处理过程）情况下，对有些共享资源进行混乱操作，导致整个处理过程变得混乱，引发BUG。 有一个英文解释： A race condition is any case where the results can be different depending on the order that processes arrive or are scheduled or depending on the order that specific competing instructions are executed. 一个早期传统的Race Condion的例子： 在早期的UNIX版本中，存在一个叫UNIX login的攻击方式。当一个新用户登陆到系统后，需要从root权限切换到user权限，假如在切换过程中一直按ESC键，则会导致权限切换不成功，使得登陆的用户一直具有root权限，从而控制整个计算机。 下面我们用C#来做一个多线程情况下的Race Contion的例子： static&nbsp;DateTime&nbsp;curTime; static&nbsp;void&nbsp;Main(string[]&nbsp;args) { &nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;10;&nbsp;i++) &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thread&nbsp;aThread&nbsp;=&nbsp;new&nbsp;Thread(new&nbsp;ParameterizedThreadStart(Run)); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aThread.Start("Thread"&nbsp;+&nbsp;i.ToString()); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thread.Sleep(1000); &nbsp;&nbsp;&nbsp;&nbsp;} } static&nbsp;void&nbsp;Run(object&nbsp;threadName) { &nbsp;&nbsp;&nbsp;&nbsp;curTime&nbsp;=&nbsp;DateTime.Now; &nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;10;&nbsp;i++) &nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(threadName.ToString()&nbsp;==&nbsp;"Thread0") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine("{0},&nbsp;Current&nbsp;time&nbsp;is&nbsp;{1}",&nbsp;threadName.ToString(),&nbsp;curTime.ToLongTimeString()); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thread.Sleep(1000); &nbsp;&nbsp;&nbsp;&nbsp;} } 上面的例子中，curTime其实是所有线程实例所同享的，而每个线程的执行函数内又对curTime进行了赋值，因此会引发混乱，导致线程内的curTime被其他线程所修改。我们看输出的结果如下： Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:51:56 Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:51:57 Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:51:58 Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:51:59 Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:52:00 Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:52:01 Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:52:02 Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:52:03 Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:52:04 Thread0,&nbsp;Current&nbsp;time&nbsp;is&nbsp;11:52:05 请按任意键继续.&nbsp;.&nbsp;.</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2008年12月21日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -355,40 +388,7 @@
 </h2>
 
 <div class="entry excerpt">
-  <p>之前的解决办法是在前台界面的js里进行时间的转换，这样做不是很好，还发现在IE中显示会有不正确的时候。因此，打算使用Django自定义filter的方式来做。其中有一些需要注意的事项，一不小心就可能弄错，导致页面出错。 1. 添加 templatetags 目录。 需要注意的是： 目录名必须是：templatetags ，这样Django才能找到它。 目录templatetags的位置。 比如：我的App目录为ncblog(app.yaml所在目录)，在ncblog目录下，还有一个目录叫nancy，这时，我在nancy目录下建立一个目录templatetags，同时放置一个空的init.py。目录结构如下： ncblog &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &mdash;- nancy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &mdash;- blog &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &mdash;- templatetags 2. settings.py中设置INSTALLED_APPS 为了能找到 templatetags，我们需要在settings.py中的NSTALLED_APPS添加一个路径，比如我添加： INSTALLED_APPS&nbsp;=&nbsp;( &nbsp;&nbsp;&nbsp;&nbsp;'django.contrib.auth', &nbsp;&nbsp;&nbsp;&nbsp;'django.contrib.contenttypes', &nbsp;&nbsp;&nbsp;&nbsp;'django.contrib.sites', &nbsp;&nbsp;&nbsp;&nbsp;'nancy',&nbsp;#我添加的这个 ) &nbsp;3. 开始编写我们的filter 在 templatetags目录下建立任意文件名的文件，如：filters.py，我们现在是要做一个时区的转换filter，因此代码如下： from&nbsp;django&nbsp;import&nbsp;template from&nbsp;datetime&nbsp;import&nbsp;timedelta register&nbsp;=&nbsp;template.Library() def&nbsp;timezone(value,&nbsp;offset): &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;value&nbsp;+&nbsp;timedelta(hours=offset) register.filter(timezone) 4. 在模板文件的开头加上{% raw %}{% load filters %}{% endraw %}，然后就可以这样使用了： {{log.date|timezone:8|date:"Y-m-d&nbsp;H:i:s"}} &nbsp;</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2008年12月07日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2008/12/07/1349735" rel="bookmark" title="Python天天美味(33) - 五分钟理解元类（Metaclasses）[转]">Python天天美味(33) - 五分钟理解元类（Metaclasses）[转]</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>五分钟理解元类（Metaclasses） 真的，它并非巫术。 原文地址：http://www.voidspace.org.uk/python/articles/five-minutes.shtml 日期：16 September, 2008. 译者：赖勇浩（http://blog.csdn.net/lanphaday） &nbsp;&#8220;元类的魔幻变化比 99% 的用户所担心的更多，当你搞不懂是否真的需要用它的时候，就是不需要。&#8221; &#8212;Tim Peters 本文源于在 PyCon UK 2008 上的一个快速演讲。 元类被称为 Python 中的&#8220;深奥的巫术&#8221;。尽管你需要用到它的地方极少（除非你基于 zope 编程），可事实上它的基础理论其实令人惊讶地易懂。 一切皆对象 一切皆对象 一切都有类型 &nbsp;&#8220;class&#8221;和&#8220;type&#8221;之间本质上并无不同 类也是对象 它们的类型是 type 以前，术语 type 用于内置类型，而术语 class 用于用户定义的类，但自 Pythoon 2.2 以来&#8220;class&#8221;和&#8220;type&#8221;本质上并无不同。 对于旧风格（old-style）类的类型是 types.ClassType。 真的，这是真的 Python 2.5.1 (r251:54869, Apr 18 2007, 22:08:04) &gt;&gt;&gt; class Something(object): &hellip;&nbsp;&nbsp;&nbsp;&nbsp; pass &hellip; &gt;&gt;&gt; Something &lt;class &lsquo;main.Something&rsquo;&gt; &gt;&gt;&gt; type(Something) &lt;type &lsquo;type&rsquo;&gt; 从这里可以看出在交互式解释器中创建的类是一个 first class 的对象。 类的类是&#8230;&#8230; 它的元类&#8230;&#8230; 就像对象是类的实例一样，类是它的元类的实例。 调用元类可以创建类。 确切来说，Python</p>
+  <p>之前的解决办法是在前台界面的js里进行时间的转换，这样做不是很好，还发现在IE中显示会有不正确的时候。因此，打算使用Django自定义filter的方式来做。其中有一些需要注意的事项，一不小心就可能弄错，导致页面出错。 1. 添加 templatetags 目录。 需要注意的是： 目录名必须是：templatetags ，这样Django才能找到它。 目录templatetags的位置。 比如：我的App目录为ncblog(app.yaml所在目录)，在ncblog目录下，还有一个目录叫nancy，这时，我在nancy目录下建立一个目录templatetags，同时放置一个空的init.py。目录结构如下： ncblog &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &mdash;- nancy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &mdash;- blog &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &mdash;- templatetags 2. settings.py中设置INSTALLED_APPS 为了能找到 templatetags，我们需要在settings.py中的NSTALLED_APPS添加一个路径，比如我添加： INSTALLED_APPS&nbsp;=&nbsp;( &nbsp;&nbsp;&nbsp;&nbsp;'django.contrib.auth', &nbsp;&nbsp;&nbsp;&nbsp;'django.contrib.contenttypes', &nbsp;&nbsp;&nbsp;&nbsp;'django.contrib.sites', &nbsp;&nbsp;&nbsp;&nbsp;'nancy',&nbsp;#我添加的这个 ) &nbsp;3. 开始编写我们的filter 在 templatetags目录下建立任意文件名的文件，如：filters.py，我们现在是要做一个时区的转换filter，因此代码如下： from&nbsp;django&nbsp;import&nbsp;template from&nbsp;datetime&nbsp;import&nbsp;timedelta register&nbsp;=&nbsp;template.Library() def&nbsp;timezone(value,&nbsp;offset): &nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;value&nbsp;+&nbsp;timedelta(hours=offset) register.filter(timezone) 4. 在模板文件的开头加上{% load filters %}，然后就可以这样使用了： {{log.date|timezone:8|date:"Y-m-d&nbsp;H:i:s"}} &nbsp;</p>
 </div>
 
 
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 22 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/21/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

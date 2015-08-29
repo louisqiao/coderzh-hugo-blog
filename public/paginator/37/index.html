@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2007年12月03日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2007/12/03/981119" rel="bookmark" title="VBS获取本机IP地址">VBS获取本机IP地址</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>'获取本机IP 'owner DeViL 'return 本机的IP地址 Public&nbsp;Function&nbsp;GetIP &nbsp;&nbsp;&nbsp;ComputerName="." &nbsp;&nbsp;&nbsp;&nbsp;Dim&nbsp;objWMIService,colItems,objItem,objAddress &nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;objWMIService&nbsp;=&nbsp;GetObject("winmgmts:\\"&nbsp;&amp;&nbsp;ComputerName&nbsp;&amp;&nbsp;"\root\cimv2") &nbsp;&nbsp;&nbsp;&nbsp;Set&nbsp;colItems&nbsp;=&nbsp;objWMIService.ExecQuery("Select&nbsp;*&nbsp;From&nbsp;Win32_NetworkAdapterConfiguration&nbsp;Where&nbsp;IPEnabled&nbsp;=&nbsp;True") &nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;Each&nbsp;objItem&nbsp;in&nbsp;colItems &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;Each&nbsp;objAddress&nbsp;in&nbsp;objItem.IPAddress &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;objAddress&nbsp;&lt;&gt;&nbsp;""&nbsp;then &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GetIP&nbsp;=&nbsp;objAddress &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Exit&nbsp;Function &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End&nbsp;If &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Next &nbsp;&nbsp;&nbsp;&nbsp;Next End&nbsp;Function</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2007年11月22日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2007年10月27日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2007/10/27/939702" rel="bookmark" title=".NET代码执行顺序探讨">.NET代码执行顺序探讨</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>&nbsp;&nbsp;&nbsp; 通常我们设计一个.NET应用程序，无需考虑过多就可以让我们的程序正确的跑起来。但是，当我们的设计日益复杂时，稍不小心就会因为不清楚.NET代码的执行顺序以及规则而使我们陷入困境。先来个小demo，检查一下你对它了解多少吧。 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;&nbsp;1&nbsp;public&nbsp;class&nbsp;MainTest &nbsp;2&nbsp;{ &nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;void&nbsp;Main(string[]&nbsp;agrs) &nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{//断点①&nbsp;&nbsp;&nbsp;&nbsp;(没错，是花括号) &nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(Test1.Getddd());//断点②&nbsp;&nbsp;&nbsp;(调用静态方法) &nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(Test1.ddd);//断点③&nbsp;&nbsp;&nbsp;(调用静态字段) &nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;8&nbsp;}; &nbsp;9&nbsp;public&nbsp;class&nbsp;Test1 10&nbsp;{ 11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;string&nbsp;ddd&nbsp;=&nbsp;Test2.kkk;//断点④ 12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;string&nbsp;Getddd() 13&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&ldquo;ddd&ldquo;;//断点⑤ 15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 16&nbsp;}; 17&nbsp;public&nbsp;class&nbsp;Test2 18&nbsp;{ 19&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;string&nbsp;kkk&nbsp;=&nbsp;&ldquo;kkk&ldquo;;//断点⑥ 20&nbsp;}; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 问题一：上面的代码中，我定义了六个断点，你不妨思考一下，六个断点处的代码执行顺序如何。下面有两个观点，你认同哪个呢？ &nbsp;&nbsp;&nbsp; 观点1 ： ① &ndash; ⑤ &ndash; ② &ndash; ⑥ &ndash; ④ &ndash; ③ &nbsp;&nbsp;&nbsp; 观点2 ： ⑥ &ndash; ④ &ndash; ① &ndash; ⑤ &ndash; ② &ndash; ③ &nbsp;&nbsp;&nbsp; (如果你还有其他观点，欢迎跟帖讨论) &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 如果你支持观点1，那你就很值得把这篇文章一看了。如果你肯定观点2是正确的，那说明你已经出师，无需再看下文讲解。 &nbsp;&nbsp;&nbsp; 的确，观点2是正确。上面的代码主要的关键点有： &nbsp;&nbsp;&nbsp;</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 37 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/36/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

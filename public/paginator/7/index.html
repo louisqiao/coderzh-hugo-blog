@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2010年09月12日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2010/09/12/nancywiki" rel="bookmark" title="发布基于GAE的个人Wiki系统 - NancyWiki">发布基于GAE的个人Wiki系统 - NancyWiki</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>介绍 一个周末的时间，我写了这个Wiki系统。[](http://wiki.coderzh.com/)[NancyWiki](http://wiki.coderzh.com/)是基于[](http://appengine.google.com/)[](http://appengine.google.com/)[Google App Engine](http://appengine.google.com/)开发的，使用的语言是Python。Wiki标记语言采用的是Markdown，因为它简单，易用。 NancyWiki致力于打造用户真正想要的个人Wiki系统。多看书，多学习，多记笔记，就用NancyWiki！ NancyWiki尊崇的原则：尽量保持简单，实用。NancyWiki保持了代码的精简，一共3个python文件：main.py, models.py, views.py。同时，提供了完善的换肤功能，让用户更加简单的DIY自己的Wiki皮肤，现themes目录提供了simple和plain两套皮肤，可以在设置页面随时进行切换。 试用 NancyWiki提供了一个[](http://wiki.coderzh.com/demo)[](http://wiki.coderzh.com/demo)[Demo](http://wiki.coderzh.com/demo)页面，任何人都可以对这个页面进行编辑。心动不如行动，赶紧[体验](http://wiki.coderzh.com/demo)一下吧。 下载 NancyWiki是开放所有源代码的，任何人下载源码，申请一个Google App Engine账号，就可以部署完全属于自己的Wiki系统。 Google Code主页: http://code.google.com/p/nancywiki/ 下载1.0.1稳定版本：http://nancywiki.googlecode.com/files/nancywiki1.0.1.zip 获取最新代码： hg&nbsp;clone&nbsp;https://nancywiki.googlecode.com/hg/&nbsp;nancywiki 安装 [](http://disqus.com/)[](http://disqus.com/) 下载了源码后，打开app.yaml文件，修改application字段为你的GAE应用的名称：&nbsp; application:&nbsp;yourappname 然后，由于NancyWiki本身不提供评论系统（简单原则），而是在模板里挂接Disqus的评论系统。因此，如果想使用Disqus评论系统，请先注册一个Disqus账号，然后学习一下用法。待你了解差不多之后，回过头来，修改一下wiki.html模板中的评论部分的代码为你自己的Disqus代码。 &lt;div&nbsp;id="comments"&gt; &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id="disqus_thread"&gt;&lt;/div&gt; &nbsp;&nbsp;&nbsp;&nbsp;&lt;script&nbsp;type="text/javascript"&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;disqus_developer&nbsp;=&nbsp;1; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(function()&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;dsq&nbsp;=&nbsp;document.createElement('script');&nbsp;dsq.type&nbsp;=&nbsp;'text/javascript';&nbsp;dsq.async&nbsp;=&nbsp;true; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dsq.src&nbsp;=&nbsp;'http://nancywiki.disqus.com/embed.js'; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(document.getElementsByTagName('head')[0]&nbsp;||&nbsp;document.getElementsByTagName('body')[0]).appendChild(dsq); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})(); &nbsp;&nbsp;&nbsp;&nbsp;&lt;/script&gt; &nbsp;&nbsp;&nbsp;&nbsp;&lt;noscript&gt;Please&nbsp;enable&nbsp;JavaScript&nbsp;to&nbsp;view&nbsp;the&nbsp;&lt;a&nbsp;href="http://disqus.com/?ref_noscript=nancywiki"&gt;comments&nbsp;powered&nbsp;by&nbsp;Disqus.&lt;/a&gt;&lt;/noscript&gt; &lt;/div&gt; &nbsp;配置完了，上传： python&nbsp;appcfg.py&nbsp;update&nbsp;yourappname 太棒了，赶紧体验一下吧，访问：http://yourappname.appspot.com/ 使用 * 新建页面 在浏览器的地址栏里输入任意不存在的地址，将会创建一个默认的页面（实际并未写入数据库），点击**编辑**按钮，进入页面的编辑页面。或者，先编辑页面内容中的地址超链接，通过点击超链接创建新页面。 `[New Page](link)` 效果：[New Page](http://wiki.coderzh.com/link) * 编辑页面 点击**编辑**按钮，进入传说中的_所想即所得_编辑界面。为了方便编写Markdown内容，我使用了[wmd](http://www.wmd-editor.com/)（The Wysiwym Markdown Editor）编辑器。可以用鼠标，正所谓：所点即所想，所想即所得。你在编辑的任何时候，都可以即时的查看到预览的效果。（就在编辑页面的下方）。更多Markdown语法，详见：[http://en.wikipedia.org/wiki/Markdown](http://en.wikipedia.org/wiki/Markdown) * 删除页面 我不提供删除页面功能，如果这个页面当初不需要，为什么创建出来呢？既然已经来到了人世，何不改头换面呢？ * 设置 设置页面，可以设置网站的标题，谷歌搜索的域名（由于GAE拒不提供like语法，只能借助Google搜索），Wiki皮肤。 截图 &nbsp; 我的个人Wiki：http://wiki.coderzh.com 体验地址：http://wiki.coderzh.com/demo &nbsp;</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2010年09月11日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2010年07月17日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2010/07/17/autossh" rel="bookmark" title="Ubuntu中让SSH自动重连">Ubuntu中让SSH自动重连</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>Ubuntu中让SSH自动重连，简单的办法是安装autossh和expect。autossh负责自动重连，expect负责自动输入密码。 安装：&nbsp; sudo&nbsp;apt-get&nbsp;install&nbsp;autossh sudo&nbsp;apt-get&nbsp;install&nbsp;expect 新建一个sh脚本，例如：/etc/autossh.sh，内容： #!/bin/bash HOST="xx.xxx.com" USER="yourname" PASS="yourpassword" CMD=$@ &nbsp; VAR=$(expect&nbsp;-c&nbsp;" spawn&nbsp;/usr/bin/autossh&nbsp;-M&nbsp;2000&nbsp;-N&nbsp;-v&nbsp;-D&nbsp;127.0.0.1:7070&nbsp;$USER@$HOST&nbsp;$CMD match_max&nbsp;100000 expect&nbsp;\"*?assword:*\" send&nbsp;--&nbsp;\"$PASS\r\" send&nbsp;--&nbsp;\"\r\" expect&nbsp;eof ") echo&nbsp;"===============" echo&nbsp;"$VAR" 运行/etc/autossh.sh，就自动登录了。</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 7 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/6/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

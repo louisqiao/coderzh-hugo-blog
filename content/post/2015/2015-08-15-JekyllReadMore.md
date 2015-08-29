@@ -14,7 +14,7 @@ url: /2015/08/15/JekyllReadMore
 我之前的方法，在index.html中
 
 ```html
-{% raw %} {{ post.content ||split:'<!--more-->' | first }} {% endraw %}
+ {{ post.content ||split:'<!--more-->' | first }} 
 ```
 
 然后在Post里，需要分隔的摘要后面加`<!--more-->。`
@@ -36,13 +36,13 @@ excerpt_separator:  '<!--more-->'
 然后，在index.html中：
 
 ```html
-{% raw %} {{ post.excerpt }} {% endraw %}
+ {{ post.excerpt }} 
 ```
 
 一般情况下，摘要需要去掉html标签，所以一般这样用：
 
 ```html
- {% raw %} {{ post.excerpt | strip_html }} {% endraw %}
+  {{ post.excerpt | strip_html }} 
 ```
 
 然后，和前一种方法一样，在摘要后面加`<!--more-->`  即可。

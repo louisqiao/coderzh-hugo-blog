@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2007年10月17日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2007/10/17/927315" rel="bookmark" title="VBS脚本获取安全标识符SID（Security Identifiers）的方法">VBS脚本获取安全标识符SID（Security Identifiers）的方法</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>一、SID简介 &nbsp; &nbsp;&nbsp;&nbsp; SID也就是安全标识符（Security Identifiers），是标识用户、组和计算机帐户的唯一的号码。在第一次创建该帐户时，将给网络上的每一个帐户发布一个唯一的 SID。Windows 2000 中的内部进程将引用帐户的 SID 而不是帐户的用户或组名。如果创建帐户，再删除帐户，然后使用相同的用户名创建另一个帐户，则新帐户将不具有授权给前一个帐户的权力或权限，原因是该帐户 具有不同的 SID 号。安全标识符也被称为安全 ID 或 SID。 &nbsp;&nbsp;&nbsp; 一个完整的SID包括： &nbsp;&nbsp;&nbsp; &#8226; 用户和组的安全描述 &nbsp;&nbsp;&nbsp; &#8226; 48-bit的ID authority &nbsp;&nbsp;&nbsp; &#8226; 修订版本 &nbsp;&nbsp;&nbsp; &#8226; 可变的验证值Variable sub-authority values 例：S-1-5-21-343818398-299502267-839522115-500 参考资料:http://www.5dmail.net/html/2004-8-1&frasl;200481181008.htm 二、VBS脚本获取SID &nbsp;&nbsp;&nbsp; 方法一： &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;Set&nbsp;objNetwork&nbsp;=&nbsp;CreateObject(&ldquo;Wscript.Network&ldquo;) strComputer&nbsp;=&nbsp;objNetwork.ComputerName&lsquo;获取当前的机器名 strUserName=objNetwork.UserName&lsquo;获取当前的用户名 Set&nbsp;objLocalSam&nbsp;=GetObject(&ldquo;WinNT://&ldquo;&nbsp;&amp;&nbsp;strComputer&nbsp;&amp;&nbsp;&ldquo;/&ldquo;&nbsp;&amp;&nbsp;strUserName)&lsquo;这里做了修改，scottlocke中默认strUserName为&rdquo;Administrator&rdquo;是不保险的 Wscript.echo&nbsp;SIDArray(objLocalSam.objectSID) Function&nbsp;SIDArray(bar) &nbsp;&nbsp;&lsquo;&nbsp;Converts&nbsp;Binary&nbsp;Array&nbsp;into&nbsp;Human&nbsp;readable&nbsp;eg:&nbsp;S-1-5-21-XXXXX-XXXXX-XXXXX-XXX &nbsp;&nbsp;dim&nbsp;seperator,sid,length &nbsp;&nbsp;seperator&nbsp;=&nbsp;&rdquo;&rdquo; &nbsp;&nbsp;sid&nbsp;=&nbsp;&rdquo;&rdquo; &nbsp;&nbsp;for&nbsp;length&nbsp;=&nbsp;1&nbsp;to&nbsp;lenb(bar) &nbsp;&nbsp;&nbsp;&nbsp;sid&nbsp;=&nbsp;sid&nbsp;&amp;&nbsp;seperator&nbsp;&amp;&nbsp;right(&ldquo;0&ldquo;&nbsp;&amp;&nbsp;hex(ascb(midb(bar,length,1))),2) &nbsp;&nbsp;&nbsp;&nbsp;seperator&nbsp;=&nbsp;&ldquo;,&ldquo; &nbsp;&nbsp;Next &nbsp;&nbsp;SIDArray&nbsp;=&nbsp;sid &nbsp;&nbsp;SID&nbsp;=&nbsp;Split(SIDArray,&ldquo;,&ldquo;) &lsquo;&nbsp;Convert&nbsp;into&nbsp;standard&nbsp;viewable&nbsp;format&nbsp;-&nbsp;little&nbsp;endian&nbsp;format&nbsp;for&nbsp;4&nbsp;byte&nbsp;groups SID1&nbsp;=&nbsp;(HexToDec(Mid(SID(15),&nbsp;1,&nbsp;1))268435456)&nbsp;+&nbsp;(HexToDec(Mid(SID(15),&nbsp;2,&nbsp;2))16777216)&nbsp;+&nbsp;(HexToDec(Mid(SID(14),&nbsp;1,&nbsp;1))1048576)&nbsp;+&nbsp;(HexToDec(Mid(SID(14),&nbsp;2,&nbsp;2))65536)&nbsp;+&nbsp;(HexToDec(Mid(SID(13),&nbsp;1,&nbsp;1))4096)&nbsp;+&nbsp;(HexToDec(Mid(SID(13),&nbsp;2,&nbsp;2))256)&nbsp;+&nbsp;(HexToDec(Mid(SID(12),&nbsp;1,&nbsp;1))*16)&nbsp;+&nbsp;HexToDec(Mid(SID(12),&nbsp;2,&nbsp;2)) SID2&nbsp;=&nbsp;(HexToDec(Mid(SID(19),&nbsp;1,&nbsp;1))268435456)&nbsp;+&nbsp;(HexToDec(Mid(SID(19),&nbsp;2,&nbsp;2))16777216)&nbsp;+&nbsp;(HexToDec(Mid(SID(18),&nbsp;1,&nbsp;1))1048576)&nbsp;+&nbsp;(HexToDec(Mid(SID(18),&nbsp;2,&nbsp;2))65536)&nbsp;+&nbsp;(HexToDec(Mid(SID(17),&nbsp;1,&nbsp;1))4096)&nbsp;+&nbsp;(HexToDec(Mid(SID(17),&nbsp;2,&nbsp;2))256)&nbsp;+&nbsp;(HexToDec(Mid(SID(16),&nbsp;1,&nbsp;1))*16)&nbsp;+&nbsp;HexToDec(Mid(SID(16),&nbsp;2,&nbsp;2)) SID3&nbsp;=&nbsp;(HexToDec(Mid(SID(23),&nbsp;1,&nbsp;1))268435456)&nbsp;+&nbsp;(HexToDec(Mid(SID(23),&nbsp;2,&nbsp;2))16777216)&nbsp;+&nbsp;(HexToDec(Mid(SID(22),&nbsp;1,&nbsp;1))1048576)&nbsp;+&nbsp;(HexToDec(Mid(SID(22),&nbsp;2,&nbsp;2))65536)&nbsp;+&nbsp;(HexToDec(Mid(SID(21),&nbsp;1,&nbsp;1))4096)&nbsp;+&nbsp;(HexToDec(Mid(SID(21),&nbsp;2,&nbsp;2))256)&nbsp;+&nbsp;(HexToDec(Mid(SID(20),&nbsp;1,&nbsp;1))*16)&nbsp;+&nbsp;HexToDec(Mid(SID(20),&nbsp;2,&nbsp;2)) RID&nbsp;=&nbsp;(HexToDec(Mid(SID(27),&nbsp;1,&nbsp;1))268435456)&nbsp;+&nbsp;(HexToDec(Mid(SID(27),&nbsp;2,&nbsp;2))16777216)&nbsp;+&nbsp;(HexToDec(Mid(SID(26),&nbsp;1,&nbsp;1))1048576)&nbsp;+&nbsp;(HexToDec(Mid(SID(26),&nbsp;2,&nbsp;2))65536)&nbsp;+&nbsp;(HexToDec(Mid(SID(25),&nbsp;1,&nbsp;1))4096)&nbsp;+&nbsp;(HexToDec(Mid(SID(25),&nbsp;2,&nbsp;2))256)&nbsp;+&nbsp;(HexToDec(Mid(SID(24),&nbsp;1,&nbsp;1))*16)&nbsp;+&nbsp;HexToDec(Mid(SID(24),&nbsp;2,&nbsp;2)) &lsquo;&nbsp;Cheating&nbsp;here&nbsp;by&nbsp;just&nbsp;prepending&nbsp;the&nbsp;S-1-5-21- SIDArray&nbsp;=&nbsp;&ldquo;S-1-5-21-&ldquo;&nbsp;&amp;&nbsp;SID1&nbsp;&amp;&nbsp;&ldquo;-&ldquo;&nbsp;&amp;&nbsp;SID2&nbsp;&amp;&nbsp;&ldquo;-&ldquo;&nbsp;&amp;&nbsp;SID3&nbsp;&amp;&nbsp;&ldquo;-&ldquo;&nbsp;&amp;&nbsp;RID</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2007年10月15日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -257,13 +294,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -294,9 +327,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -327,13 +364,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -362,6 +395,8 @@
 
 
                     
+                      </div>
+                    
                   
                 
               </div>
@@ -373,7 +408,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 38 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/37/">Prev &laquo;</a>
@@ -421,6 +456,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -428,8 +465,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

@@ -211,6 +211,39 @@
 </div>
 
 <h2 class="post-title">
+  <a href="http://blog.coderzh.com/2008/06/07/1215607" rel="bookmark" title="Python天天美味(27) - 网络编程起步(Socket发送消息)">Python天天美味(27) - 网络编程起步(Socket发送消息)</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>现在开始学习网络编程，先从简单的UDP协议发送消息开始。我们需要有接受消息的服务端程序(Server.py)和发送消息的客户端程序(Client)。 一、服务端(Server.py) &nbsp;&nbsp;&nbsp; 服务端要做的事情是： &nbsp;&nbsp;&nbsp; 1. 创建一个Socket对象 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;import&nbsp;socket s&nbsp;=&nbsp;socket.socket(socket.AF_INET,&nbsp;socket.SOCK_DGRAM) &nbsp;&nbsp;&nbsp; 2. 绑定一个端口 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;s.bind((&rdquo;&rdquo;,&nbsp;8081)) &nbsp;&nbsp;&nbsp; 3. 接受来自客户端的消息 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;while&nbsp;True: &nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Receive&nbsp;up&nbsp;to&nbsp;1,024&nbsp;bytes&nbsp;in&nbsp;a&nbsp;datagram &nbsp;&nbsp;&nbsp;&nbsp;data,&nbsp;addr&nbsp;=&nbsp;s.recvfrom(1024) &nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;&ldquo;Received:&ldquo;,&nbsp;data,&nbsp;&ldquo;from&ldquo;,&nbsp;addr 二、客户端(Client.py) &nbsp;&nbsp;&nbsp; 客户端要做的事情是： &nbsp;&nbsp;&nbsp; 1. 创建一个Socket对象。 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;import&nbsp;socket s&nbsp;=&nbsp;socket.socket(socket.AF_INET,&nbsp;socket.SOCK_DGRAM) &nbsp;&nbsp;&nbsp; 2. 向某个服务器的指定的端口发送消息。由于使用UDP，如果服务器端未接收到将会丢弃数据包。 &lt;!&ndash; Code highlighting produced by Actipro CodeHighlighter (freeware) http://www.CodeHighlighter.com/ &ndash;&gt;port&nbsp;=&nbsp;8081 host&nbsp;=&nbsp;&ldquo;localhost&ldquo; while&nbsp;True: &nbsp;&nbsp;&nbsp;&nbsp;msg&nbsp;=&nbsp;raw_input() &nbsp;&nbsp;&nbsp;&nbsp;s.sendto(msg,&nbsp;(host,&nbsp;port)) 三、运行试试 Python 天天美味系列（总） [Python 天天美味(25) - 深入理解yield](http://www.cnblogs.com/coderzh/archive/2008/05/18/1202040.html) &nbsp; [Python 天天美味(26) - __getattr__与__setattr__](http://www.cnblogs.com/coderzh/archive/2008/05/25/1206931.html) &nbsp; [Python 天天美味(27) - 网络编程起步(Socket发送消息)](http://www.cnblogs.com/coderzh/archive/2008/06/07/1215607.html) &nbsp; [Python 天天美味(28) - urlopen](http://www.cnblogs.com/coderzh/archive/2008/06/07/1215657.html)&nbsp;&nbsp; &nbsp; [Python 天天美味(29) - 调用VC++的动态链接库(DLL)](http://www.cnblogs.com/coderzh/archive/2008/07/23/1249919.html)&nbsp; ...</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
+  <p class="post-date">2008年06月07日</p>
+</div>
+
+<h2 class="post-title">
   <a href="http://blog.coderzh.com/2008/06/07/1215657" rel="bookmark" title="Python天天美味(28) - urlopen">Python天天美味(28) - urlopen</a>
 </h2>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2008年05月20日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2008/05/20/1203574" rel="bookmark" title="开源Granados介绍 - SSH连接远程Linux服务器(C#)">开源Granados介绍 - SSH连接远程Linux服务器(C#)</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>Granados是一个基于.NET的SSH客户端库。它有以下特点： 1.Granados是一个C#的开源项目。源码地址：http://www.routrek.co.jp/support/download/varaterm/granados200.tar.gz 2.同时支持SSH1和SSH2。 3.Granados实现了AES, Blowfish, TripleDES, RSA, DSA等加密验证算法。 4.实现TCP协议连接。 如何使用Granados库 可惜的是Granados的文档几乎没有！所以只有从它的源码找到它的测试代码来看。总结步骤为： 1.工程中添加Routrek.granados.dll(下载的包里有)的引用。 2.添加Reader类，实现ISSHConnectionEventReceiver和ISSHChannelEventReceiver接口。首先引用命名空间： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;System.Threading; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;System.Diagnostics; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;System.Net; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;System.Net.Sockets; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.Crypto; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.SSHC; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.SSHCV1; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.SSHCV2; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.Toolkit; ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)using&nbsp;Routrek.PKI; Reader类实现如下： ![](http://www.cnblogs.com/Images/OutliningIndicators/None.gif)class&nbsp;Reader&nbsp;:&nbsp;ISSHConnectionEventReceiver,&nbsp;ISSHChannelEventReceiver ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;SSHConnection&nbsp;_conn; ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;bool&nbsp;_ready; ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnData(byte[]&nbsp;data,&nbsp;int&nbsp;offset,&nbsp;int&nbsp;length) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.Console.Write(Encoding.ASCII.GetString(data,&nbsp;offset,&nbsp;length)); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnDebugMessage(bool&nbsp;always_display,&nbsp;byte[]&nbsp;data) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("DEBUG:&nbsp;"&nbsp;+&nbsp;Encoding.ASCII.GetString(data)); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnIgnoreMessage(byte[]&nbsp;data) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Ignore:&nbsp;"&nbsp;+&nbsp;Encoding.ASCII.GetString(data)); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnAuthenticationPrompt(string[]&nbsp;msg) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Auth&nbsp;Prompt&nbsp;"&nbsp;+&nbsp;msg[0]); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif) ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnError(Exception&nbsp;error,&nbsp;string&nbsp;msg) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("ERROR:&nbsp;"&nbsp;+&nbsp;msg); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnChannelClosed() ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Channel&nbsp;closed"); ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_conn.Disconnect(""); ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//_conn.AsyncReceive(this); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnChannelEOF() ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_pf.Close(); ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Channel&nbsp;EOF"); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnExtendedData(int&nbsp;type,&nbsp;byte[]&nbsp;data) ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("EXTENDED&nbsp;DATA"); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnConnectionClosed() ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockStart.gif)![](http://www.cnblogs.com/Images/OutliningIndicators/ContractedSubBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif){ ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Debug.WriteLine("Connection&nbsp;closed"); ![](http://www.cnblogs.com/Images/OutliningIndicators/ExpandedSubBlockEnd.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} ![](http://www.cnblogs.com/Images/OutliningIndicators/InBlock.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;OnUnknownMessage(byte&nbsp;type,&nbsp;byte[]&nbsp;data)</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 30 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/29/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>

@@ -207,6 +207,39 @@
     
   </p>
 
+  <p class="post-date">2009年03月19日</p>
+</div>
+
+<h2 class="post-title">
+  <a href="http://blog.coderzh.com/2009/03/19/1416114" rel="bookmark" title="装上Window7">装上Window7</a>
+</h2>
+
+<div class="entry excerpt">
+  <p>今天把Window7的装上了，7057的版本。 之前听了几次Window7的讲座，被Window7吸引了，今天晚上装上后感觉非常不错 ！赞一个！ 发现很多地方人性化了很多，特别是工具栏和菜单栏，现在正在装VS2008，Window7的截图网上已经很多了，就不帖了。</p>
+</div>
+
+
+  </div>
+  
+</article>
+
+
+
+                    
+                  
+                
+                  
+                    
+
+                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
+  <div class="post-inner post-hover">
+    <div class="post-meta group">
+  <p class="post-category">
+    
+    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
+    
+  </p>
+
   <p class="post-date">2009年02月18日</p>
 </div>
 
@@ -226,9 +259,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -259,13 +296,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -296,9 +329,13 @@
 
 
                     
+                      </div>
+                    
                   
                 
                   
+                    
+                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -329,13 +366,9 @@
 
 
                     
-                      </div>
-                    
                   
                 
                   
-                    
-                      <div class="post-row">
                     
 
                       <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
@@ -366,39 +399,6 @@
 
 
                     
-                  
-                
-                  
-                    
-
-                      <article class="post type-post status-publish format-standard has-post-thumbnail hentry group">
-  <div class="post-inner post-hover">
-    <div class="post-meta group">
-  <p class="post-category">
-    
-    <a href="http://blog.coderzh.com/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" title="All posts in 技术文章" rel="category tag">技术文章</a>
-    
-  </p>
-
-  <p class="post-date">2009年01月05日</p>
-</div>
-
-<h2 class="post-title">
-  <a href="http://blog.coderzh.com/2009/01/05/1368804" rel="bookmark" title="JNDI概述(转载)">JNDI概述(转载)</a>
-</h2>
-
-<div class="entry excerpt">
-  <p>JNDI是 Java 命名与目录接口（Java Naming and Directory Interface），在J2EE规范中是重要的规范之一，不少专家认为，没有透彻理解JNDI的意义和作用，就没有真正掌握J2EE特别是EJB的知识。 那么，JNDI到底起什么作用？ 要了解JNDI的作用，我们可以从&#8220;如果不用JNDI我们怎样做？用了JNDI后我们又将怎样做？&#8221;这个问题来探讨。 没有JNDI的做法 程序员开发时，知道要开发访问MySQL数据库的应用，于是将一个对 MySQL JDBC 驱动程序类的引用进行了编码，并通过使用适当的 JDBC URL 连接到数据库。 就像以下代码这样： Connection&nbsp;conn=null; try&nbsp;{ &nbsp;&nbsp;&nbsp;Class.forName("com.mysql.jdbc.Driver", &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true,&nbsp;Thread.currentThread().getContextClassLoader()); &nbsp;&nbsp;&nbsp;conn=DriverManager.getConnection("jdbc:mysql://MyDBServer?user=qingfeng&amp;password=mingyue"); &nbsp;&nbsp;&nbsp;/*&nbsp;使用conn并进行SQL操作&nbsp;*/ &nbsp;&nbsp;&nbsp;![](http://www.cnblogs.com/Images/dot.gif)![](http://www.cnblogs.com/Images/dot.gif) &nbsp;&nbsp;&nbsp;conn.close(); } catch(Exception&nbsp;e)&nbsp;{ &nbsp;&nbsp;&nbsp;e.printStackTrace(); } finally&nbsp;{ &nbsp;&nbsp;&nbsp;if(conn!=null)&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;conn.close(); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch(SQLException&nbsp;e)&nbsp;{} &nbsp;&nbsp;&nbsp;} } 这是传统的做法，也是以前非Java程序员（如Delphi、VB等）常见的做法。这种做法一般在小规模的开发过程中不会产生问题，只要程序员熟悉Java语言、了解JDBC技术和MySQL，可以很快开发出相应的应用程序。 没有JNDI的做法存在的问题： 1、数据库服务器名称MyDBServer 、用户名和口令都可能需要改变，由此引发JDBC URL需要修改； 2、数据库可能改用别的产品，如改用DB2或者Oracle，引发JDBC驱动程序包和类名需要修改； 3、随着实际使用终端的增加，原配置的连接池参数可能需要调整； 4、&hellip;&hellip; 解决办法： 程序员应该不需要关心&#8220;具体的数据库后台是什么？JDBC驱动程序是什么？JDBC URL格式是什么？访问数据库的用户名和口令是什么？&#8221;等等这些问题，程序员编写的程序应该没有对 JDBC 驱动程序的引用，没有服务器名称，没有用户名称或口令 —— 甚至没有数据库池或连接管理。而是把这些问题交给J2EE容器来配置和管理，程序员只需要对这些配置和管理进行引用即可。 由此，就有了JNDI。 用了JNDI之后的做法 首先，在在J2EE容器中配置JNDI参数，定义一个数据源，也就是JDBC引用参数，给这个数据源设置一个名称；然后，在程序中，通过数据源名称引用数据源从而访问后台数据库。 具体操作如下（以JBoss为例）： 1、配置数据源 在JBoss的 D:&ldquo;jboss420GA&rdquo;docs&rdquo;examples&rdquo;jca 文件夹下面，有很多不同数据库引用的数据源定义模板。将其中的 mysql-ds.xml 文件Copy到你使用的服务器下，如 D:&ldquo;jboss420GA&rdquo;server&rdquo;default&rdquo;deploy。 修改 mysql-ds.xml 文件的内容，使之能通过JDBC正确访问你的MySQL数据库，如下： &nbsp; &lt;?xml&nbsp;version="1.0"&nbsp;encoding="UTF-8"?&gt; &lt;datasources&gt; &lt;local-tx-datasource&gt;</p>
-</div>
-
-
-  </div>
-  
-</article>
-
-
-
-                    
                       </div>
                     
                   
@@ -412,7 +412,7 @@
   <div class="wp-pagenavi">
     <span class="pages">
         Page 21 of 38
-        (265 Posts)
+        (266 Posts)
     </span>
     
       <a class="previouspostslink" rel="prev" href="http://blog.coderzh.com/paginator/20/">Prev &laquo;</a>
@@ -462,6 +462,8 @@
     <div class="widget widget_recent_entries sidebarLeftCategories"><h3>Last posts</h3>
       <ul>
         
+        <li><a href="http://blog.coderzh.com/2015/08/29/hugo">手把手教你使用hugo搭建个人博客站点</a></li>
+        
         <li><a href="http://blog.coderzh.com/2015/08/16/Books">最近读的几本书</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/15/JekyllReadMore">使用Jekyll官方的ReadMore摘要功能</a></li>
@@ -469,8 +471,6 @@
         <li><a href="http://blog.coderzh.com/2015/08/15/ThreadSanitizer">使用ThreadSanitizer线程检查工具</a></li>
         
         <li><a href="http://blog.coderzh.com/2015/08/08/IDonnotCare">你说我是错的，那你最好证明你是对的</a></li>
-        
-        <li><a href="http://blog.coderzh.com/2015/06/28/163GameOpenDay">小记：网易游戏学院第二届公开日</a></li>
         
       </ul>
     </div>
